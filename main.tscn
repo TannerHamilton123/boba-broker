@@ -1,0 +1,184 @@
+[gd_scene format=3 uid="uid://dr15obsyuck6a"]
+
+[ext_resource type="Script" uid="uid://2g63qbyrm0dy" path="res://bubble_spawner.gd" id="1_0xm2m"]
+[ext_resource type="Script" uid="uid://dtkww0apdukl5" path="res://main.gd" id="1_h2yge"]
+[ext_resource type="PackedScene" uid="uid://ctncygwlrrw0m" path="res://boba_cup.tscn" id="2_7mycd"]
+[ext_resource type="Script" uid="uid://btbtb2y7herv5" path="res://boba.gd" id="2_lquwl"]
+[ext_resource type="PackedScene" uid="uid://b8slv82wc5nq5" path="res://progress_bar.tscn" id="3_h2yge"]
+[ext_resource type="Script" uid="uid://s0y0scbdwrc6" path="res://ingredient.gd" id="3_lquwl"]
+
+[node name="main" type="Node2D" unique_id=1553475821]
+script = ExtResource("1_h2yge")
+
+[node name="boba_cup" parent="." unique_id=2051385593 instance=ExtResource("2_7mycd")]
+position = Vector2(736, 432)
+
+[node name="CanvasGroup" type="CanvasGroup" parent="." unique_id=341626053]
+process_mode = 4
+
+[node name="ColorRect" type="ColorRect" parent="CanvasGroup" unique_id=1460893337]
+offset_right = 800.0
+offset_bottom = 600.0
+color = Color(0.41981313, 0.41981313, 0.4198131, 1)
+
+[node name="ColorRect" type="ColorRect" parent="CanvasGroup/ColorRect" unique_id=862488144]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -300.0
+offset_right = 128.0
+offset_bottom = 300.0
+grow_vertical = 2
+color = Color(0.27020255, 0.4806214, 0.44788754, 1)
+
+[node name="ColorRect2" type="ColorRect" parent="CanvasGroup/ColorRect" unique_id=1147762504]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -128.0
+offset_top = -300.0
+offset_bottom = 300.0
+grow_horizontal = 0
+grow_vertical = 2
+pivot_offset = Vector2(128, 0)
+color = Color(0.27020255, 0.4806214, 0.44788754, 1)
+
+[node name="ColorRect3" type="ColorRect" parent="CanvasGroup/ColorRect" unique_id=555071834]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -376.0
+offset_top = -88.0
+offset_right = 376.0
+grow_horizontal = 2
+grow_vertical = 0
+color = Color(0.27020255, 0.4806214, 0.44788754, 1)
+
+[node name="ColorRect4" type="ColorRect" parent="CanvasGroup/ColorRect" unique_id=1348177706]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -52.0
+offset_right = 52.0
+offset_bottom = 40.0
+grow_horizontal = 2
+pivot_offset_ratio = Vector2(0.5, 0)
+color = Color(0.6642817, 0.33932677, 0.44395682, 1)
+
+[node name="Boba_Crafting" type="Node" parent="." unique_id=1394053290]
+
+[node name="tea" type="ColorRect" parent="Boba_Crafting" unique_id=1229588125]
+offset_left = 688.0
+offset_top = 136.0
+offset_right = 784.0
+offset_bottom = 207.0
+script = ExtResource("3_lquwl")
+
+[node name="pearls" type="ColorRect" parent="Boba_Crafting" unique_id=714119793]
+offset_left = 688.0
+offset_top = 232.0
+offset_right = 784.0
+offset_bottom = 303.0
+script = ExtResource("3_lquwl")
+
+[node name="milk" type="ColorRect" parent="Boba_Crafting" unique_id=1151690171]
+offset_left = 688.0
+offset_top = 40.0
+offset_right = 784.0
+offset_bottom = 112.0
+script = ExtResource("3_lquwl")
+
+[node name="boba" type="ColorRect" parent="Boba_Crafting" unique_id=1089067376]
+offset_left = 688.0
+offset_top = 352.0
+offset_right = 784.0
+offset_bottom = 504.0
+script = ExtResource("2_lquwl")
+
+[node name="bubbles" type="Node" parent="." unique_id=1819975558]
+script = ExtResource("1_0xm2m")
+
+[node name="Timer" type="Timer" parent="bubbles" unique_id=750116778]
+autostart = true
+
+[node name="UI" type="Node" parent="." unique_id=676416187]
+
+[node name="tea_quantity" type="Label" parent="UI" unique_id=934803749]
+offset_left = 712.0
+offset_top = 160.0
+offset_right = 752.0
+offset_bottom = 183.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="pearl_quantity" type="Label" parent="UI" unique_id=1136806242]
+offset_left = 712.0
+offset_top = 256.0
+offset_right = 752.0
+offset_bottom = 279.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="milk_quantity" type="Label" parent="UI" unique_id=2005205398]
+offset_left = 712.0
+offset_top = 64.0
+offset_right = 752.0
+offset_bottom = 87.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TeaPrice" parent="UI" unique_id=1441843266 instance=ExtResource("3_h2yge")]
+offset_left = 24.0
+offset_top = 128.0
+offset_right = 40.0
+offset_bottom = 520.0
+min_value = 1.0
+max_value = 10.0
+value = 5.0
+ticks_on_borders = true
+
+[node name="MilkPrice" parent="UI" unique_id=1904647928 instance=ExtResource("3_h2yge")]
+offset_left = 56.0
+offset_top = 128.0
+offset_right = 72.0
+offset_bottom = 520.0
+max_value = 10.0
+
+[node name="PearlPrice" parent="UI" unique_id=1537062269 instance=ExtResource("3_h2yge")]
+offset_left = 88.0
+offset_top = 128.0
+offset_right = 104.0
+offset_bottom = 520.0
+max_value = 10.0
+
+[node name="PlayerBalance" type="Label" parent="UI" unique_id=2131126378]
+offset_left = 348.0
+offset_top = 8.0
+offset_right = 452.0
+offset_bottom = 40.0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GameOver" type="Node2D" parent="UI" unique_id=166650162]
+visible = false
+position = Vector2(348, 8)
+
+[node name="ColorRect" type="ColorRect" parent="UI/GameOver" unique_id=1491156990]
+offset_left = -348.0
+offset_top = -8.0
+offset_right = 452.0
+offset_bottom = 592.0
+color = Color(0.5254902, 0.24705882, 0.25882354, 0.5294118)
+
+[connection signal="timeout" from="bubbles/Timer" to="bubbles" method="_on_timer_timeout"]

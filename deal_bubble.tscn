@@ -1,0 +1,46 @@
+[gd_scene format=3 uid="uid://dqwgchv6186ok"]
+
+[ext_resource type="Script" uid="uid://b3priw6yimkek" path="res://deal_bubble.gd" id="1_o0vui"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_lquwl"]
+radius = 40.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_o3orw"]
+radius = 1.0
+height = 2.0
+
+[node name="Area2D" type="Area2D" unique_id=502880007]
+script = ExtResource("1_o0vui")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=31276096]
+shape = SubResource("CircleShape2D_lquwl")
+
+[node name="Circle" type="MeshInstance2D" parent="CollisionShape2D" unique_id=738034933]
+modulate = Color(0.16862746, 1, 1, 1)
+position = Vector2(0.5283192, 1.2533622)
+scale = Vector2(38.51531, 37.253357)
+mesh = SubResource("SphereMesh_o3orw")
+
+[node name="Label" type="Label" parent="." unique_id=790736703]
+offset_left = -48.0
+offset_top = -16.0
+offset_right = 50.0
+offset_bottom = 16.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0.07431156, 0.4131895, 0.072857, 1)
+text = "TEXT"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Price" type="Label" parent="." unique_id=476859406]
+offset_left = -48.0
+offset_top = 4.0
+offset_right = 50.0
+offset_bottom = 36.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0.07431156, 0.4131895, 0.072857, 1)
+text = "TEXT"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="input_event" from="." to="." method="_on_input_event"]

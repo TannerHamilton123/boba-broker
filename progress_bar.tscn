@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://b8slv82wc5nq5"]
+
+[ext_resource type="Script" uid="uid://cusvu4t1qxhln" path="res://price_bar.gd" id="1_chwcf"]
+
+[node name="VSlider" type="VSlider" unique_id=978935056]
+offset_top = -8.0
+offset_right = 16.0
+offset_bottom = 384.0
+step = 0.01
+editable = false
+scrollable = false
+script = ExtResource("1_chwcf")
+
+[node name="price_change" type="Timer" parent="." unique_id=23495910]
+wait_time = 5.0
+autostart = true
+
+[connection signal="timeout" from="price_change" to="." method="_on_price_change_timeout"]
