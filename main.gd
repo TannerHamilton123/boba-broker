@@ -5,7 +5,7 @@ var milk_quantity: int = 0
 var TeaPrice: float = 1.0
 var PearlPrice: float = 1.0
 var MilkPrice: float = 1.0
-var player_balance: float = 10
+var player_balance: float = 100
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	update_ui()
@@ -41,3 +41,15 @@ func update_ui() -> void:
 	$"UI/tea_quantity".text = "Tea: " + str(tea_quantity)
 	$"UI/pearl_quantity".text = "Pearls: " + str(pearls_quantity)
 	$"UI/milk_quantity".text = "Milk: " + str(milk_quantity)
+
+
+
+func _on_Ingredient_drag_data_received(position: Vector2, data: Variant) -> void:
+	print("Received drag data: ", data, " at position: ", position)
+	if data == "tea":
+		tea_quantity += 1
+	elif data == "pearls":
+		pearls_quantity += 1
+	elif data == "milk":
+		milk_quantity += 1
+	update_ui()

@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://djmqh6c5rd38b"]
+
+[ext_resource type="Script" uid="uid://dvqasluc5lpfr" path="res://order_card.gd" id="1_5yx2q"]
+
+[node name="OrderCard" type="ColorRect" unique_id=705807321]
+offset_top = -16.0
+offset_right = 80.0
+offset_bottom = 80.0
+script = ExtResource("1_5yx2q")
+
+[node name="Label" type="Label" parent="." unique_id=1878356465]
+layout_mode = 0
+offset_left = 8.0
+offset_right = 64.0
+offset_bottom = 75.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 12
+text = "line1
+line2
+line3"
+
+[node name="ProgressBar" type="ProgressBar" parent="." unique_id=1553035776]
+layout_mode = 0
+offset_top = 75.0
+offset_right = 80.0
+offset_bottom = 96.0
+show_percentage = false
+
+[node name="Timer" type="Timer" parent="." unique_id=1644225062]
+wait_time = 5.0
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

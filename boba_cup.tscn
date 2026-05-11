@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://xypjtft1wndq" path="res://boba_cup.gd" id="1_si7th"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_lquwl"]
-b = Vector2(0, 152)
+b = Vector2(14, 150)
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_7mycd"]
 a = Vector2(16, 152)
@@ -13,76 +13,111 @@ b = Vector2(80, 152)
 a = Vector2(80, 152)
 b = Vector2(96, 0)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_7mycd"]
-size = Vector2(96, 152)
-
 [sub_resource type="CircleShape2D" id="CircleShape2D_si7th"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_3vf6y"]
 
-[node name="boba_cup" type="Node2D" unique_id=2051385593]
-process_priority = 5
-z_index = 5
+[sub_resource type="SphereMesh" id="SphereMesh_si7th"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_si7th"]
+size = Vector2(88, 160)
+
+[node name="boba_cup" type="ColorRect" unique_id=361827926]
+offset_right = 104.0
+offset_bottom = 160.0
+pivot_offset = Vector2(56, 80)
+color = Color(1, 1, 1, 0)
 script = ExtResource("1_si7th")
 
+[node name="tea" type="Polygon2D" parent="." unique_id=29867865]
+position = Vector2(48, 80)
+color = Color(0.28235295, 0.16470589, 0.101960786, 1)
+polygon = PackedVector2Array(-40, -56, -32, 72, 32, 72, 48, -64, -40, -64)
+
+[node name="milk" type="Polygon2D" parent="." unique_id=1658522292]
+position = Vector2(48, 80)
+color = Color(1, 1, 1, 0.48235294)
+polygon = PackedVector2Array(-40, -56, -32, 72, 32, 72, 48, -64, -40, -64)
+
 [node name="Line2D" type="Line2D" parent="." unique_id=1792453374]
-position = Vector2(-734, -438)
+position = Vector2(-686, -358)
 points = PackedVector2Array(688, 360, 704, 512, 768, 512, 784, 360)
 default_color = Color(0, 0, 0, 1)
 
 [node name="AnimatableBody2D" type="AnimatableBody2D" parent="." unique_id=728094002]
+position = Vector2(48, 80)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatableBody2D" unique_id=1880933930]
 position = Vector2(-46, -78)
 shape = SubResource("SegmentShape2D_lquwl")
 
 [node name="AnimatableBody2D2" type="AnimatableBody2D" parent="." unique_id=1763985240]
+position = Vector2(48, 80)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatableBody2D2" unique_id=1385708820]
 position = Vector2(-46, -78)
 shape = SubResource("SegmentShape2D_7mycd")
 
 [node name="AnimatableBody2D3" type="AnimatableBody2D" parent="." unique_id=932728000]
+position = Vector2(48, 80)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatableBody2D3" unique_id=1456416134]
 position = Vector2(-46, -78)
 shape = SubResource("SegmentShape2D_272bh")
 
-[node name="Area2D" type="Area2D" parent="." unique_id=360382212]
+[node name="pearls" type="Node2D" parent="." unique_id=1417358624]
+position = Vector2(48, 80)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=19507841]
-position = Vector2(2, -2)
-shape = SubResource("RectangleShape2D_7mycd")
-
-[node name="boba_ball" type="RigidBody2D" parent="." unique_id=1192013901 groups=["boba_balls"]]
+[node name="boba_ball" type="RigidBody2D" parent="pearls" unique_id=1192013901 groups=["boba_balls"]]
+visible = false
 z_index = 3
 position = Vector2(-26, -64)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="boba_ball" unique_id=1144843263]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="pearls/boba_ball" unique_id=1144843263]
 shape = SubResource("CircleShape2D_si7th")
 
-[node name="MeshInstance2D" type="MeshInstance2D" parent="boba_ball" unique_id=534475886]
+[node name="MeshInstance2D" type="MeshInstance2D" parent="pearls/boba_ball" unique_id=534475886]
 scale = Vector2(20, 20)
 mesh = SubResource("SphereMesh_3vf6y")
 
-[node name="boba_ball2" type="RigidBody2D" parent="." unique_id=1430545999 groups=["boba_balls"]]
-z_index = 3
-position = Vector2(24, -48)
+[node name="MeshInstance2D" type="MeshInstance2D" parent="pearls" unique_id=1415000730]
+modulate = Color(0.16565639, 0.16565642, 0.16565639, 1)
+position = Vector2(-24.000004, -24.000004)
+scale = Vector2(16.518143, 16.500004)
+mesh = SubResource("SphereMesh_si7th")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="boba_ball2" unique_id=1277764077]
-shape = SubResource("CircleShape2D_si7th")
+[node name="MeshInstance2D2" type="MeshInstance2D" parent="pearls" unique_id=128778114]
+modulate = Color(0.16565639, 0.16565642, 0.16565639, 1)
+position = Vector2(32.00001, -40)
+scale = Vector2(16.518143, 16.500004)
+mesh = SubResource("SphereMesh_si7th")
 
-[node name="MeshInstance2D" type="MeshInstance2D" parent="boba_ball2" unique_id=1335429069]
-scale = Vector2(20, 20)
-mesh = SubResource("SphereMesh_3vf6y")
+[node name="MeshInstance2D3" type="MeshInstance2D" parent="pearls" unique_id=732681688]
+modulate = Color(0.16565639, 0.16565642, 0.16565639, 1)
+position = Vector2(7.999996, -1.9999962)
+scale = Vector2(16.518143, 16.500004)
+mesh = SubResource("SphereMesh_si7th")
 
-[node name="boba_ball3" type="RigidBody2D" parent="." unique_id=2144014875 groups=["boba_balls"]]
-z_index = 3
-position = Vector2(-16, -32)
+[node name="MeshInstance2D4" type="MeshInstance2D" parent="pearls" unique_id=1087219151]
+modulate = Color(0.16565639, 0.16565642, 0.16565639, 1)
+position = Vector2(-8.000002, 24.000004)
+scale = Vector2(16.518143, 16.500004)
+mesh = SubResource("SphereMesh_si7th")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="boba_ball3" unique_id=1601285797]
-shape = SubResource("CircleShape2D_si7th")
+[node name="MeshInstance2D5" type="MeshInstance2D" parent="pearls" unique_id=491746818]
+modulate = Color(0.16565639, 0.16565642, 0.16565639, 1)
+position = Vector2(16.000004, 48)
+scale = Vector2(16.518143, 16.500004)
+mesh = SubResource("SphereMesh_si7th")
 
-[node name="MeshInstance2D" type="MeshInstance2D" parent="boba_ball3" unique_id=1009283770]
-scale = Vector2(20, 20)
-mesh = SubResource("SphereMesh_3vf6y")
+[node name="MeshInstance2D6" type="MeshInstance2D" parent="pearls" unique_id=1629504617]
+modulate = Color(0.16565639, 0.16565642, 0.16565639, 1)
+position = Vector2(-1.9073486e-06, -40.000008)
+scale = Vector2(16.518143, 16.500004)
+mesh = SubResource("SphereMesh_si7th")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1773705709]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=647332822]
+position = Vector2(52, 80)
+shape = SubResource("RectangleShape2D_si7th")

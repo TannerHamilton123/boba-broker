@@ -11,6 +11,8 @@ func _process(delta: float) -> void:
 	pass
 
 func _get_drag_data(at_position: Vector2) -> Variant:
-	var data = self.name
-	print("Dragging ingredient: ", self.name)
-	return data
+	var preview = TextureRect.new()
+	preview.texture = $"TextureRect".texture
+	preview.scale = Vector2(0.5, 0.5)
+	set_drag_preview(preview)
+	return self.name

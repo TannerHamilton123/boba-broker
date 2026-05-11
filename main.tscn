@@ -3,15 +3,23 @@
 [ext_resource type="Script" uid="uid://2g63qbyrm0dy" path="res://bubble_spawner.gd" id="1_0xm2m"]
 [ext_resource type="Script" uid="uid://dtkww0apdukl5" path="res://main.gd" id="1_h2yge"]
 [ext_resource type="PackedScene" uid="uid://ctncygwlrrw0m" path="res://boba_cup.tscn" id="2_7mycd"]
-[ext_resource type="Script" uid="uid://btbtb2y7herv5" path="res://boba.gd" id="2_lquwl"]
 [ext_resource type="PackedScene" uid="uid://b8slv82wc5nq5" path="res://progress_bar.tscn" id="3_h2yge"]
 [ext_resource type="Script" uid="uid://s0y0scbdwrc6" path="res://ingredient.gd" id="3_lquwl"]
+[ext_resource type="Texture2D" uid="uid://dr6unskpr24cf" path="res://assets/tea.jpg" id="4_7mycd"]
+[ext_resource type="Texture2D" uid="uid://heu7h00vcvd3" path="res://assets/pearls.jpg" id="5_272bh"]
+[ext_resource type="Texture2D" uid="uid://ct7dm3qworl6m" path="res://assets/milk.jpg" id="6_5vw27"]
+[ext_resource type="Script" uid="uid://bmigby0thk4f5" path="res://order_list.gd" id="9_4c57u"]
+[ext_resource type="PackedScene" uid="uid://djmqh6c5rd38b" path="res://order_card.tscn" id="9_kek77"]
 
 [node name="main" type="Node2D" unique_id=1553475821]
 script = ExtResource("1_h2yge")
 
 [node name="boba_cup" parent="." unique_id=2051385593 instance=ExtResource("2_7mycd")]
-position = Vector2(736, 432)
+z_index = 5
+offset_left = 688.0
+offset_top = 360.0
+offset_right = 792.0
+offset_bottom = 520.0
 
 [node name="CanvasGroup" type="CanvasGroup" parent="." unique_id=341626053]
 process_mode = 4
@@ -82,12 +90,30 @@ offset_right = 784.0
 offset_bottom = 207.0
 script = ExtResource("3_lquwl")
 
+[node name="TextureRect" type="TextureRect" parent="Boba_Crafting/tea" unique_id=1746569670]
+visible = false
+layout_mode = 0
+offset_left = 368.0
+offset_top = 230.0
+offset_right = 593.0
+offset_bottom = 455.0
+texture = ExtResource("4_7mycd")
+
 [node name="pearls" type="ColorRect" parent="Boba_Crafting" unique_id=714119793]
 offset_left = 688.0
 offset_top = 232.0
 offset_right = 784.0
 offset_bottom = 303.0
 script = ExtResource("3_lquwl")
+
+[node name="TextureRect" type="TextureRect" parent="Boba_Crafting/pearls" unique_id=629349947]
+visible = false
+layout_mode = 0
+offset_left = 368.0
+offset_top = -368.0
+offset_right = 593.0
+offset_bottom = -143.0
+texture = ExtResource("5_272bh")
 
 [node name="milk" type="ColorRect" parent="Boba_Crafting" unique_id=1151690171]
 offset_left = 688.0
@@ -96,12 +122,14 @@ offset_right = 784.0
 offset_bottom = 112.0
 script = ExtResource("3_lquwl")
 
-[node name="boba" type="ColorRect" parent="Boba_Crafting" unique_id=1089067376]
-offset_left = 688.0
-offset_top = 352.0
-offset_right = 784.0
-offset_bottom = 504.0
-script = ExtResource("2_lquwl")
+[node name="TextureRect" type="TextureRect" parent="Boba_Crafting/milk" unique_id=953276177]
+visible = false
+layout_mode = 0
+offset_left = 368.0
+offset_top = 72.0
+offset_right = 593.0
+offset_bottom = 297.0
+texture = ExtResource("6_5vw27")
 
 [node name="bubbles" type="Node" parent="." unique_id=1819975558]
 script = ExtResource("1_0xm2m")
@@ -110,6 +138,24 @@ script = ExtResource("1_0xm2m")
 autostart = true
 
 [node name="UI" type="Node" parent="." unique_id=676416187]
+
+[node name="TeaPrice" parent="UI" unique_id=978935056 instance=ExtResource("3_h2yge")]
+offset_left = 40.0
+offset_top = 127.0
+offset_right = 56.0
+offset_bottom = 519.0
+
+[node name="MilkPrice" parent="UI" unique_id=338619077 instance=ExtResource("3_h2yge")]
+offset_left = 64.0
+offset_top = 127.0
+offset_right = 80.0
+offset_bottom = 519.0
+
+[node name="PearlPrice" parent="UI" unique_id=1938011951 instance=ExtResource("3_h2yge")]
+offset_left = 88.0
+offset_top = 127.0
+offset_right = 104.0
+offset_bottom = 519.0
 
 [node name="tea_quantity" type="Label" parent="UI" unique_id=934803749]
 offset_left = 712.0
@@ -138,30 +184,6 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="TeaPrice" parent="UI" unique_id=1441843266 instance=ExtResource("3_h2yge")]
-offset_left = 24.0
-offset_top = 128.0
-offset_right = 40.0
-offset_bottom = 520.0
-min_value = 1.0
-max_value = 10.0
-value = 5.0
-ticks_on_borders = true
-
-[node name="MilkPrice" parent="UI" unique_id=1904647928 instance=ExtResource("3_h2yge")]
-offset_left = 56.0
-offset_top = 128.0
-offset_right = 72.0
-offset_bottom = 520.0
-max_value = 10.0
-
-[node name="PearlPrice" parent="UI" unique_id=1537062269 instance=ExtResource("3_h2yge")]
-offset_left = 88.0
-offset_top = 128.0
-offset_right = 104.0
-offset_bottom = 520.0
-max_value = 10.0
-
 [node name="PlayerBalance" type="Label" parent="UI" unique_id=2131126378]
 offset_left = 348.0
 offset_top = 8.0
@@ -181,4 +203,37 @@ offset_right = 452.0
 offset_bottom = 592.0
 color = Color(0.5254902, 0.24705882, 0.25882354, 0.5294118)
 
+[node name="Label" type="Label" parent="UI" unique_id=2063515355]
+offset_left = 48.0
+offset_top = 104.0
+offset_right = 88.0
+offset_bottom = 127.0
+text = "$5.00"
+
+[node name="Label2" type="Label" parent="UI" unique_id=1582771522]
+offset_left = 48.0
+offset_top = 524.0
+offset_right = 88.0
+offset_bottom = 547.0
+text = "$1.00"
+
+[node name="OrderList" type="Node" parent="." unique_id=797184050]
+script = ExtResource("9_4c57u")
+
+[node name="OrderContainer" type="ColorRect" parent="OrderList" unique_id=1868295799]
+offset_left = 128.0
+offset_top = 512.0
+offset_right = 672.0
+offset_bottom = 600.0
+color = Color(0.24477637, 0.2447764, 0.24477637, 1)
+
+[node name="OrderCard" parent="OrderList/OrderContainer" unique_id=705807321 instance=ExtResource("9_kek77")]
+layout_mode = 0
+offset_top = 0.0
+offset_bottom = 96.0
+
+[node name="Timer" type="Timer" parent="OrderList" unique_id=1999790851]
+autostart = true
+
 [connection signal="timeout" from="bubbles/Timer" to="bubbles" method="_on_timer_timeout"]
+[connection signal="timeout" from="OrderList/Timer" to="OrderList" method="_on_timer_timeout"]
