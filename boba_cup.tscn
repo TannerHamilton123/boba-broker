@@ -2,17 +2,6 @@
 
 [ext_resource type="Script" uid="uid://xypjtft1wndq" path="res://boba_cup.gd" id="1_si7th"]
 
-[sub_resource type="SegmentShape2D" id="SegmentShape2D_lquwl"]
-b = Vector2(14, 150)
-
-[sub_resource type="SegmentShape2D" id="SegmentShape2D_7mycd"]
-a = Vector2(16, 152)
-b = Vector2(80, 152)
-
-[sub_resource type="SegmentShape2D" id="SegmentShape2D_272bh"]
-a = Vector2(80, 152)
-b = Vector2(96, 0)
-
 [sub_resource type="CircleShape2D" id="CircleShape2D_si7th"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_3vf6y"]
@@ -30,40 +19,21 @@ color = Color(1, 1, 1, 0)
 script = ExtResource("1_si7th")
 
 [node name="tea" type="Polygon2D" parent="." unique_id=29867865]
-position = Vector2(48, 80)
+position = Vector2(49, 153)
 color = Color(0.28235295, 0.16470589, 0.101960786, 1)
-polygon = PackedVector2Array(-40, -56, -32, 72, 32, 72, 48, -64, -40, -64)
+offset = Vector2(0, -50)
+polygon = PackedVector2Array(-35, 50, 37, 50, 42, -65, -40, -64)
 
-[node name="milk" type="Polygon2D" parent="." unique_id=1658522292]
-position = Vector2(48, 80)
-color = Color(1, 1, 1, 0.48235294)
-polygon = PackedVector2Array(-40, -56, -32, 72, 32, 72, 48, -64, -40, -64)
+[node name="milk" type="Polygon2D" parent="." unique_id=727748814]
+position = Vector2(49, 153)
+color = Color(0.85700965, 0.6287078, 0.51137483, 1)
+offset = Vector2(0, -50)
+polygon = PackedVector2Array(-35, 50, 37, 50, 42, -65, -40, -64)
 
 [node name="Line2D" type="Line2D" parent="." unique_id=1792453374]
 position = Vector2(-686, -358)
 points = PackedVector2Array(688, 360, 704, 512, 768, 512, 784, 360)
 default_color = Color(0, 0, 0, 1)
-
-[node name="AnimatableBody2D" type="AnimatableBody2D" parent="." unique_id=728094002]
-position = Vector2(48, 80)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatableBody2D" unique_id=1880933930]
-position = Vector2(-46, -78)
-shape = SubResource("SegmentShape2D_lquwl")
-
-[node name="AnimatableBody2D2" type="AnimatableBody2D" parent="." unique_id=1763985240]
-position = Vector2(48, 80)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatableBody2D2" unique_id=1385708820]
-position = Vector2(-46, -78)
-shape = SubResource("SegmentShape2D_7mycd")
-
-[node name="AnimatableBody2D3" type="AnimatableBody2D" parent="." unique_id=932728000]
-position = Vector2(48, 80)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatableBody2D3" unique_id=1456416134]
-position = Vector2(-46, -78)
-shape = SubResource("SegmentShape2D_272bh")
 
 [node name="pearls" type="Node2D" parent="." unique_id=1417358624]
 position = Vector2(48, 80)

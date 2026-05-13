@@ -15,14 +15,14 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	TeaPrice = snappedf($"UI/TeaPrice".value, 0.01)
-	PearlPrice = snappedf($"UI/PearlPrice".value, 0.01)
-	MilkPrice = snappedf($"UI/MilkPrice".value, 0.01)
+	TeaPrice = snappedf($"Prices/TeaPrice".value, 0.01)
+	PearlPrice = snappedf($"Prices/PearlPrice".value, 0.01)
+	MilkPrice = snappedf($"Prices/MilkPrice".value, 0.01)
 
 	$UI/PlayerBalance.text = "$%.2f" % player_balance
 	if player_balance <= 0:
 		print("game over")
-		$UI/GameOver.visible = true
+		$GameOver.visible = true
 
 	pass
 
@@ -38,9 +38,9 @@ func _on_bubble_clicked(ingredient: String, price: float) -> void:
 	update_ui()
 
 func update_ui() -> void:
-	$"UI/tea_quantity".text = "Tea: " + str(tea_quantity)
-	$"UI/pearl_quantity".text = "Pearls: " + str(pearls_quantity)
-	$"UI/milk_quantity".text = "Milk: " + str(milk_quantity)
+	$"Boba_Crafting/tea/tea_quantity".text = " tea: " + str(tea_quantity)
+	$"Boba_Crafting/pearls/pearl_quantity".text = "Pearls: " + str(pearls_quantity)
+	$"Boba_Crafting/milk/milk_quantity".text = "Milk: " + str(milk_quantity)
 
 
 

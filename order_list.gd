@@ -4,7 +4,7 @@ var order_count = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	connect("order_failed", self, "_on_order_failed")
+	connect("order_failed", _on_order_failed)
 	$Timer.wait_time = randf_range(5.0, 10.0)
 	$Timer.start()
 	pass # Replace with function body.
@@ -18,7 +18,7 @@ func _process(delta: float) -> void:
 func add_order():
 	
 	if order_count < max_orders:
-		print("Adding new order. Current order count: ", order_count)
+		#print("Adding new order. Current order count: ", order_count)
 		var new_order = preload("res://order_card.tscn").instantiate()
 
 		$"OrderContainer".add_child(new_order)
@@ -27,6 +27,8 @@ func add_order():
 		new_order.shift_order_to_position()
 		_reorder_orders()
 
+func _on_order_failed():
+	_reorder_orders()
 
 func _reorder_orders():
 	var current_number = 1

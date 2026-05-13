@@ -14,6 +14,10 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	for ingredient in used_ingredients:
+		fill_up(ingredient)
+	
+	
 	_last_position = global_position
 	if _dragging:
 		if global_position.distance_to(destination) > 10.0:
@@ -55,23 +59,24 @@ func _is_over_cup(click_position: Vector2) -> bool:
 	return cup_rect.has_point(click_position)
 
 func _can_drop_data(at_position: Vector2, data: Variant) -> bool:
-	return true
+		return true
 
 
 func _drop_data(at_position: Vector2, data: Variant) -> void:
 	print("Attempting to drop data: ", data, " at position: ", at_position)
 	if _can_drop_data(at_position,data):
-		print("Dropped ", data, " at ", at_position)
 		match data:
 			"tea":
 				
 				if get_tree().current_scene.tea_quantity > 0:
 					used_ingredients.append("tea")
+					$"tea".scale.y = 0.1
 					$"tea".visible = true
 					get_tree().current_scene.tea_quantity -= 1
 			"milk":
 				if get_tree().current_scene.milk_quantity > 0:
 					used_ingredients.append("milk")
+					$"milk".scale.y = 0.1
 					$"milk".visible = true
 					get_tree().current_scene.milk_quantity -= 1
 			"pearls":
@@ -90,3 +95,11 @@ func reset():
 	$"tea".visible = false
 	$"pearls".visible = false
 	$"milk".visible = false
+
+func fill_up(ingredient):
+	if ingredient == "milk":
+		if $"milk".scale.y < 1:
+			$"milk".scale.y += 0.01
+	if ingredient == "tea":
+		if $"tea".scale.y < 1:
+			$"tea".scale.y += 0.01

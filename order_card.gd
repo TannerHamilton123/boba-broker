@@ -36,7 +36,7 @@ func order_timer():
 
 func _on_timer_timeout() -> void:
 	print("Order ", order_number, " timed out!")
-	emit order_failed(order_number)
+	emit_signal("order_failed")
 	queue_free()
 
 func shift_order_to_position():
