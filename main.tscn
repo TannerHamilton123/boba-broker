@@ -2,33 +2,63 @@
 
 [ext_resource type="Script" uid="uid://2g63qbyrm0dy" path="res://bubble_spawner.gd" id="1_0xm2m"]
 [ext_resource type="Script" uid="uid://dtkww0apdukl5" path="res://main.gd" id="1_h2yge"]
-[ext_resource type="PackedScene" uid="uid://ctncygwlrrw0m" path="res://boba_cup.tscn" id="2_7mycd"]
+[ext_resource type="Script" uid="uid://d3qa12m4oahrb" path="res://price_calculator.gd" id="2_4c57u"]
 [ext_resource type="PackedScene" uid="uid://b8slv82wc5nq5" path="res://progress_bar.tscn" id="3_h2yge"]
 [ext_resource type="Script" uid="uid://s0y0scbdwrc6" path="res://ingredient.gd" id="3_lquwl"]
-[ext_resource type="Texture2D" uid="uid://dr6unskpr24cf" path="res://assets/tea.jpg" id="4_7mycd"]
-[ext_resource type="Texture2D" uid="uid://heu7h00vcvd3" path="res://assets/pearls.jpg" id="5_272bh"]
-[ext_resource type="Texture2D" uid="uid://ct7dm3qworl6m" path="res://assets/milk.jpg" id="6_5vw27"]
+[ext_resource type="Texture2D" uid="uid://dr6unskpr24cf" path="res://Icons/tea.jpg" id="4_7mycd"]
+[ext_resource type="Texture2D" uid="uid://heu7h00vcvd3" path="res://Icons/pearls.jpg" id="5_272bh"]
+[ext_resource type="Texture2D" uid="uid://ct7dm3qworl6m" path="res://Icons/milk.jpg" id="6_5vw27"]
 [ext_resource type="Script" uid="uid://bmigby0thk4f5" path="res://order_list.gd" id="9_4c57u"]
 [ext_resource type="PackedScene" uid="uid://djmqh6c5rd38b" path="res://order_card.tscn" id="9_kek77"]
 
 [node name="main" type="Node2D" unique_id=1553475821]
 script = ExtResource("1_h2yge")
 
-[node name="UI" type="Node" parent="." unique_id=676416187]
+[node name="PriceCalculator" type="Node" parent="." unique_id=1567559871]
+script = ExtResource("2_4c57u")
 
-[node name="PlayerBalance" type="Label" parent="UI" unique_id=2131126378]
-offset_left = 348.0
-offset_top = 8.0
-offset_right = 452.0
-offset_bottom = 40.0
-horizontal_alignment = 1
-vertical_alignment = 1
+[node name="Timer" type="Timer" parent="PriceCalculator" unique_id=1201371735]
+wait_time = 10.0
+autostart = true
+
+[node name="Control" type="Control" parent="." unique_id=740147094]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 800.0
+offset_bottom = 600.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 1
+
+[node name="TimeTracker" type="VBoxContainer" parent="Control" unique_id=2070056805]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 58.0
+grow_horizontal = 2
+
+[node name="DayTracker" type="ProgressBar" parent="Control/TimeTracker" unique_id=201131605]
+layout_mode = 2
+
+[node name="WeekTracker" type="ProgressBar" parent="Control/TimeTracker" unique_id=2098167443]
+layout_mode = 2
+
+[node name="GoodContainer" type="VBoxContainer" parent="Control" unique_id=1677014012]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -172.0
+offset_right = 160.0
+offset_bottom = 172.0
+grow_vertical = 2
 
 [node name="Prices" type="ColorRect" parent="." unique_id=862488144]
 anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
-offset_right = 128.0
+offset_left = -144.0
+offset_right = -16.0
 offset_bottom = 600.0
 grow_vertical = 2
 color = Color(0.27020255, 0.4806214, 0.44788754, 1)
@@ -76,8 +106,8 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = 672.0
-offset_right = 800.0
+offset_left = 856.0
+offset_right = 984.0
 offset_bottom = 600.0
 grow_horizontal = 0
 grow_vertical = 2
@@ -200,12 +230,6 @@ offset_bottom = 96.0
 [node name="Timer" type="Timer" parent="OrderList" unique_id=1999790851]
 autostart = true
 
-[node name="boba_cup" parent="." unique_id=2051385593 instance=ExtResource("2_7mycd")]
-z_index = 5
-offset_left = 688.0
-offset_top = 360.0
-offset_right = 792.0
-offset_bottom = 520.0
-
+[connection signal="timeout" from="PriceCalculator/Timer" to="PriceCalculator" method="_on_timer_timeout"]
 [connection signal="timeout" from="bubbles/Timer" to="bubbles" method="_on_timer_timeout"]
 [connection signal="timeout" from="OrderList/Timer" to="OrderList" method="_on_timer_timeout"]

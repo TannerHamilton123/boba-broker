@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ct7dm3qworl6m"
-path="res://.godot/imported/milk.jpg-92fa50156f27a5ea399c5d49ff515f00.ctex"
+uid="uid://heu7h00vcvd3"
+path="res://.godot/imported/pearls.jpg-f9a40fb63182352fdf1f9acbdaf6aebe.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/milk.jpg"
-dest_files=["res://.godot/imported/milk.jpg-92fa50156f27a5ea399c5d49ff515f00.ctex"]
+source_file="res://Icons/pearls.jpg"
+dest_files=["res://.godot/imported/pearls.jpg-f9a40fb63182352fdf1f9acbdaf6aebe.ctex"]
 
 [params]
 

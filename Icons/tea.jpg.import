@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dr6unskpr24cf"
-path="res://.godot/imported/tea.jpg-a9f492ae647dceea9ed1ffd07517f0e1.ctex"
+path="res://.godot/imported/tea.jpg-8671291991c0ad40d93ab203197ba447.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/tea.jpg"
-dest_files=["res://.godot/imported/tea.jpg-a9f492ae647dceea9ed1ffd07517f0e1.ctex"]
+source_file="res://Icons/tea.jpg"
+dest_files=["res://.godot/imported/tea.jpg-8671291991c0ad40d93ab203197ba447.ctex"]
 
 [params]
 

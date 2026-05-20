@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://heu7h00vcvd3"
-path="res://.godot/imported/pearls.jpg-6d5bc0c5dc6375360c17881fa1c1b6e7.ctex"
+uid="uid://b6rkxlxxiko1o"
+path="res://.godot/imported/decreasing.jpg-81ea3605d9570464436ad771761a3129.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/pearls.jpg"
-dest_files=["res://.godot/imported/pearls.jpg-6d5bc0c5dc6375360c17881fa1c1b6e7.ctex"]
+source_file="res://PriceChangeIcons/decreasing.jpg"
+dest_files=["res://.godot/imported/decreasing.jpg-81ea3605d9570464436ad771761a3129.ctex"]
 
 [params]
 

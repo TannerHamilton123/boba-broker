@@ -33,8 +33,6 @@ func spawn_bubble() -> void:
 	
 
 
-	bubble_instance.connect("bubble_clicked",get_parent()._on_bubble_clicked)
-
 func _on_timer_timeout() -> void:
 	spawn_bubble()
 	pass # Replace with function body.
