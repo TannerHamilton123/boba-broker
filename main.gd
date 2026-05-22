@@ -8,21 +8,21 @@ var MilkPrice: float = 1.0
 var player_balance: float = 100
 var good_container = preload("res://good_container.tscn")
 var game_ingredients = {
-	"tea": {"quantity": tea_quantity, "Price": TeaPrice, "PriceChange": "stable"},
-	"pearls": {"quantity": pearls_quantity, "Price": PearlPrice, "PriceChange": "stable"},
-	"milk": {"quantity": milk_quantity, "Price": MilkPrice, "PriceChange": "stable"}
+	"tea": {"quantity": tea_quantity, "Price": TeaPrice, "PriceChange": "stable","Storage_Limit": 5},
+	"pearls": {"quantity": pearls_quantity, "Price": PearlPrice, "PriceChange": "stable","Storage_Limit": 5},
+	"milk": {"quantity": milk_quantity, "Price": MilkPrice, "PriceChange": "stable","Storage_Limit": 5}
 }
-
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	create_good_containers()
+	create_storage()
 	# update_ui()
 	
 	pass # Replace with function body.
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	update_good_containers()
 	pass
 	
@@ -39,6 +39,13 @@ func create_good_containers() -> void:
 		good.get_node("PriceChange").texture = load("res://PriceChangeIcons/" + game_ingredients[ingredient]["PriceChange"] + ".jpg")
 		get_node("Control/GoodContainer").add_child(good)
 
+func create_storage():
+	var storage_node = get_node("Control/Storage")
+	for ingredient in game_ingredients.keys():
+		var storage_item = Label.new()
+		storage_item.text = ingredient.capitalize() + ": " + str(game_ingredients[ingredient]["quantity"]) + "/" + str(game_ingredients[ingredient]["Storage_Limit"])
+		storage_node.add_child(storage_item)
+
 func update_good_containers() -> void:
 	for ingredient in game_ingredients.keys():
 		var good = get_node("Control/GoodContainer/" + ingredient)
@@ -46,38 +53,26 @@ func update_good_containers() -> void:
 		# good.get_node("PriceChange").texture = get_node("PriceChangeIcons/" + game_ingredients[ingredient]["PriceChange"])
 
 
+func _on_bubble_clicked(ingredient: String, price: float) -> void:
+	game_ingredients[ingredient]["quantity"] += 1
+	player_balance -= price
+	update_good_containers()
+	update_storage()
 
-	
-	# if player_balance <= 0:
-	# 	print("game over")
-	# 	$GameOver.visible = true
+func update_storage() -> void:
+	var storage_node = get_node("Control/Storage")
+	print(storage_node.get_child_count())
+	for i in range(storage_node.get_child_count()):
+		var storage_item = storage_node.get_child(i)
+		storage_item.text = game_ingredients.keys()[i].capitalize() + ": " + str(game_ingredients[game_ingredients.keys()[i]]["quantity"]) + "/" + str(game_ingredients[game_ingredients.keys()[i]]["Storage_Limit"])
 
-	# pass
+func _on_order_fulfilled(order_number, order, price) -> void:
+	print("Order ", order_number, " fulfilled! Order details: ", order, " Price: ", price)
+	player_balance += price
+	for ingredients in order.keys():
+		game_ingredients[ingredients]["quantity"] -= order[ingredients]
+	update_good_containers()
+	update_storage()
 
-# func _on_bubble_clicked(ingredient: String, price: float) -> void:
-# 	match ingredient:
-# 		"tea":
-# 			tea_quantity += 1
-# 		"pearls":
-# 			pearls_quantity += 1
-# 		"milk":
-# 			milk_quantity += 1
-# 	player_balance -= price
-# 	update_ui()
-
-# func update_ui() -> void:
-# 	$"Boba_Crafting/tea/tea_quantity".text = " tea: " + str(tea_quantity)
-# 	$"Boba_Crafting/pearls/pearl_quantity".text = "Pearls: " + str(pearls_quantity)
-# 	$"Boba_Crafting/milk/milk_quantity".text = "Milk: " + str(milk_quantity)
-
-
-
-# func _on_Ingredient_drag_data_received(position: Vector2, data: Variant) -> void:
-# 	print("Received drag data: ", data, " at position: ", position)
-# 	if data == "tea":
-# 		tea_quantity += 1
-# 	elif data == "pearls":
-# 		pearls_quantity += 1
-# 	elif data == "milk":
-# 		milk_quantity += 1
-# 	update_ui()
+func _on_order_failed(order_number) -> void:
+	print("Order ", order_number, " failed!")

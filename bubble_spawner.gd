@@ -1,5 +1,5 @@
 extends Node
-
+var bubble_scene = preload("res://deal_bubble.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -7,30 +7,28 @@ func _ready() -> void:
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
+	
+	
+
 	
 	pass
 
 
 
 func spawn_bubble() -> void:
-	var bubble_scene = preload("res://deal_bubble.tscn")
-	var bubble_instance = bubble_scene.instantiate()
-	bubble_instance.position = Vector2(randf_range(200, 600), 600)
-	get_parent().add_child(bubble_instance)
-
-	var ingredient = ["tea", "pearls", "milk"].pick_random()
-	var price: float = 1.00
-	match ingredient:
-		"tea":
-			price = get_parent().TeaPrice
-		"pearls":
-			price = get_parent().PearlPrice
-		"milk":
-			price = get_parent().MilkPrice
-
-	bubble_instance.deal_type(ingredient, price)
+	var game_ingredients = get_node("/root/main").game_ingredients
 	
+	var bubble_instance = bubble_scene.instantiate()
+
+	bubble_instance.position = Vector2(randf_range(200, 600), 600)
+
+	get_parent().add_child(bubble_instance)
+	var bubble_ingredient = game_ingredients.keys()[randi() % game_ingredients.size()]
+	var price: float = game_ingredients[bubble_ingredient]["Price"]
+
+	bubble_instance.deal_type(bubble_ingredient, price)
+	bubble_instance.connect("bubble_clicked", get_node("/root/main")._on_bubble_clicked)
 
 
 func _on_timer_timeout() -> void:

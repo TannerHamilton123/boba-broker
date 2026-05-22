@@ -20,7 +20,7 @@ func _process(delta: float) -> void:
 	position.x = _start_x + sin(_time * drift_speed) * drift_amplitude
 
 
-func _on_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
+func _on_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 		emit_signal("bubble_clicked", ingredient, price)
 		
