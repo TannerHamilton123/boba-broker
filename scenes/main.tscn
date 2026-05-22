@@ -1,6 +1,93 @@
-[gd_scene format=3 uid="uid://clkaqm7jjheg"]
+[gd_scene format=3 uid="uid://dr15obsyuck6a"]
 
-[ext_resource type="Script" uid="uid://cmoul50h5j7qc" path="res://node_2d.gd" id="1_ig7tw"]
+[ext_resource type="Script" uid="uid://2g63qbyrm0dy" path="res://scripts/bubble_spawner.gd" id="1_0xm2m"]
+[ext_resource type="Script" uid="uid://dtkww0apdukl5" path="res://scripts/main.gd" id="1_h2yge"]
+[ext_resource type="Script" uid="uid://d3qa12m4oahrb" path="res://scripts/price_calculator.gd" id="2_4c57u"]
+[ext_resource type="Theme" uid="uid://b8msacrlqyrhr" path="res://themes/gameplay_theme.tres" id="5_choun"]
+[ext_resource type="Script" uid="uid://bmigby0thk4f5" path="res://scripts/order_list.gd" id="9_4c57u"]
 
 [node name="main" type="Node2D" unique_id=1553475821]
-script = ExtResource("1_ig7tw")
+script = ExtResource("1_h2yge")
+
+[node name="PriceCalculator" type="Node" parent="." unique_id=1567559871]
+script = ExtResource("2_4c57u")
+
+[node name="Timer" type="Timer" parent="PriceCalculator" unique_id=1201371735]
+wait_time = 10.0
+autostart = true
+
+[node name="Control" type="Control" parent="." unique_id=740147094]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 800.0
+offset_bottom = 600.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 1
+
+[node name="TimeTracker" type="VBoxContainer" parent="Control" unique_id=2070056805]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 58.0
+grow_horizontal = 2
+
+[node name="DayTracker" type="ProgressBar" parent="Control/TimeTracker" unique_id=201131605]
+layout_mode = 2
+theme = ExtResource("5_choun")
+
+[node name="WeekTracker" type="ProgressBar" parent="Control/TimeTracker" unique_id=2098167443]
+layout_mode = 2
+theme = ExtResource("5_choun")
+
+[node name="GoodContainer" type="VBoxContainer" parent="Control" unique_id=1677014012]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -172.0
+offset_right = 192.0
+offset_bottom = 172.0
+grow_vertical = 2
+
+[node name="Storage" type="VBoxContainer" parent="Control" unique_id=555058453]
+layout_mode = 0
+offset_left = 656.0
+offset_top = 136.0
+offset_right = 800.0
+offset_bottom = 496.0
+
+[node name="bubbles" type="Node" parent="." unique_id=1819975558]
+script = ExtResource("1_0xm2m")
+
+[node name="Timer" type="Timer" parent="bubbles" unique_id=750116778]
+autostart = true
+
+[node name="GameOver" type="Node2D" parent="." unique_id=166650162]
+visible = false
+position = Vector2(348, 8)
+
+[node name="ColorRect" type="ColorRect" parent="GameOver" unique_id=1491156990]
+offset_left = -348.0
+offset_top = -8.0
+offset_right = 452.0
+offset_bottom = 592.0
+color = Color(0.5254902, 0.24705882, 0.25882354, 0.5294118)
+
+[node name="OrderList" type="Node" parent="." unique_id=797184050]
+script = ExtResource("9_4c57u")
+
+[node name="OrderContainer" type="ColorRect" parent="OrderList" unique_id=1868295799]
+offset_left = 128.0
+offset_top = 512.0
+offset_right = 672.0
+offset_bottom = 600.0
+mouse_filter = 1
+color = Color(0.24477637, 0.2447764, 0.24477637, 1)
+
+[node name="Timer" type="Timer" parent="OrderList" unique_id=1999790851]
+autostart = true
+
+[connection signal="timeout" from="PriceCalculator/Timer" to="PriceCalculator" method="_on_timer_timeout"]
+[connection signal="timeout" from="bubbles/Timer" to="bubbles" method="_on_timer_timeout"]
+[connection signal="timeout" from="OrderList/Timer" to="OrderList" method="_on_timer_timeout"]

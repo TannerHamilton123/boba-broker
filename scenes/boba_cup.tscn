@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://ctncygwlrrw0m"]
 
-[ext_resource type="Script" uid="uid://xypjtft1wndq" path="res://boba_cup.gd" id="1_si7th"]
+[ext_resource type="Script" uid="uid://xypjtft1wndq" path="res://scripts/boba_cup.gd" id="1_si7th"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_si7th"]
 

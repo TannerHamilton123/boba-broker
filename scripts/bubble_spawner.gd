@@ -1,5 +1,5 @@
 extends Node
-var bubble_scene = preload("res://deal_bubble.tscn")
+var bubble_scene = preload("res://scenes/deal_bubble.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

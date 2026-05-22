@@ -10,29 +10,22 @@ signal order_fulfilled(order_number, order,price)
 func _ready() -> void:
 	connect("order_fulfilled", get_node("/root/main")._on_order_fulfilled)
 	connect("order_failed", get_node("/root/main")._on_order_failed)
-	generate_order()
+	
 	$Timer.wait_time = randf_range(10.0, 15.0)
 	$Timer.start()
 	pass # Replace with function body.
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	order_timer()
 	pass
 
-func generate_order():
-	price = order_difficulty * 5.0
-
-	var ingredients = ["tea", "pearls", "milk"]
-	order = {"tea": 1, "pearls": 0, "milk": 0}
+func label_order():
 	var order_text = ""
-
-	for i in range(order_difficulty):
-		order[ingredients[randi() % ingredients.size()]] += 1
-	for key in order:
-		if order[key] > 0:
-			order_text += ("%d %s\n" % [order[key], key])
+	for ingredient in order.keys():
+		order_text += str(order[ingredient]) + " " + ingredient.capitalize() + "\n"
+	order_text += "$%.2f" % price
 	$"Label".text = order_text
 
 func order_timer():
@@ -46,15 +39,10 @@ func _on_timer_timeout() -> void:
 	emit_signal("order_failed")
 	queue_free()
 
-func shift_order_to_position():
-	position = Vector2(0,0) + Vector2((order_number-1) * 110, 0)
-	print("Shifting order ", order_number, " to position: ", position)
-
 func _gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 		print("Clicked on order ", order_number)
 		check_order()
-
 
 func check_order():
 	var game_ingredients = get_node("/root/main").game_ingredients

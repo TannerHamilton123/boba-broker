@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://b8slv82wc5nq5"]
 
-[ext_resource type="Script" uid="uid://cusvu4t1qxhln" path="res://price_bar.gd" id="1_chwcf"]
+[ext_resource type="Script" uid="uid://cusvu4t1qxhln" path="res://scripts/price_bar.gd" id="1_chwcf"]
 
 [node name="VSlider" type="VSlider" unique_id=978935056]
 offset_top = -8.0

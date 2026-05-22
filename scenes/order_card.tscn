@@ -1,11 +1,11 @@
 [gd_scene format=3 uid="uid://djmqh6c5rd38b"]
 
-[ext_resource type="Script" uid="uid://dvqasluc5lpfr" path="res://order_card.gd" id="1_5yx2q"]
+[ext_resource type="Script" uid="uid://dvqasluc5lpfr" path="res://scripts/order_card.gd" id="1_5yx2q"]
+[ext_resource type="Theme" uid="uid://b8msacrlqyrhr" path="res://themes/gameplay_theme.tres" id="2_jukm1"]
 
 [node name="OrderCard" type="ColorRect" unique_id=705807321]
-offset_top = -16.0
 offset_right = 80.0
-offset_bottom = 80.0
+offset_bottom = 96.0
 script = ExtResource("1_5yx2q")
 
 [node name="Label" type="Label" parent="." unique_id=1878356465]
@@ -13,8 +13,7 @@ layout_mode = 0
 offset_left = 8.0
 offset_right = 64.0
 offset_bottom = 75.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 12
+theme = ExtResource("2_jukm1")
 text = "line1
 line2
 line3"
