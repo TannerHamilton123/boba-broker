@@ -4,6 +4,8 @@
 [ext_resource type="Script" uid="uid://dtkww0apdukl5" path="res://scripts/main.gd" id="1_h2yge"]
 [ext_resource type="Script" uid="uid://d3qa12m4oahrb" path="res://scripts/price_calculator.gd" id="2_4c57u"]
 [ext_resource type="Theme" uid="uid://b8msacrlqyrhr" path="res://themes/gameplay_theme.tres" id="5_choun"]
+[ext_resource type="Script" uid="uid://bdc642swlahph" path="res://scenes/upgrades.gd" id="6_o6xl0"]
+[ext_resource type="PackedScene" uid="uid://bcj2knqij31qx" path="res://scenes/upgrade_button.tscn" id="6_tefeu"]
 [ext_resource type="Script" uid="uid://bmigby0thk4f5" path="res://scripts/order_list.gd" id="9_4c57u"]
 
 [node name="main" type="Node2D" unique_id=1553475821]
@@ -16,7 +18,7 @@ script = ExtResource("2_4c57u")
 wait_time = 10.0
 autostart = true
 
-[node name="Control" type="Control" parent="." unique_id=740147094]
+[node name="GameUI" type="Control" parent="." unique_id=740147094]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 800.0
@@ -25,22 +27,25 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 mouse_filter = 1
 
-[node name="TimeTracker" type="VBoxContainer" parent="Control" unique_id=2070056805]
+[node name="TimeTracker" type="VBoxContainer" parent="GameUI" unique_id=2070056805]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
 offset_bottom = 58.0
 grow_horizontal = 2
 
-[node name="DayTracker" type="ProgressBar" parent="Control/TimeTracker" unique_id=201131605]
+[node name="DayTracker" type="ProgressBar" parent="GameUI/TimeTracker" unique_id=201131605]
 layout_mode = 2
 theme = ExtResource("5_choun")
 
-[node name="WeekTracker" type="ProgressBar" parent="Control/TimeTracker" unique_id=2098167443]
+[node name="WeekTracker" type="ProgressBar" parent="GameUI/TimeTracker" unique_id=2098167443]
 layout_mode = 2
 theme = ExtResource("5_choun")
 
-[node name="GoodContainer" type="VBoxContainer" parent="Control" unique_id=1677014012]
+[node name="clock" type="Label" parent="GameUI/TimeTracker" unique_id=999258031]
+layout_mode = 2
+
+[node name="GoodContainer" type="VBoxContainer" parent="GameUI" unique_id=1677014012]
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
@@ -50,7 +55,7 @@ offset_right = 192.0
 offset_bottom = 172.0
 grow_vertical = 2
 
-[node name="Storage" type="VBoxContainer" parent="Control" unique_id=555058453]
+[node name="Storage" type="VBoxContainer" parent="GameUI" unique_id=555058453]
 layout_mode = 0
 offset_left = 656.0
 offset_top = 136.0
@@ -87,6 +92,115 @@ color = Color(0.24477637, 0.2447764, 0.24477637, 1)
 
 [node name="Timer" type="Timer" parent="OrderList" unique_id=1999790851]
 autostart = true
+
+[node name="EndOfWeek" type="Control" parent="." unique_id=247071218]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 800.0
+offset_bottom = 600.0
+
+[node name="ColorRect" type="ColorRect" parent="EndOfWeek" unique_id=1958397173]
+layout_mode = 0
+offset_left = 50.0
+offset_top = 50.0
+offset_right = 750.0
+offset_bottom = 550.0
+
+[node name="Label" type="Label" parent="EndOfWeek/ColorRect" unique_id=1463656620]
+layout_mode = 0
+offset_left = 270.0
+offset_top = 118.0
+offset_right = 394.0
+offset_bottom = 141.0
+theme = ExtResource("5_choun")
+text = "End of the Week"
+
+[node name="Summary" type="Panel" parent="EndOfWeek/ColorRect" unique_id=1162121392]
+layout_mode = 0
+offset_left = 70.0
+offset_top = 141.0
+offset_right = 302.0
+offset_bottom = 326.0
+theme = ExtResource("5_choun")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="EndOfWeek/ColorRect/Summary" unique_id=1425565280]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -114.5
+offset_top = -65.5
+offset_right = 114.5
+offset_bottom = 65.5
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Label2" type="Label" parent="EndOfWeek/ColorRect/Summary/VBoxContainer" unique_id=1532662757]
+layout_mode = 2
+theme = ExtResource("5_choun")
+text = "Boba sold:"
+
+[node name="Label3" type="Label" parent="EndOfWeek/ColorRect/Summary/VBoxContainer" unique_id=900020504]
+layout_mode = 2
+theme = ExtResource("5_choun")
+text = "Money spent on materials"
+
+[node name="Label4" type="Label" parent="EndOfWeek/ColorRect/Summary/VBoxContainer" unique_id=1018601429]
+layout_mode = 2
+theme = ExtResource("5_choun")
+text = "Money earned from sales"
+
+[node name="Label5" type="Label" parent="EndOfWeek/ColorRect/Summary/VBoxContainer" unique_id=95953026]
+layout_mode = 2
+theme = ExtResource("5_choun")
+text = "Average price of goods bought"
+
+[node name="Label6" type="Label" parent="EndOfWeek/ColorRect/Summary/VBoxContainer" unique_id=2138264523]
+layout_mode = 2
+theme = ExtResource("5_choun")
+text = "Customer Satisfaction"
+
+[node name="Upgrades" type="Panel" parent="EndOfWeek/ColorRect" unique_id=1452993214]
+layout_mode = 0
+offset_left = 398.0
+offset_top = 142.0
+offset_right = 622.0
+offset_bottom = 326.0
+theme = ExtResource("5_choun")
+script = ExtResource("6_o6xl0")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="EndOfWeek/ColorRect/Upgrades" unique_id=1250214433]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -101.0
+offset_top = -85.5
+offset_right = 101.0
+offset_bottom = 85.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Storage" parent="EndOfWeek/ColorRect/Upgrades/VBoxContainer" unique_id=1322697764 instance=ExtResource("6_tefeu")]
+layout_mode = 2
+
+[node name="Ingredient" parent="EndOfWeek/ColorRect/Upgrades/VBoxContainer" unique_id=977589304 instance=ExtResource("6_tefeu")]
+layout_mode = 2
+
+[node name="Popularity" parent="EndOfWeek/ColorRect/Upgrades/VBoxContainer" unique_id=2026628330 instance=ExtResource("6_tefeu")]
+layout_mode = 2
+
+[node name="WaitTime" parent="EndOfWeek/ColorRect/Upgrades/VBoxContainer" unique_id=262576158 instance=ExtResource("6_tefeu")]
+layout_mode = 2
+
+[node name="Supply" parent="EndOfWeek/ColorRect/Upgrades/VBoxContainer" unique_id=701519641 instance=ExtResource("6_tefeu")]
+layout_mode = 2
 
 [connection signal="timeout" from="PriceCalculator/Timer" to="PriceCalculator" method="_on_timer_timeout"]
 [connection signal="timeout" from="bubbles/Timer" to="bubbles" method="_on_timer_timeout"]

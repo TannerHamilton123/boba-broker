@@ -5,13 +5,20 @@ var order
 var price
 # Called when the node enters the scene tree for the first time.
 var order_number := 0
+
+@onready var main = get_node("/root/main")
+
 signal order_failed(order_number)
 signal order_fulfilled(order_number, order,price)
 func _ready() -> void:
-	connect("order_fulfilled", get_node("/root/main")._on_order_fulfilled)
-	connect("order_failed", get_node("/root/main")._on_order_failed)
-	
-	$Timer.wait_time = randf_range(10.0, 15.0)
+	connect("order_fulfilled", main._on_order_fulfilled)
+	connect("order_failed", main._on_order_failed)
+
+	#wait time is variable, plus the effects of upgrades that represent a customers willingness to wait longer
+	var wait_time_increase = main.wait_time_increase
+
+	$Timer.wait_time = randf_range(10.0, 15.0) + wait_time_increase - order_difficulty
+
 	$Timer.start()
 	pass # Replace with function body.
 
@@ -36,7 +43,7 @@ func order_timer():
 
 func _on_timer_timeout() -> void:
 	print("Order ", order_number, " timed out!")
-	emit_signal("order_failed")
+	emit_signal("order_failed",order_number)
 	queue_free()
 
 func _gui_input(event: InputEvent) -> void:
