@@ -28,7 +28,7 @@ func spawn_bubble() -> void:
 	var price: float = game_ingredients[bubble_ingredient]["Price"]
 
 	bubble_instance.deal_type(bubble_ingredient, price)
-	bubble_instance.connect("bubble_clicked", get_node("/root/main")._on_bubble_clicked)
+	bubble_instance.connect("bubble_clicked", get_node("/root/main/OrderManager")._on_bubble_clicked)
 
 
 func _on_timer_timeout() -> void:

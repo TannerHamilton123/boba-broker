@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://bllr8h2latc6t"]
+
+[ext_resource type="Texture2D" uid="uid://dl03ldnhsgjd8" path="res://assets/lemon.png" id="1_x2ngj"]
+
+[node name="lemon" type="Sprite2D" unique_id=1621878304]
+rotation = 1.0471976
+scale = Vector2(0.04506368, 0.04506368)
+texture = ExtResource("1_x2ngj")
+offset = Vector2(-200, 700)

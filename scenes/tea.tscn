@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://c7gqmxdaljena"]
+
+[ext_resource type="Texture2D" uid="uid://cj6nxrbewb61v" path="res://assets/tea.png" id="1_4u5my"]
+
+[node name="tea" type="Sprite2D" unique_id=374827546]
+scale = Vector2(0.057917338, 0.057917338)
+texture = ExtResource("1_4u5my")
+offset = Vector2(-200, 700)

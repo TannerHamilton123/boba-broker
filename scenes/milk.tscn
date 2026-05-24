@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://drbkplepsvmeo"]
+
+[ext_resource type="Texture2D" uid="uid://6ti6wklsprtc" path="res://assets/milk.png" id="1_b1h7t"]
+
+[node name="milk" type="Sprite2D" unique_id=74981698]
+scale = Vector2(0.057917334, 0.057917334)
+texture = ExtResource("1_b1h7t")
+offset = Vector2(500, 600)

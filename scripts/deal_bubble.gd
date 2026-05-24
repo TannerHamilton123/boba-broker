@@ -9,6 +9,14 @@ var _time: float = 0.0
 var _start_x: float = 0.0
 var ingredient: String
 var price: float = 1.0
+var milk_sprite_scene = preload("res://scenes/milk.tscn")
+var pearl_sprite_scene = preload("res://scenes/pearls.tscn")
+var tea_sprite_scene = preload("res://scenes/tea.tscn")
+var pearls_sprite_scene = preload("res://scenes/pearls.tscn")
+var lemons_sprite_scene = preload("res://scenes/lemon.tscn")
+var strawberry_sprite_scene = preload("res://scenes/strawberry.tscn")
+var taro_sprite_scene = preload("res://scenes/taro.tscn")
+
 func _ready() -> void:
 	_start_x = position.x
 	_time = randf() * TAU
@@ -40,7 +48,11 @@ func deal_type(ingredient_type: String, bubble_price: float) -> void:
 			rise_speed = 80.0
 			drift_speed = 1.5
 			drift_amplitude = 30.0
-			$Label.text = "Tea"
+
+			var sprite = tea_sprite_scene.instantiate()
+			sprite.position = Vector2.ZERO
+			add_child(sprite)
+
 			$CollisionShape2D/Circle.modulate = Color(0.8, 0.6, 0.4)
 			$Price.text = "$%.2f" % price
 			
@@ -48,7 +60,10 @@ func deal_type(ingredient_type: String, bubble_price: float) -> void:
 			rise_speed = 60.0
 			drift_speed = 1.0
 			drift_amplitude = 20.0
-			$Label.text = "Pearls"
+			var sprite = pearls_sprite_scene.instantiate()
+			sprite.position = Vector2.ZERO
+			add_child(sprite)
+			
 			$CollisionShape2D/Circle.modulate = Color.LIGHT_PINK
 			$Price.text = "$%.2f" % price
 
@@ -56,6 +71,9 @@ func deal_type(ingredient_type: String, bubble_price: float) -> void:
 			rise_speed = 100.0
 			drift_speed = 2.0
 			drift_amplitude = 40.0
-			$Label.text = "Milk"
+			var sprite = milk_sprite_scene.instantiate()
+			sprite.position = Vector2.ZERO
+			add_child(sprite)
+
 			$CollisionShape2D/Circle.modulate = Color(1.0, 1.0, 1.0)
 			$Price.text = "$%.2f" % price

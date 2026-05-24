@@ -1,4 +1,5 @@
-extends Panel
+
+extends Node
 
 var upgrade_types = ["Storage", "Ingredient", "WaitTime", "Popularity","Supply"]
 var upgrade_levels = {
@@ -43,24 +44,47 @@ func upgrade_storage() -> void:
 	var price = set_price("Storage")
 	main.ingredient_storage += 5
 	upgrade_levels["Storage"] += 1
+	_refresh_button("Storage")
 	print("Storage upgraded to level ", upgrade_levels["Storage"], " for $", price)
 
 func upgrade_ingredient() -> void:
 	main.ingredient_level += 1
 	upgrade_levels["Ingredient"] += 1
+	_refresh_button("Ingredient")
+	_unlock_ingredient(main.ingredient_level)
 	print("Ingredient quality upgraded to level ", upgrade_levels["Ingredient"])
 
 func upgrade_wait_time() -> void:
 	main.wait_time_increase += 0.1
 	upgrade_levels["WaitTime"] += 1
+	_refresh_button("WaitTime")
 	print("Wait time reduction upgraded to level ", upgrade_levels["WaitTime"])
 
 func upgrade_popularity() -> void:
 	main.popularity += 1
 	upgrade_levels["Popularity"] += 1
+	_refresh_button("Popularity")
 	print("Popularity upgraded to level ", upgrade_levels["Popularity"])
 
 func upgrade_supply() -> void:
 	main.supply_level += 1
 	upgrade_levels["Supply"] += 1
+	_refresh_button("Supply")
 	print("Supply upgraded to level ", upgrade_levels["Supply"])
+
+'''
+Finds the matching button in the EOW scene and
+updates its level then refreshes its label text
+'''
+func _refresh_button(upgrade_type: String) -> void:
+	var eow = get_tree().root.get_node("EndOfWeek")
+
+	var button = eow.get_node("ColorRect/Upgrades/VBoxContainer/" + upgrade_type)
+	button.current_level = upgrade_levels[upgrade_type]
+	button.refresh_label()
+
+func _unlock_ingredient(level: int) -> void:
+	var eow = get_tree().root.get_node("EndOfWeek")
+	var new_ingredient = main.all_ingredients[level]
+	main.game_ingredients[new_ingredient] = {"quantity": 0, "Price": 1.0, "PriceChange": "stable","Storage_Limit": main.ingredient_storage}
+	eow.get_node("ColorRect/Upgrades/VBoxContainer/Ingredient").refresh_label()

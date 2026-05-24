@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://0482j1n5nglx"]
+
+[ext_resource type="Texture2D" uid="uid://cc2y5ee2onmiq" path="res://assets/strawberry.png" id="1_13m7n"]
+
+[node name="strawberry" type="Sprite2D" unique_id=1006039960]
+rotation = 0.5235988
+scale = Vector2(0.041705552, 0.041705552)
+texture = ExtResource("1_13m7n")

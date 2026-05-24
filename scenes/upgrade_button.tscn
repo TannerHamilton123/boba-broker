@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bcj2knqij31qx"]
 
-[ext_resource type="Script" uid="uid://dredetma58sa0" path="res://scenes/upgrade_button.gd" id="1_vd32k"]
+[ext_resource type="Script" path="res://scripts/upgrade_button.gd" id="1_vd32k"]
 
 [node name="StorageUpgrade" type="Button" unique_id=1322697764]
 text = "EXPAND THE BACKROOM"

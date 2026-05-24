@@ -7,12 +7,13 @@ var price
 var order_number := 0
 
 @onready var main = get_node("/root/main")
+@onready var OrderManager = get_node("/root/main/OrderManager")
 
-signal order_failed(order_number)
-signal order_fulfilled(order_number, order,price)
+signal order_failed(order,price)
+signal order_fulfilled(order,price)
 func _ready() -> void:
-	connect("order_fulfilled", main._on_order_fulfilled)
-	connect("order_failed", main._on_order_failed)
+	connect("order_fulfilled", OrderManager._on_order_fulfilled)
+	connect("order_failed", OrderManager._on_order_failed)
 
 	#wait time is variable, plus the effects of upgrades that represent a customers willingness to wait longer
 	var wait_time_increase = main.wait_time_increase
@@ -43,7 +44,7 @@ func order_timer():
 
 func _on_timer_timeout() -> void:
 	print("Order ", order_number, " timed out!")
-	emit_signal("order_failed",order_number)
+	emit_signal("order_failed",order,price)
 	queue_free()
 
 func _gui_input(event: InputEvent) -> void:
@@ -60,7 +61,7 @@ func check_order():
 	
 	#All ingredients are present, so now order is fulfilled
 	print("Order ", order_number, " fulfilled!")
-	emit_signal("order_fulfilled", order_number,order,price)
+	emit_signal("order_fulfilled",order,price)
 	queue_free()
 
 	

@@ -1,0 +1,258 @@
+[gd_scene format=3 uid="uid://col4f6pr4vpab"]
+
+[ext_resource type="Script" path="res://scenes/end_of_week.gd" id="1_6ubf8"]
+[ext_resource type="Theme" uid="uid://b8msacrlqyrhr" path="res://themes/gameplay_theme.tres" id="1_q21ax"]
+[ext_resource type="PackedScene" uid="uid://bcj2knqij31qx" path="res://scenes/upgrade_button.tscn" id="2_6ubf8"]
+[ext_resource type="FontFile" uid="uid://bkq7isl3bkgjh" path="res://themes/Fredoka-Bold.ttf" id="4_lrvch"]
+
+[node name="EndOfWeek" type="Control" unique_id=377314579]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 800.0
+offset_bottom = 600.0
+script = ExtResource("1_6ubf8")
+
+[node name="ColorRect2" type="ColorRect" parent="." unique_id=1653264945]
+layout_mode = 0
+offset_right = 800.0
+offset_bottom = 592.0
+color = Color(0, 0, 0, 0.42352942)
+
+[node name="Label" type="Label" parent="ColorRect2" unique_id=77953213]
+layout_mode = 0
+offset_left = 270.0
+offset_top = 118.0
+offset_right = 394.0
+offset_bottom = 141.0
+theme = ExtResource("1_q21ax")
+text = "End of the Week"
+
+[node name="Summary" type="Panel" parent="ColorRect2" unique_id=851876767]
+layout_mode = 0
+offset_left = 70.0
+offset_top = 141.0
+offset_right = 302.0
+offset_bottom = 326.0
+theme = ExtResource("1_q21ax")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect2/Summary" unique_id=1582101350]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -114.5
+offset_top = -65.5
+offset_right = 114.5
+offset_bottom = 65.5
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Label2" type="Label" parent="ColorRect2/Summary/VBoxContainer" unique_id=226497078]
+layout_mode = 2
+theme = ExtResource("1_q21ax")
+text = "Boba sold:"
+
+[node name="Label3" type="Label" parent="ColorRect2/Summary/VBoxContainer" unique_id=1517242718]
+layout_mode = 2
+theme = ExtResource("1_q21ax")
+text = "Money spent on materials"
+
+[node name="Label4" type="Label" parent="ColorRect2/Summary/VBoxContainer" unique_id=997408390]
+layout_mode = 2
+theme = ExtResource("1_q21ax")
+text = "Money earned from sales"
+
+[node name="Label5" type="Label" parent="ColorRect2/Summary/VBoxContainer" unique_id=302521792]
+layout_mode = 2
+theme = ExtResource("1_q21ax")
+text = "Average price of goods bought"
+
+[node name="Label6" type="Label" parent="ColorRect2/Summary/VBoxContainer" unique_id=509006558]
+layout_mode = 2
+theme = ExtResource("1_q21ax")
+text = "Customer Satisfaction"
+
+[node name="Upgrades" type="Panel" parent="ColorRect2" unique_id=607637725]
+layout_mode = 0
+offset_left = 398.0
+offset_top = 142.0
+offset_right = 622.0
+offset_bottom = 326.0
+theme = ExtResource("1_q21ax")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect2/Upgrades" unique_id=1507991799]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -101.0
+offset_top = -85.5
+offset_right = 101.0
+offset_bottom = 85.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Storage" parent="ColorRect2/Upgrades/VBoxContainer" unique_id=1322697764 instance=ExtResource("2_6ubf8")]
+layout_mode = 2
+
+[node name="Ingredient" parent="ColorRect2/Upgrades/VBoxContainer" unique_id=1658040578 instance=ExtResource("2_6ubf8")]
+layout_mode = 2
+
+[node name="Popularity" parent="ColorRect2/Upgrades/VBoxContainer" unique_id=987723368 instance=ExtResource("2_6ubf8")]
+layout_mode = 2
+
+[node name="WaitTime" parent="ColorRect2/Upgrades/VBoxContainer" unique_id=1649585822 instance=ExtResource("2_6ubf8")]
+layout_mode = 2
+
+[node name="Supply" parent="ColorRect2/Upgrades/VBoxContainer" unique_id=692231917 instance=ExtResource("2_6ubf8")]
+layout_mode = 2
+
+[node name="ColorRect" type="Panel" parent="." unique_id=415948330]
+layout_mode = 0
+offset_left = 48.0
+offset_top = 48.0
+offset_right = 748.0
+offset_bottom = 548.0
+theme = ExtResource("1_q21ax")
+
+[node name="Label" type="Label" parent="ColorRect" unique_id=1744153793]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -88.5
+offset_top = 86.0
+offset_right = 88.5
+offset_bottom = 116.0
+grow_horizontal = 2
+theme = ExtResource("1_q21ax")
+theme_override_fonts/font = ExtResource("4_lrvch")
+theme_override_font_sizes/font_size = 24
+text = "End of the Week"
+
+[node name="Summary" type="Panel" parent="ColorRect" unique_id=1783960967]
+layout_mode = 0
+offset_left = 70.0
+offset_top = 141.0
+offset_right = 302.0
+offset_bottom = 326.0
+theme = ExtResource("1_q21ax")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect/Summary" unique_id=1631469614]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -116.0
+offset_top = -90.5
+offset_right = 137.0
+offset_bottom = 92.5
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="GridContainer" type="GridContainer" parent="ColorRect/Summary/VBoxContainer" unique_id=2097156206]
+layout_mode = 2
+columns = 2
+
+[node name="BobaSold" type="Label" parent="ColorRect/Summary/VBoxContainer/GridContainer" unique_id=173745514]
+layout_mode = 2
+theme = ExtResource("1_q21ax")
+text = "Boba sold:"
+
+[node name="BobaSold2" type="Label" parent="ColorRect/Summary/VBoxContainer/GridContainer" unique_id=830297031]
+layout_mode = 2
+theme = ExtResource("1_q21ax")
+text = "10"
+
+[node name="Ingredients" type="Label" parent="ColorRect/Summary/VBoxContainer/GridContainer" unique_id=1304677073]
+layout_mode = 2
+theme = ExtResource("1_q21ax")
+text = "Money spent on materials"
+
+[node name="label2" type="Label" parent="ColorRect/Summary/VBoxContainer/GridContainer" unique_id=1595331166]
+layout_mode = 2
+theme = ExtResource("1_q21ax")
+text = "$"
+
+[node name="Label4" type="Label" parent="ColorRect/Summary/VBoxContainer/GridContainer" unique_id=823937629]
+layout_mode = 2
+theme = ExtResource("1_q21ax")
+text = "Money earned from sales"
+
+[node name="Label8" type="Label" parent="ColorRect/Summary/VBoxContainer/GridContainer" unique_id=1511632503]
+layout_mode = 2
+theme = ExtResource("1_q21ax")
+text = "$"
+
+[node name="Label5" type="Label" parent="ColorRect/Summary/VBoxContainer/GridContainer" unique_id=615699564]
+layout_mode = 2
+theme = ExtResource("1_q21ax")
+text = "Average price of goods bought"
+
+[node name="Label9" type="Label" parent="ColorRect/Summary/VBoxContainer/GridContainer" unique_id=288038445]
+layout_mode = 2
+theme = ExtResource("1_q21ax")
+text = "$"
+
+[node name="Label6" type="Label" parent="ColorRect/Summary/VBoxContainer/GridContainer" unique_id=958246212]
+layout_mode = 2
+theme = ExtResource("1_q21ax")
+text = "Customer Satisfaction"
+
+[node name="Label10" type="Label" parent="ColorRect/Summary/VBoxContainer/GridContainer" unique_id=2056728062]
+layout_mode = 2
+theme = ExtResource("1_q21ax")
+text = "%"
+
+[node name="Upgrades" type="Panel" parent="ColorRect" unique_id=1606752082]
+layout_mode = 0
+offset_left = 398.0
+offset_top = 142.0
+offset_right = 622.0
+offset_bottom = 326.0
+theme = ExtResource("1_q21ax")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect/Upgrades" unique_id=1187762989]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -101.0
+offset_top = -85.5
+offset_right = 101.0
+offset_bottom = 85.5
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Storage" parent="ColorRect/Upgrades/VBoxContainer" unique_id=1136268516 instance=ExtResource("2_6ubf8")]
+layout_mode = 2
+theme = ExtResource("1_q21ax")
+text = "upgrade"
+
+[node name="Ingredient" parent="ColorRect/Upgrades/VBoxContainer" unique_id=223015031 instance=ExtResource("2_6ubf8")]
+layout_mode = 2
+text = "upgrade"
+
+[node name="Popularity" parent="ColorRect/Upgrades/VBoxContainer" unique_id=861985517 instance=ExtResource("2_6ubf8")]
+layout_mode = 2
+text = "upgrade"
+
+[node name="WaitTime" parent="ColorRect/Upgrades/VBoxContainer" unique_id=1314841912 instance=ExtResource("2_6ubf8")]
+layout_mode = 2
+text = "upgrade"
+
+[node name="Supply" parent="ColorRect/Upgrades/VBoxContainer" unique_id=1139131302 instance=ExtResource("2_6ubf8")]
+layout_mode = 2
+text = "upgrade
+"

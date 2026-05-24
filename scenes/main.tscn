@@ -3,13 +3,47 @@
 [ext_resource type="Script" uid="uid://2g63qbyrm0dy" path="res://scripts/bubble_spawner.gd" id="1_0xm2m"]
 [ext_resource type="Script" uid="uid://dtkww0apdukl5" path="res://scripts/main.gd" id="1_h2yge"]
 [ext_resource type="Script" uid="uid://d3qa12m4oahrb" path="res://scripts/price_calculator.gd" id="2_4c57u"]
+[ext_resource type="Script" uid="uid://d0jyq6x2my6on" path="res://scripts/time_manager.gd" id="2_choun"]
+[ext_resource type="Script" uid="uid://cw7fm14j7e3ba" path="res://scripts/ui_manager.gd" id="3_choun"]
+[ext_resource type="Script" uid="uid://cwxdmeo0qjubt" path="res://scripts/order_manager.gd" id="4_choun"]
 [ext_resource type="Theme" uid="uid://b8msacrlqyrhr" path="res://themes/gameplay_theme.tres" id="5_choun"]
-[ext_resource type="Script" uid="uid://bdc642swlahph" path="res://scenes/upgrades.gd" id="6_o6xl0"]
-[ext_resource type="PackedScene" uid="uid://bcj2knqij31qx" path="res://scenes/upgrade_button.tscn" id="6_tefeu"]
+[ext_resource type="Script" uid="uid://cgfrhur7u61o5" path="res://scripts/upgrade_manager.gd" id="5_jkv2x"]
 [ext_resource type="Script" uid="uid://bmigby0thk4f5" path="res://scripts/order_list.gd" id="9_4c57u"]
+[ext_resource type="PackedScene" uid="uid://col4f6pr4vpab" path="res://scenes/end_of_week.tscn" id="10_choun"]
+[ext_resource type="Texture2D" uid="uid://by5x7p1qtlsbd" path="res://assets/boba.png" id="10_trceg"]
+[ext_resource type="Texture2D" uid="uid://6ti6wklsprtc" path="res://assets/milk.png" id="11_a8y0u"]
+[ext_resource type="Texture2D" uid="uid://bq5s6v44vyqm" path="res://assets/taro.png" id="12_jbj1t"]
+[ext_resource type="Texture2D" uid="uid://cj6nxrbewb61v" path="res://assets/tea.png" id="12_jkv2x"]
+[ext_resource type="Texture2D" uid="uid://dl03ldnhsgjd8" path="res://assets/lemon.png" id="13_jkv2x"]
+[ext_resource type="Texture2D" uid="uid://cc2y5ee2onmiq" path="res://assets/strawberry.png" id="14_jbj1t"]
 
 [node name="main" type="Node2D" unique_id=1553475821]
 script = ExtResource("1_h2yge")
+
+[node name="Panel" type="Panel" parent="." unique_id=642137560]
+z_index = -1
+offset_right = 800.0
+offset_bottom = 600.0
+theme = ExtResource("5_choun")
+
+[node name="TimeManager" type="Node" parent="." unique_id=2092677775]
+script = ExtResource("2_choun")
+eow_scene = ExtResource("10_choun")
+
+[node name="UpgradeManager" type="Node" parent="." unique_id=1780036871]
+script = ExtResource("5_jkv2x")
+
+[node name="UIManager" type="Node" parent="." unique_id=1599483740]
+script = ExtResource("3_choun")
+
+[node name="OrderManager" type="Node" parent="." unique_id=1302204418]
+script = ExtResource("4_choun")
+
+[node name="BubbleSpawner" type="Node" parent="." unique_id=1819975558]
+script = ExtResource("1_0xm2m")
+
+[node name="Timer" type="Timer" parent="BubbleSpawner" unique_id=750116778]
+autostart = true
 
 [node name="PriceCalculator" type="Node" parent="." unique_id=1567559871]
 script = ExtResource("2_4c57u")
@@ -26,6 +60,7 @@ offset_bottom = 600.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 mouse_filter = 1
+theme = ExtResource("5_choun")
 
 [node name="TimeTracker" type="VBoxContainer" parent="GameUI" unique_id=2070056805]
 layout_mode = 1
@@ -33,6 +68,7 @@ anchors_preset = 10
 anchor_right = 1.0
 offset_bottom = 58.0
 grow_horizontal = 2
+theme = ExtResource("5_choun")
 
 [node name="DayTracker" type="ProgressBar" parent="GameUI/TimeTracker" unique_id=201131605]
 layout_mode = 2
@@ -41,19 +77,24 @@ theme = ExtResource("5_choun")
 [node name="WeekTracker" type="ProgressBar" parent="GameUI/TimeTracker" unique_id=2098167443]
 layout_mode = 2
 theme = ExtResource("5_choun")
+max_value = 7.0
+value = 1.0
 
 [node name="clock" type="Label" parent="GameUI/TimeTracker" unique_id=999258031]
 layout_mode = 2
+theme = ExtResource("5_choun")
 
 [node name="GoodContainer" type="VBoxContainer" parent="GameUI" unique_id=1677014012]
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
+offset_left = -248.0
 offset_top = -172.0
-offset_right = 192.0
+offset_right = -56.0
 offset_bottom = 172.0
 grow_vertical = 2
+theme = ExtResource("5_choun")
 
 [node name="Storage" type="VBoxContainer" parent="GameUI" unique_id=555058453]
 layout_mode = 0
@@ -61,12 +102,113 @@ offset_left = 656.0
 offset_top = 136.0
 offset_right = 800.0
 offset_bottom = 496.0
+theme = ExtResource("5_choun")
 
-[node name="bubbles" type="Node" parent="." unique_id=1819975558]
-script = ExtResource("1_0xm2m")
+[node name="PriceBar" type="Panel" parent="GameUI" unique_id=476105927]
+layout_mode = 0
+offset_top = 128.0
+offset_right = 150.0
+offset_bottom = 428.0
 
-[node name="Timer" type="Timer" parent="bubbles" unique_id=750116778]
-autostart = true
+[node name="Lines" type="Node2D" parent="GameUI/PriceBar" unique_id=860485155]
+
+[node name="Line2D" type="Line2D" parent="GameUI/PriceBar/Lines" unique_id=1175171820]
+position = Vector2(0, 79)
+points = PackedVector2Array(0, 0, 150, 0)
+width = 4.0
+default_color = Color(0.78431374, 0.47843137, 0.6901961, 0.44705883)
+
+[node name="Line2D2" type="Line2D" parent="GameUI/PriceBar/Lines" unique_id=658158755]
+position = Vector2(0, 150)
+points = PackedVector2Array(0, 0, 150, 0)
+width = 4.0
+default_color = Color(0.78431374, 0.47843137, 0.6901961, 0.44705883)
+
+[node name="Line2D3" type="Line2D" parent="GameUI/PriceBar/Lines" unique_id=1233859533]
+position = Vector2(0, 219)
+points = PackedVector2Array(0, 0, 150, 0)
+width = 4.0
+default_color = Color(0.78431374, 0.47843137, 0.6901961, 0.44705883)
+
+[node name="Label" type="Label" parent="GameUI/PriceBar/Lines" unique_id=851004447]
+offset_left = 56.0
+offset_top = 58.0
+offset_right = 99.0
+offset_bottom = 81.0
+theme = ExtResource("5_choun")
+text = "$4.00"
+
+[node name="Label2" type="Label" parent="GameUI/PriceBar/Lines" unique_id=832686847]
+offset_left = 56.0
+offset_top = 129.0
+offset_right = 99.0
+offset_bottom = 152.0
+theme = ExtResource("5_choun")
+text = "$3.00"
+
+[node name="Label3" type="Label" parent="GameUI/PriceBar/Lines" unique_id=1194205160]
+offset_left = 56.0
+offset_top = 198.0
+offset_right = 99.0
+offset_bottom = 221.0
+theme = ExtResource("5_choun")
+text = "$2.00"
+
+[node name="Label4" type="Label" parent="GameUI/PriceBar/Lines" unique_id=1672751921]
+offset_left = 56.0
+offset_top = 276.0
+offset_right = 99.0
+offset_bottom = 299.0
+theme = ExtResource("5_choun")
+text = "$1.00"
+
+[node name="Label6" type="Label" parent="GameUI/PriceBar/Lines" unique_id=1322229416]
+offset_left = 56.0
+offset_top = -19.0
+offset_right = 98.0
+offset_bottom = 4.0
+theme = ExtResource("5_choun")
+text = "$4.00"
+
+[node name="icons" type="Control" parent="GameUI/PriceBar" unique_id=1952473343]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="pearls" type="Sprite2D" parent="GameUI/PriceBar/icons" unique_id=1558265090]
+position = Vector2(16.303059, 271.40408)
+scale = Vector2(0.057917338, 0.057917338)
+texture = ExtResource("10_trceg")
+
+[node name="milk" type="Sprite2D" parent="GameUI/PriceBar/icons" unique_id=2056109607]
+position = Vector2(45.30305, 279.4041)
+scale = Vector2(0.057917334, 0.057917334)
+texture = ExtResource("11_a8y0u")
+offset = Vector2(500, 600)
+
+[node name="taro" type="Sprite2D" parent="GameUI/PriceBar/icons" unique_id=1906174042]
+position = Vector2(126.303055, 263.40408)
+scale = Vector2(0.045680847, 0.045680847)
+texture = ExtResource("12_jbj1t")
+
+[node name="tea" type="Sprite2D" parent="GameUI/PriceBar/icons" unique_id=849186184]
+position = Vector2(70.303055, 271.40408)
+scale = Vector2(0.057917338, 0.057917338)
+texture = ExtResource("12_jkv2x")
+offset = Vector2(-200, 700)
+
+[node name="lemon" type="Sprite2D" parent="GameUI/PriceBar/icons" unique_id=629934971]
+position = Vector2(132.30307, 263.40408)
+rotation = 1.0471976
+scale = Vector2(0.04506368, 0.04506368)
+texture = ExtResource("13_jkv2x")
+offset = Vector2(-200, 700)
+
+[node name="strawberry" type="Sprite2D" parent="GameUI/PriceBar/icons" unique_id=671196285]
+position = Vector2(111.30307, 271.40408)
+rotation = 0.5235988
+scale = Vector2(0.041705552, 0.041705552)
+texture = ExtResource("14_jbj1t")
 
 [node name="GameOver" type="Node2D" parent="." unique_id=166650162]
 visible = false
@@ -93,115 +235,6 @@ color = Color(0.24477637, 0.2447764, 0.24477637, 1)
 [node name="Timer" type="Timer" parent="OrderList" unique_id=1999790851]
 autostart = true
 
-[node name="EndOfWeek" type="Control" parent="." unique_id=247071218]
-visible = false
-layout_mode = 3
-anchors_preset = 0
-offset_right = 800.0
-offset_bottom = 600.0
-
-[node name="ColorRect" type="ColorRect" parent="EndOfWeek" unique_id=1958397173]
-layout_mode = 0
-offset_left = 50.0
-offset_top = 50.0
-offset_right = 750.0
-offset_bottom = 550.0
-
-[node name="Label" type="Label" parent="EndOfWeek/ColorRect" unique_id=1463656620]
-layout_mode = 0
-offset_left = 270.0
-offset_top = 118.0
-offset_right = 394.0
-offset_bottom = 141.0
-theme = ExtResource("5_choun")
-text = "End of the Week"
-
-[node name="Summary" type="Panel" parent="EndOfWeek/ColorRect" unique_id=1162121392]
-layout_mode = 0
-offset_left = 70.0
-offset_top = 141.0
-offset_right = 302.0
-offset_bottom = 326.0
-theme = ExtResource("5_choun")
-
-[node name="VBoxContainer" type="VBoxContainer" parent="EndOfWeek/ColorRect/Summary" unique_id=1425565280]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -114.5
-offset_top = -65.5
-offset_right = 114.5
-offset_bottom = 65.5
-grow_horizontal = 2
-grow_vertical = 2
-alignment = 1
-
-[node name="Label2" type="Label" parent="EndOfWeek/ColorRect/Summary/VBoxContainer" unique_id=1532662757]
-layout_mode = 2
-theme = ExtResource("5_choun")
-text = "Boba sold:"
-
-[node name="Label3" type="Label" parent="EndOfWeek/ColorRect/Summary/VBoxContainer" unique_id=900020504]
-layout_mode = 2
-theme = ExtResource("5_choun")
-text = "Money spent on materials"
-
-[node name="Label4" type="Label" parent="EndOfWeek/ColorRect/Summary/VBoxContainer" unique_id=1018601429]
-layout_mode = 2
-theme = ExtResource("5_choun")
-text = "Money earned from sales"
-
-[node name="Label5" type="Label" parent="EndOfWeek/ColorRect/Summary/VBoxContainer" unique_id=95953026]
-layout_mode = 2
-theme = ExtResource("5_choun")
-text = "Average price of goods bought"
-
-[node name="Label6" type="Label" parent="EndOfWeek/ColorRect/Summary/VBoxContainer" unique_id=2138264523]
-layout_mode = 2
-theme = ExtResource("5_choun")
-text = "Customer Satisfaction"
-
-[node name="Upgrades" type="Panel" parent="EndOfWeek/ColorRect" unique_id=1452993214]
-layout_mode = 0
-offset_left = 398.0
-offset_top = 142.0
-offset_right = 622.0
-offset_bottom = 326.0
-theme = ExtResource("5_choun")
-script = ExtResource("6_o6xl0")
-
-[node name="VBoxContainer" type="VBoxContainer" parent="EndOfWeek/ColorRect/Upgrades" unique_id=1250214433]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -101.0
-offset_top = -85.5
-offset_right = 101.0
-offset_bottom = 85.5
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Storage" parent="EndOfWeek/ColorRect/Upgrades/VBoxContainer" unique_id=1322697764 instance=ExtResource("6_tefeu")]
-layout_mode = 2
-
-[node name="Ingredient" parent="EndOfWeek/ColorRect/Upgrades/VBoxContainer" unique_id=977589304 instance=ExtResource("6_tefeu")]
-layout_mode = 2
-
-[node name="Popularity" parent="EndOfWeek/ColorRect/Upgrades/VBoxContainer" unique_id=2026628330 instance=ExtResource("6_tefeu")]
-layout_mode = 2
-
-[node name="WaitTime" parent="EndOfWeek/ColorRect/Upgrades/VBoxContainer" unique_id=262576158 instance=ExtResource("6_tefeu")]
-layout_mode = 2
-
-[node name="Supply" parent="EndOfWeek/ColorRect/Upgrades/VBoxContainer" unique_id=701519641 instance=ExtResource("6_tefeu")]
-layout_mode = 2
-
+[connection signal="timeout" from="BubbleSpawner/Timer" to="BubbleSpawner" method="_on_timer_timeout"]
 [connection signal="timeout" from="PriceCalculator/Timer" to="PriceCalculator" method="_on_timer_timeout"]
-[connection signal="timeout" from="bubbles/Timer" to="bubbles" method="_on_timer_timeout"]
 [connection signal="timeout" from="OrderList/Timer" to="OrderList" method="_on_timer_timeout"]

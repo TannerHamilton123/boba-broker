@@ -21,4 +21,3 @@ func _on_timer_timeout() -> void:
 			main.game_ingredients[ingredient]["Price"] = randf_range(current_price, MAX_PRICE)
 
 
-

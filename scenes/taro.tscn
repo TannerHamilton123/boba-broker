@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://6cyfjghqf6ic"]
+
+[ext_resource type="Texture2D" uid="uid://bq5s6v44vyqm" path="res://assets/taro.png" id="1_u3os8"]
+
+[node name="taro" type="Sprite2D" unique_id=648707611]
+scale = Vector2(0.045680847, 0.045680847)
+texture = ExtResource("1_u3os8")
