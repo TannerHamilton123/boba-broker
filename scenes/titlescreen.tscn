@@ -1,0 +1,75 @@
+[gd_scene format=3 uid="uid://xvovxdquna4e"]
+
+[ext_resource type="Theme" uid="uid://b8msacrlqyrhr" path="res://themes/gameplay_theme.tres" id="1_goadl"]
+[ext_resource type="Script" uid="uid://bkwe1x1tm600l" path="res://scenes/titlescreen.gd" id="1_tt55a"]
+[ext_resource type="FontFile" uid="uid://bkq7isl3bkgjh" path="res://themes/Fredoka-Bold.ttf" id="2_2bjoa"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3jj3l"]
+bg_color = Color(0.78431374, 0.47843137, 0.6901961, 1)
+corner_radius_top_left = 124
+corner_radius_top_right = 124
+corner_radius_bottom_right = 124
+corner_radius_bottom_left = 124
+
+[node name="TitleScreen" type="Control" unique_id=1274523301]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_tt55a")
+
+[node name="Panel" type="Panel" parent="." unique_id=1404538685]
+layout_mode = 0
+offset_right = 800.0
+offset_bottom = 600.0
+theme = ExtResource("1_goadl")
+
+[node name="Panel2" type="Panel" parent="." unique_id=216583049]
+layout_mode = 0
+offset_left = 259.0
+offset_top = 162.0
+offset_right = 536.8103
+offset_bottom = 424.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_3jj3l")
+
+[node name="Label" type="Label" parent="." unique_id=1822075420]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -118.5
+offset_top = -196.0
+offset_right = 118.5
+offset_bottom = -151.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_goadl")
+theme_override_fonts/font = ExtResource("2_2bjoa")
+theme_override_font_sizes/font_size = 48
+text = "BOBA BROKER"
+
+[node name="PlayButton" type="Button" parent="." unique_id=1932013236]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -123.0
+offset_top = 140.0
+offset_right = 123.0
+offset_bottom = 240.9231
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.78431374, 0.47843137, 0.6901961, 1)
+theme_override_colors/font_outline_color = Color(1, 0.8392157, 0.8784314, 1)
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("2_2bjoa")
+theme_override_font_sizes/font_size = 36
+text = "PLAY"
+
+[connection signal="pressed" from="PlayButton" to="." method="_on_play_button_pressed"]

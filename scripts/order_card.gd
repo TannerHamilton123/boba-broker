@@ -32,7 +32,12 @@ func _process(_delta: float) -> void:
 func label_order():
 	var order_text = ""
 	for ingredient in order.keys():
-		order_text += str(order[ingredient]) + " " + ingredient.capitalize() + "\n"
+		order_text += str(order[ingredient])
+		var ingredient_icon = load("res://scenes/"+ingredient+".tscn").instantiate()
+		$"GridContainer".add_child(ingredient_icon)
+		# self.add_child(ingredient_icon)
+		# ingredient_icon.position = Vector2(64, 8 + (order.keys().find(ingredient)) * 30)
+
 	order_text += "$%.2f" % price
 	$"Label".text = order_text
 

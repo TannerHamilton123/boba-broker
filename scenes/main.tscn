@@ -5,17 +5,18 @@
 [ext_resource type="Script" uid="uid://d3qa12m4oahrb" path="res://scripts/price_calculator.gd" id="2_4c57u"]
 [ext_resource type="Script" uid="uid://d0jyq6x2my6on" path="res://scripts/time_manager.gd" id="2_choun"]
 [ext_resource type="Script" uid="uid://cw7fm14j7e3ba" path="res://scripts/ui_manager.gd" id="3_choun"]
+[ext_resource type="Script" uid="uid://v650stxr8ad7" path="res://scripts/summary_manager.gd" id="3_muem4"]
 [ext_resource type="Script" uid="uid://cwxdmeo0qjubt" path="res://scripts/order_manager.gd" id="4_choun"]
 [ext_resource type="Theme" uid="uid://b8msacrlqyrhr" path="res://themes/gameplay_theme.tres" id="5_choun"]
 [ext_resource type="Script" uid="uid://cgfrhur7u61o5" path="res://scripts/upgrade_manager.gd" id="5_jkv2x"]
 [ext_resource type="Script" uid="uid://bmigby0thk4f5" path="res://scripts/order_list.gd" id="9_4c57u"]
 [ext_resource type="PackedScene" uid="uid://col4f6pr4vpab" path="res://scenes/end_of_week.tscn" id="10_choun"]
-[ext_resource type="Texture2D" uid="uid://by5x7p1qtlsbd" path="res://assets/boba.png" id="10_trceg"]
-[ext_resource type="Texture2D" uid="uid://6ti6wklsprtc" path="res://assets/milk.png" id="11_a8y0u"]
-[ext_resource type="Texture2D" uid="uid://bq5s6v44vyqm" path="res://assets/taro.png" id="12_jbj1t"]
-[ext_resource type="Texture2D" uid="uid://cj6nxrbewb61v" path="res://assets/tea.png" id="12_jkv2x"]
-[ext_resource type="Texture2D" uid="uid://dl03ldnhsgjd8" path="res://assets/lemon.png" id="13_jkv2x"]
-[ext_resource type="Texture2D" uid="uid://cc2y5ee2onmiq" path="res://assets/strawberry.png" id="14_jbj1t"]
+[ext_resource type="PackedScene" uid="uid://8xupw1dx74q5" path="res://scenes/pearls.tscn" id="10_jbj1t"]
+[ext_resource type="PackedScene" uid="uid://drbkplepsvmeo" path="res://scenes/milk.tscn" id="11_muem4"]
+[ext_resource type="PackedScene" uid="uid://6cyfjghqf6ic" path="res://scenes/taro.tscn" id="12_dp3eg"]
+[ext_resource type="PackedScene" uid="uid://c7gqmxdaljena" path="res://scenes/tea.tscn" id="13_0ld40"]
+[ext_resource type="PackedScene" uid="uid://bllr8h2latc6t" path="res://scenes/lemon.tscn" id="14_gqmmt"]
+[ext_resource type="PackedScene" uid="uid://0482j1n5nglx" path="res://scenes/strawberry.tscn" id="15_yc10j"]
 
 [node name="main" type="Node2D" unique_id=1553475821]
 script = ExtResource("1_h2yge")
@@ -25,6 +26,9 @@ z_index = -1
 offset_right = 800.0
 offset_bottom = 600.0
 theme = ExtResource("5_choun")
+
+[node name="SummaryManager" type="Node" parent="." unique_id=259713520]
+script = ExtResource("3_muem4")
 
 [node name="TimeManager" type="Node" parent="." unique_id=2092677775]
 script = ExtResource("2_choun")
@@ -82,18 +86,6 @@ value = 1.0
 
 [node name="clock" type="Label" parent="GameUI/TimeTracker" unique_id=999258031]
 layout_mode = 2
-theme = ExtResource("5_choun")
-
-[node name="GoodContainer" type="VBoxContainer" parent="GameUI" unique_id=1677014012]
-layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_left = -248.0
-offset_top = -172.0
-offset_right = -56.0
-offset_bottom = 172.0
-grow_vertical = 2
 theme = ExtResource("5_choun")
 
 [node name="Storage" type="VBoxContainer" parent="GameUI" unique_id=555058453]
@@ -175,40 +167,23 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="pearls" type="Sprite2D" parent="GameUI/PriceBar/icons" unique_id=1558265090]
+[node name="pearls" parent="GameUI/PriceBar/icons" unique_id=2120347878 instance=ExtResource("10_jbj1t")]
 position = Vector2(16.303059, 271.40408)
-scale = Vector2(0.057917338, 0.057917338)
-texture = ExtResource("10_trceg")
 
-[node name="milk" type="Sprite2D" parent="GameUI/PriceBar/icons" unique_id=2056109607]
+[node name="milk" parent="GameUI/PriceBar/icons" unique_id=74981698 instance=ExtResource("11_muem4")]
 position = Vector2(45.30305, 279.4041)
-scale = Vector2(0.057917334, 0.057917334)
-texture = ExtResource("11_a8y0u")
-offset = Vector2(500, 600)
 
-[node name="taro" type="Sprite2D" parent="GameUI/PriceBar/icons" unique_id=1906174042]
+[node name="taro" parent="GameUI/PriceBar/icons" unique_id=648707611 instance=ExtResource("12_dp3eg")]
 position = Vector2(126.303055, 263.40408)
-scale = Vector2(0.045680847, 0.045680847)
-texture = ExtResource("12_jbj1t")
 
-[node name="tea" type="Sprite2D" parent="GameUI/PriceBar/icons" unique_id=849186184]
+[node name="tea" parent="GameUI/PriceBar/icons" unique_id=374827546 instance=ExtResource("13_0ld40")]
 position = Vector2(70.303055, 271.40408)
-scale = Vector2(0.057917338, 0.057917338)
-texture = ExtResource("12_jkv2x")
-offset = Vector2(-200, 700)
 
-[node name="lemon" type="Sprite2D" parent="GameUI/PriceBar/icons" unique_id=629934971]
+[node name="lemon" parent="GameUI/PriceBar/icons" unique_id=1621878304 instance=ExtResource("14_gqmmt")]
 position = Vector2(132.30307, 263.40408)
-rotation = 1.0471976
-scale = Vector2(0.04506368, 0.04506368)
-texture = ExtResource("13_jkv2x")
-offset = Vector2(-200, 700)
 
-[node name="strawberry" type="Sprite2D" parent="GameUI/PriceBar/icons" unique_id=671196285]
+[node name="strawberry" parent="GameUI/PriceBar/icons" unique_id=1006039960 instance=ExtResource("15_yc10j")]
 position = Vector2(111.30307, 271.40408)
-rotation = 0.5235988
-scale = Vector2(0.041705552, 0.041705552)
-texture = ExtResource("14_jbj1t")
 
 [node name="GameOver" type="Node2D" parent="." unique_id=166650162]
 visible = false

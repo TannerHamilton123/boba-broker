@@ -5,14 +5,16 @@
 
 [node name="OrderCard" type="ColorRect" unique_id=705807321]
 offset_right = 80.0
-offset_bottom = 96.0
+offset_bottom = 128.0
 script = ExtResource("1_5yx2q")
 
 [node name="Label" type="Label" parent="." unique_id=1878356465]
+visible = false
 layout_mode = 0
 offset_left = 8.0
+offset_top = 8.0
 offset_right = 64.0
-offset_bottom = 75.0
+offset_bottom = 112.0
 theme = ExtResource("2_jukm1")
 text = "line1
 line2
@@ -20,13 +22,19 @@ line3"
 
 [node name="ProgressBar" type="ProgressBar" parent="." unique_id=1553035776]
 layout_mode = 0
-offset_top = 75.0
+offset_top = 112.0
 offset_right = 80.0
-offset_bottom = 96.0
+offset_bottom = 128.0
 show_percentage = false
 
 [node name="Timer" type="Timer" parent="." unique_id=1644225062]
 wait_time = 5.0
 autostart = true
+
+[node name="GridContainer" type="GridContainer" parent="." unique_id=1762521705]
+layout_mode = 0
+offset_right = 80.0
+offset_bottom = 112.0
+columns = 2
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

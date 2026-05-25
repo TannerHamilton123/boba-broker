@@ -9,6 +9,13 @@ var upgrade_levels = {
 	"Popularity": 0,
 	"Supply": 0
 }
+var upgrade_max_levels = {
+	"Storage": 5,
+	"Ingredient": 3,
+	"WaitTime": 5,
+	"Popularity": 5,
+	"Supply": 5
+}
 @onready var main = get_node("/root/main")
 
 # Called when the node enters the scene tree for the first time.
@@ -22,6 +29,9 @@ func _process(_delta: float) -> void:
 
 func _on_UpgradeButton_pressed(upgrade_type: String) -> void:
 	print("Upgrade button pressed: ", upgrade_type)
+	if upgrade_levels[upgrade_type] >= upgrade_max_levels[upgrade_type]:
+		print("Upgrade ", upgrade_type, " is already at max level!")
+		return
 	if upgrade_type == "Storage":
 		upgrade_storage()
 	elif upgrade_type == "Ingredient":

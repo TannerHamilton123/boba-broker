@@ -66,7 +66,7 @@ func _reorder_orders():
 	print("Reordering orders..." + str($"OrderContainer".get_child_count()) + " orders remaining.")
 	for order in $"OrderContainer".get_children():
 		order.order_number = current_number
-		order.label_order()
+		
 		current_number += 1
 
 func shift_orders(order,delta):
@@ -79,7 +79,7 @@ func generate_order():
 	var price_multiplier = difficulty_check()[1]
 	var price = initial_price * price_multiplier
 	var game_ingredients = get_node("/root/main").game_ingredients
-	var order = {}
+	var order = {"tea": 1, "milk": 1}
 	var ingredient_list = game_ingredients.keys()
 	for i in range(number_of_ingredients):
 		var ingredient = ingredient_list[randi() % ingredient_list.size()]
@@ -115,6 +115,6 @@ func difficulty_check():
 	order_difficulty = floor(min(5, 1.0 + happiness_score / 20.0))
 	#determine number of ingredients based on difficulty
 	#Determine price based on difficulty
-	var number_of_ingredients = min(order_difficulty, 5)
+	var number_of_ingredients = min(order_difficulty, 5)-2
 	var price_multiplier = 1.0 + (order_difficulty - 1) * 0.5
 	return [number_of_ingredients, price_multiplier]
