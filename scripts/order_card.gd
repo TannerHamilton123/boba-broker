@@ -30,22 +30,27 @@ func _process(_delta: float) -> void:
 	pass
 
 func label_order():
-	var order_text = ""
-	for ingredient in order.keys():
-		order_text += str(order[ingredient])
-		var ingredient_icon = load("res://scenes/"+ingredient+".tscn").instantiate()
-		$"GridContainer".add_child(ingredient_icon)
-		# self.add_child(ingredient_icon)
-		# ingredient_icon.position = Vector2(64, 8 + (order.keys().find(ingredient)) * 30)
+	var col_positions = [16, 54]
+	var row_positions = [18, 54]
+	var icon_index = 0
 
-	order_text += "$%.2f" % price
-	$"Label".text = order_text
+	for ingredient in order.keys():
+		var quantity = order[ingredient]
+		for i in range(quantity):
+			var col = icon_index % 2
+			var row: int = int(icon_index / 2.0)
+			var ingredient_icon = load("res://scenes/"+ingredient+".tscn").instantiate()
+			ingredient_icon.position = Vector2(col_positions[col], row_positions[row])
+			self.add_child(ingredient_icon)
+			icon_index += 1
+
+	$"Label".text = "$%.2f" % price
 
 func order_timer():
 	$ProgressBar.value = $"Timer".time_left / $"Timer".wait_time * 100
 	var ratio = $"Timer".time_left / $"Timer".wait_time
 	var color_ratio = 0.5 * ratio + 0.5
-	self.modulate = Color(1, color_ratio, color_ratio)
+	$ColorRect.modulate = Color(1, color_ratio, color_ratio)
 
 func _on_timer_timeout() -> void:
 	print("Order ", order_number, " timed out!")

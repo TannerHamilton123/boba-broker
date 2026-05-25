@@ -201,7 +201,7 @@ script = ExtResource("9_4c57u")
 
 [node name="OrderContainer" type="ColorRect" parent="OrderList" unique_id=1868295799]
 offset_left = 128.0
-offset_top = 512.0
+offset_top = 479.0
 offset_right = 672.0
 offset_bottom = 600.0
 mouse_filter = 1

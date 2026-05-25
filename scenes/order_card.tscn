@@ -8,17 +8,20 @@ offset_right = 80.0
 offset_bottom = 128.0
 script = ExtResource("1_5yx2q")
 
-[node name="Label" type="Label" parent="." unique_id=1878356465]
-visible = false
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1688724087]
 layout_mode = 0
-offset_left = 8.0
-offset_top = 8.0
-offset_right = 64.0
-offset_bottom = 112.0
+offset_right = 80.0
+offset_bottom = 128.0
+
+[node name="Label" type="Label" parent="." unique_id=1878356465]
+layout_mode = 0
+offset_top = 88.0
+offset_right = 80.0
+offset_bottom = 128.0
 theme = ExtResource("2_jukm1")
-text = "line1
-line2
-line3"
+text = "PRICE"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="ProgressBar" type="ProgressBar" parent="." unique_id=1553035776]
 layout_mode = 0
@@ -32,9 +35,18 @@ wait_time = 5.0
 autostart = true
 
 [node name="GridContainer" type="GridContainer" parent="." unique_id=1762521705]
-layout_mode = 0
-offset_right = 80.0
-offset_bottom = 112.0
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -40.0
+offset_top = -56.0
+offset_right = 40.0
+offset_bottom = 56.0
+grow_horizontal = 2
+grow_vertical = 2
 columns = 2
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
