@@ -67,6 +67,8 @@ func deal_type(ingredient_type: String, bubble_price: float) -> void:
 			add_child(sprite)
 	$CollisionShape2D/Circle.modulate = _price_color(price)
 	$Price.text = "$%.2f" % price
+	$Price.add_theme_constant_override("outline_size", 6)
+	$Price.add_theme_color_override("font_outline_color", Color.html("4A3B52"))
 
 # $1 → Matcha Mint (#C8F0E0), $2.50 → Cream (#FFF8F0), $5 → Rose (#FFB8C8)
 func _price_color(p: float) -> Color:
