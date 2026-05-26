@@ -16,18 +16,15 @@ func _ready() -> void:
 	refresh_label()
 
 
-'''
-Looks up the label for the current level;
-shows "Maxed Out" if all levels are purchased
-'''
 func refresh_label() -> void:
 	if upgrade_type == "":
 		return
 	var levels: Array = UpgradeData.labels[upgrade_type]
+	var costs: Array = UpgradeData.costs[upgrade_type]
 	if current_level >= levels.size():
 		text = upgrade_type + ": Maxed Out"
 	else:
-		text = levels[current_level]
+		text = levels[current_level] + "  ($" + str(costs[current_level]) + ")"
 
 
 func _on_pressed() -> void:
