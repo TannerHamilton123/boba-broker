@@ -30,8 +30,8 @@ func _process(_delta: float) -> void:
 func _on_UpgradeButton_pressed(upgrade_type: String) -> void:
 	if upgrade_levels[upgrade_type] >= upgrade_max_levels[upgrade_type]:
 		return
-	if not _can_afford(upgrade_type):
-		_on_cannot_afford()
+	if not main.can_afford(set_price(upgrade_type)):
+		main.on_cannot_afford()
 		return
 	if upgrade_type == "Storage":
 		upgrade_storage()
@@ -52,15 +52,8 @@ func set_price(upgrade_type: String) -> int:
 		return 0
 	return costs[level]
 
-func _can_afford(upgrade_type: String) -> bool:
-	return main.player_balance >= set_price(upgrade_type)
-
 func _purchase(upgrade_type: String) -> void:
 	main.player_balance -= set_price(upgrade_type)
-
-# Placeholder — wire to the Can't Afford animation when task #3 is implemented.
-func _on_cannot_afford() -> void:
-	print("Cannot afford upgrade")
 
 func upgrade_storage() -> void:
 	_purchase("Storage")

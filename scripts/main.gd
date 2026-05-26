@@ -39,10 +39,17 @@ var game_ingredients = {
 
 
 
+func can_afford(amount: float) -> bool:
+	return player_balance >= amount
+
+# Placeholder — wire to the Can't Afford animation when task #3 is implemented.
+func on_cannot_afford() -> void:
+	print("Cannot afford")
+
 func _ready() -> void:
 	# create_good_containers()
 	# create_storage()
-	
+
 	pass
 
 
