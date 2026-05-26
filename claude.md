@@ -1,4 +1,4 @@
-Walk me through generating the code on my own.
+
 I am learning software development, and relearning GDscript and Godot.
 
 Create small features in single files when i prompt generation.
