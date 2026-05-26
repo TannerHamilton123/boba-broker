@@ -42,20 +42,15 @@ func _on_visibility_screen_exited() -> void:
 func deal_type(ingredient_type: String, bubble_price: float) -> void:
 	ingredient = ingredient_type
 	price = bubble_price
-	$CollisionShape2D.scale = Vector2( 1 + price / 20, 1 + price / 20) # Scale bubble based on price
+	$CollisionShape2D.scale = Vector2(1 + price / 20, 1 + price / 20)
 	match ingredient_type:
 		"tea":
 			rise_speed = 80.0
 			drift_speed = 1.5
 			drift_amplitude = 30.0
-
 			var sprite = tea_sprite_scene.instantiate()
 			sprite.position = Vector2.ZERO
 			add_child(sprite)
-
-			$CollisionShape2D/Circle.modulate = Color(0.8, 0.6, 0.4)
-			$Price.text = "$%.2f" % price
-			
 		"pearls":
 			rise_speed = 60.0
 			drift_speed = 1.0
@@ -63,10 +58,6 @@ func deal_type(ingredient_type: String, bubble_price: float) -> void:
 			var sprite = pearls_sprite_scene.instantiate()
 			sprite.position = Vector2.ZERO
 			add_child(sprite)
-			
-			$CollisionShape2D/Circle.modulate = Color.LIGHT_PINK
-			$Price.text = "$%.2f" % price
-
 		"milk":
 			rise_speed = 100.0
 			drift_speed = 2.0
@@ -74,6 +65,13 @@ func deal_type(ingredient_type: String, bubble_price: float) -> void:
 			var sprite = milk_sprite_scene.instantiate()
 			sprite.position = Vector2.ZERO
 			add_child(sprite)
+	$CollisionShape2D/Circle.modulate = _price_color(price)
+	$Price.text = "$%.2f" % price
 
-			$CollisionShape2D/Circle.modulate = Color(1.0, 1.0, 1.0)
-			$Price.text = "$%.2f" % price
+# $1 → Matcha Mint (#C8F0E0), $2.50 → Cream (#FFF8F0), $5 → Rose (#FFB8C8)
+func _price_color(p: float) -> Color:
+	var mint  := Color.html("C8F0E0")
+	var cream := Color.html("FFF8F0")
+	var rose  := Color.html("FFB8C8")
+	var t := clampf((p - 1.0) / 4.0, 0.0, 1.0)
+	return mint.lerp(cream, t * 2.0) if t <= 0.5 else cream.lerp(rose, (t - 0.5) * 2.0)
