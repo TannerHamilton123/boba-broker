@@ -9,13 +9,12 @@ var _time: float = 0.0
 var _start_x: float = 0.0
 var ingredient: String
 var price: float = 1.0
-var milk_sprite_scene = preload("res://scenes/milk.tscn")
-var pearl_sprite_scene = preload("res://scenes/pearls.tscn")
-var tea_sprite_scene = preload("res://scenes/tea.tscn")
-var pearls_sprite_scene = preload("res://scenes/pearls.tscn")
-var lemons_sprite_scene = preload("res://scenes/lemon.tscn")
+var milk_sprite_scene       = preload("res://scenes/milk.tscn")
+var tea_sprite_scene        = preload("res://scenes/tea.tscn")
+var pearls_sprite_scene     = preload("res://scenes/pearls.tscn")
+var lemon_sprite_scene      = preload("res://scenes/lemon.tscn")
 var strawberry_sprite_scene = preload("res://scenes/strawberry.tscn")
-var taro_sprite_scene = preload("res://scenes/taro.tscn")
+var taro_sprite_scene       = preload("res://scenes/taro.tscn")
 
 func _ready() -> void:
 	_start_x = position.x
@@ -63,6 +62,27 @@ func deal_type(ingredient_type: String, bubble_price: float) -> void:
 			drift_speed = 2.0
 			drift_amplitude = 40.0
 			var sprite = milk_sprite_scene.instantiate()
+			sprite.position = Vector2.ZERO
+			add_child(sprite)
+		"taro":
+			rise_speed = 50.0
+			drift_speed = 0.8
+			drift_amplitude = 15.0
+			var sprite = taro_sprite_scene.instantiate()
+			sprite.position = Vector2.ZERO
+			add_child(sprite)
+		"lemon":
+			rise_speed = 110.0
+			drift_speed = 2.5
+			drift_amplitude = 45.0
+			var sprite = lemon_sprite_scene.instantiate()
+			sprite.position = Vector2.ZERO
+			add_child(sprite)
+		"strawberry":
+			rise_speed = 90.0
+			drift_speed = 1.8
+			drift_amplitude = 35.0
+			var sprite = strawberry_sprite_scene.instantiate()
 			sprite.position = Vector2.ZERO
 			add_child(sprite)
 	$CollisionShape2D/Circle.modulate = _price_color(price)

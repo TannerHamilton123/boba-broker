@@ -24,6 +24,8 @@ func spawn_bubble() -> void:
 	bubble_instance.position = Vector2(randf_range(200, 600), 600)
 
 	get_parent().add_child(bubble_instance)
+	# game_ingredients only contains unlocked ingredients, so this naturally
+	# restricts bubbles to what the player has access to.
 	var bubble_ingredient = game_ingredients.keys()[randi() % game_ingredients.size()]
 	var price: float = game_ingredients[bubble_ingredient]["Price"]
 
