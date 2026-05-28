@@ -18,6 +18,7 @@
 [ext_resource type="PackedScene" uid="uid://bllr8h2latc6t" path="res://scenes/lemon.tscn" id="14_gqmmt"]
 [ext_resource type="PackedScene" uid="uid://0482j1n5nglx" path="res://scenes/strawberry.tscn" id="15_yc10j"]
 [ext_resource type="Script" uid="uid://ct5hfo4jcb6tr" path="res://scenes/panel.gd" id="17_dp3eg"]
+[ext_resource type="PackedScene" uid="uid://dwx7jabjq2oqf" path="res://tutorial.tscn" id="19_0ld40"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dp3eg"]
 bg_color = Color(1, 0.8392157, 0.8784314, 1)
@@ -270,6 +271,22 @@ step = 1.0
 fill_mode = 3
 show_percentage = false
 
+[node name="BankAccount" type="Label" parent="GameUI" unique_id=1960964850]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -59.0
+offset_top = 442.0
+offset_right = 75.0
+offset_bottom = 479.0
+grow_horizontal = 2
+theme = ExtResource("5_choun")
+theme_override_font_sizes/font_size = 24
+text = "$BANK"
+horizontal_alignment = 1
+vertical_alignment = 2
+
 [node name="GameOver" type="Node2D" parent="." unique_id=166650162]
 visible = false
 position = Vector2(348, 8)
@@ -294,6 +311,10 @@ color = Color(0.24477637, 0.2447764, 0.24477637, 1)
 
 [node name="Timer" type="Timer" parent="OrderList" unique_id=1999790851]
 autostart = true
+
+[node name="Tutorial" parent="." unique_id=1182671964 instance=ExtResource("19_0ld40")]
+visible = false
+z_index = 10
 
 [connection signal="timeout" from="BubbleSpawner/Timer" to="BubbleSpawner" method="_on_timer_timeout"]
 [connection signal="timeout" from="PriceCalculator/Timer" to="PriceCalculator" method="_on_timer_timeout"]

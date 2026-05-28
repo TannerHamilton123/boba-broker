@@ -10,7 +10,7 @@ var shop_open_hour: int = 10
 var shop_close_hour: int = 20
 var shop_hours: int = shop_close_hour - shop_open_hour
 var days_of_week: Array = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
-var current_day_index: int = 0
+var current_day_index: int = 6
 var week_is_active: bool = true
 var weeks_completed: int = 0
 
@@ -69,3 +69,11 @@ func _show_eow() -> void:
 		return
 	var eow = eow_scene.instantiate()
 	main.get_tree().root.add_child(eow)
+
+func start_next_week() -> void:
+	week_is_active = true
+	current_day_index = 0
+	time_elapsed = 0.0
+	main.get_node("PriceCalculator/Timer").start()
+	main.get_node("BubbleSpawner/Timer").start()
+	main.get_node("OrderList/Timer").start()

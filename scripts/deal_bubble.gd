@@ -29,14 +29,14 @@ func _process(delta: float) -> void:
 
 
 func _on_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
+	if not (event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed):
+		return
+	get_viewport().set_input_as_handled()
 	var main = get_node("/root/main")
 	var ingredient_storage = main.ingredient_storage
-	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
-		if main.game_ingredients[ingredient]["quantity"] < ingredient_storage:
-			emit_signal("bubble_clicked", ingredient, price)
-			#signal picked up at order manager
-			queue_free()
-	pass # Replace with function body.
+	if main.game_ingredients[ingredient]["quantity"] < ingredient_storage:
+		emit_signal("bubble_clicked", ingredient, price)
+		queue_free()
 
 
 func _on_visibility_screen_exited() -> void:
@@ -46,6 +46,7 @@ func deal_type(ingredient_type: String, bubble_price: float) -> void:
 	ingredient = ingredient_type
 	price = bubble_price
 	$CollisionShape2D.scale = Vector2( 1 + price / 20, 1 + price / 20) # Scale bubble based on price
+	$Price.modulate = _price_color(price)
 	match ingredient_type:
 		"tea":
 			rise_speed = 80.0
@@ -56,7 +57,7 @@ func deal_type(ingredient_type: String, bubble_price: float) -> void:
 			sprite.position = Vector2.ZERO
 			add_child(sprite)
 
-			$CollisionShape2D/Circle.modulate = Color(0.8, 0.6, 0.4)
+			# $CollisionShape2D/Circle.modulate = Color(0.8, 0.6, 0.4)
 			$Price.text = "$%.2f" % price
 			
 		"pearls":
@@ -67,7 +68,7 @@ func deal_type(ingredient_type: String, bubble_price: float) -> void:
 			sprite.position = Vector2.ZERO
 			add_child(sprite)
 			
-			$CollisionShape2D/Circle.modulate = Color.LIGHT_PINK
+			# $CollisionShape2D/Circle.modulate = Color.LIGHT_PINK
 			$Price.text = "$%.2f" % price
 
 		"milk":
@@ -78,5 +79,15 @@ func deal_type(ingredient_type: String, bubble_price: float) -> void:
 			sprite.position = Vector2.ZERO
 			add_child(sprite)
 
-			$CollisionShape2D/Circle.modulate = Color(1.0, 1.0, 1.0)
+			# $CollisionShape2D/Circle.modulate = Color(1.0, 1.0, 1.0)
 			$Price.text = "$%.2f" % price
+	$Circle.modulate = Color.html("#987aa7")
+	# $CollisionShape2D/Circle.modulate.a = 0.5
+
+
+func _price_color(price: float) -> Color:
+	var mint  := Color.html("C8F0E0")
+	var cream := Color.html("FFF8F0")
+	var rose  := Color.html("FFB8C8")
+	var t := clampf((price - 1.0) / 4.0, 0.0, 1.0)
+	return mint.lerp(cream, t * 2.0) if t <= 0.5 else cream.lerp(rose, (t - 0.5) * 2.0)

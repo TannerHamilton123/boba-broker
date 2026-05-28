@@ -1,0 +1,78 @@
+[gd_scene format=3 uid="uid://dwx7jabjq2oqf"]
+
+[ext_resource type="Script" uid="uid://cqvhvvi0uvct" path="res://scripts/tutorial_manager.gd" id="1_ehuit"]
+[ext_resource type="Theme" uid="uid://b8msacrlqyrhr" path="res://themes/gameplay_theme.tres" id="2_5mrt3"]
+[ext_resource type="Texture2D" uid="uid://bq5s6v44vyqm" path="res://assets/taro.png" id="3_rwowx"]
+
+[node name="Tutorial" type="Node2D" unique_id=1182671964]
+script = ExtResource("1_ehuit")
+
+[node name="Node2D" type="Node2D" parent="." unique_id=1563503000]
+z_index = 1
+
+[node name="Panel" type="Panel" parent="Node2D" unique_id=933245668]
+z_index = 1
+offset_left = -157.34637
+offset_top = -68.46182
+offset_right = 162.65363
+offset_bottom = 91.53818
+theme = ExtResource("2_5mrt3")
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="Node2D/Panel" unique_id=1247186908]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = -0.04375
+anchor_bottom = -0.04375
+offset_left = 24.0
+offset_top = 16.0
+offset_right = 304.0
+offset_bottom = 169.0
+theme = ExtResource("2_5mrt3")
+text = "Tutorial Text here
+Tutorial Text here
+Tutorial Text here
+Tutorial Text here
+Tutorial Text here
+"
+autowrap_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="Button" type="Button" parent="Node2D/Panel" unique_id=170816425]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 1.03125
+anchor_right = 0.5
+anchor_bottom = 1.03125
+offset_left = -48.0
+offset_top = -48.0
+offset_right = 56.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = ExtResource("2_5mrt3")
+text = "continue"
+metadata/_edit_use_anchors_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Node2D" unique_id=263223285]
+position = Vector2(74.653625, -116.46182)
+scale = Vector2(0.31972858, 0.31972858)
+texture = ExtResource("3_rwowx")
+
+[node name="SkipButton" type="Button" parent="." unique_id=2032472363]
+z_index = 1
+offset_left = 672.0
+offset_top = 536.0
+offset_right = 776.0
+offset_bottom = 576.0
+theme = ExtResource("2_5mrt3")
+text = "skip tutorial"
+
+[node name="Panel" type="Panel" parent="." unique_id=1122071425]
+offset_right = 800.0
+offset_bottom = 600.0
+mouse_filter = 2
+
+[connection signal="pressed" from="Node2D/Panel/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="SkipButton" to="." method="_on_skip_button_pressed"]

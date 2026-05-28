@@ -1,9 +1,64 @@
 [gd_scene format=3 uid="uid://bcj2knqij31qx"]
 
-[ext_resource type="Script" path="res://scripts/upgrade_button.gd" id="1_vd32k"]
+[ext_resource type="Theme" uid="uid://b8msacrlqyrhr" path="res://themes/gameplay_theme.tres" id="1_mdhk6"]
+[ext_resource type="Script" uid="uid://dredetma58sa0" path="res://scripts/upgrade_button.gd" id="1_vd32k"]
+[ext_resource type="FontFile" uid="uid://bkq7isl3bkgjh" path="res://themes/Fredoka-Bold.ttf" id="3_isks0"]
 
 [node name="StorageUpgrade" type="Button" unique_id=1322697764]
-text = "EXPAND THE BACKROOM"
+offset_right = 128.0
+offset_bottom = 88.0
+theme = ExtResource("1_mdhk6")
+text_overrun_behavior = 5
+autowrap_mode = 2
 script = ExtResource("1_vd32k")
+
+[node name="UpgradeDescription" type="Label" parent="." unique_id=764047045]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -76.0
+offset_top = 20.0
+offset_right = 76.0
+offset_bottom = 43.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_mdhk6")
+theme_override_font_sizes/font_size = 12
+text = "upgrade description"
+horizontal_alignment = 1
+
+[node name="Price" type="Label" parent="." unique_id=635963151]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -31.0
+offset_top = -20.0
+offset_right = 31.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_mdhk6")
+theme_override_fonts/font = ExtResource("3_isks0")
+theme_override_font_sizes/font_size = 32
+text = "$100"
+horizontal_alignment = 1
+
+[node name="UpgradeName" type="Label" parent="." unique_id=382361071]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -68.0
+offset_right = 68.0
+offset_bottom = 24.0
+grow_horizontal = 2
+text = "upgrade name"
+horizontal_alignment = 1
 
 [connection signal="pressed" from="." to="." method="_on_pressed"]

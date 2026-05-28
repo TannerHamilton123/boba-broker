@@ -14,22 +14,35 @@ height = 2.0
 script = ExtResource("1_o0vui")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=31276096]
+position = Vector2(0, 4)
+scale = Vector2(1, 1.0393496)
 shape = SubResource("CircleShape2D_lquwl")
 
-[node name="Circle" type="MeshInstance2D" parent="CollisionShape2D" unique_id=738034933]
+[node name="Circle" type="MeshInstance2D" parent="." unique_id=738034933]
 modulate = Color(0.16862746, 1, 1, 1)
-position = Vector2(0.5283192, 1.2533622)
-scale = Vector2(38.51531, 37.253357)
+position = Vector2(0.41864663, 4.043663)
+scale = Vector2(38, 38)
+mesh = SubResource("SphereMesh_o3orw")
+
+[node name="Circle2" type="MeshInstance2D" parent="." unique_id=1000750371]
+visible = false
+modulate = Color(0, 0, 0, 1)
+z_index = -1
+position = Vector2(0.41864663, 4.043663)
+scale = Vector2(40, 40)
 mesh = SubResource("SphereMesh_o3orw")
 
 [node name="Price" type="Label" parent="." unique_id=476859406]
 offset_left = -48.0
-offset_top = 4.0
+offset_top = 7.9999943
 offset_right = 50.0
-offset_bottom = 36.0
+offset_bottom = 39.999992
 theme = ExtResource("2_t4vm4")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 2
 text = "TEXT"
 horizontal_alignment = 1
 vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
 
 [connection signal="input_event" from="." to="." method="_on_input_event"]

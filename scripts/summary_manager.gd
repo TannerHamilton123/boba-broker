@@ -10,6 +10,9 @@ ingredient_totals: running totals per ingredient for the week
 var fulfilled_orders: Array = []
 var ingredient_revenue: Dictionary = {}
 var ingredient_cost: Dictionary = {}
+var week_revenue: float = 0.0
+var week_cost: float = 0.0
+var week_profit: float = 0.0
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass # Replace with function body.
@@ -56,6 +59,7 @@ Returns a dict of each ingredient's average sell price per unit
 based on all orders fulfilled this week
 '''
 func calculate_weekly_summary() -> Dictionary:
+	week_profit = week_revenue - week_cost
 	var summary: Dictionary = {}
 
 	var all_ingredients: Array = ingredient_revenue.keys()

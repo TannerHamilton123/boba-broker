@@ -12,6 +12,7 @@ Receives a fulfilled order; stores it and
 accumulates per-ingredient revenue split evenly by unit count
 '''
 func _on_order_fulfilled(order: Dictionary, price: float) -> void:
+	summary_manager.week_revenue += price
 
 	summary_manager.fulfilled_orders.append({ "order": order, "price": price })
 	summary_manager._accumulate_ingredient_revenue(order, price)
@@ -44,6 +45,7 @@ func _on_bubble_clicked(ingredient: String, price: float) -> void:
 
 		main.game_ingredients[ingredient]["quantity"] += 1
 		summary_manager._accumulate_ingredient_cost(ingredient, price)
+		summary_manager.week_cost += price
 		main.player_balance -= price
 		# ui_manager.update_good_containers()
 		ui_manager.update_storage()

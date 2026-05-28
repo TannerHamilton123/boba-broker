@@ -54,7 +54,7 @@ func order_timer():
 
 func _on_timer_timeout() -> void:
 	print("Order ", order_number, " timed out!")
-	emit_signal("order_failed",order,price)
+	emit_signal("order_failed",order)
 	queue_free()
 
 func _gui_input(event: InputEvent) -> void:

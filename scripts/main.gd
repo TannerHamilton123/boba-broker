@@ -40,15 +40,18 @@ var game_ingredients = {
 
 
 func _ready() -> void:
+	$Tutorial.visible = true
 	# create_good_containers()
 	# create_storage()
 	
 	pass
 
 
+
 func _process(delta: float) -> void:
 	# update_good_containers()
 	$TimeManager.handle_time(delta)
+	$GameUI/BankAccount.text = "Balance: $%.2f" % player_balance
 
-
-
+func start_next_week() -> void:
+	$TimeManager.start_next_week()
