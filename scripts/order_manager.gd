@@ -4,7 +4,7 @@ extends Node
 @onready var ui_manager = get_parent().get_node("UIManager")
 
 @onready var summary_manager = get_node("/root/main/SummaryManager")
-
+signal storage_full(ingredient: String)
 
 
 '''
@@ -40,8 +40,12 @@ func _on_order_failed(order_number) -> void:
 Signal: player buys an ingredient from a deal bubble
 '''
 func _on_bubble_clicked(ingredient: String, price: float) -> void:
-	main.game_ingredients[ingredient]["quantity"] += 1
-	summary_manager._accumulate_ingredient_cost(ingredient, price)
-	main.player_balance -= price
-	# ui_manager.update_good_containers()
-	ui_manager.update_storage()
+	if main.game_ingredients[ingredient]["quantity"] < main.ingredient_storage:
+
+		main.game_ingredients[ingredient]["quantity"] += 1
+		summary_manager._accumulate_ingredient_cost(ingredient, price)
+		main.player_balance -= price
+		# ui_manager.update_good_containers()
+		ui_manager.update_storage()
+	else:
+		emit_signal("storage_full", ingredient)

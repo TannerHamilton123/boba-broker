@@ -29,10 +29,13 @@ func _process(delta: float) -> void:
 
 
 func _on_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
+	var main = get_node("/root/main")
+	var ingredient_storage = main.ingredient_storage
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
-		emit_signal("bubble_clicked", ingredient, price)
-		
-		queue_free()
+		if main.game_ingredients[ingredient]["quantity"] < ingredient_storage:
+			emit_signal("bubble_clicked", ingredient, price)
+			#signal picked up at order manager
+			queue_free()
 	pass # Replace with function body.
 
 

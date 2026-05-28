@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://bpubwuhvs00ei"]
+
+[node name="PanelLine" type="Line2D" unique_id=1572427481]
+points = PackedVector2Array(0, 0, 150, 0)
+width = 4.0
+default_color = Color(0.78431374, 0.47843137, 0.6901961, 0.44705883)

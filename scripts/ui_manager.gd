@@ -40,7 +40,12 @@ func update_storage() -> void:
 	for i in range(storage_node.get_child_count()):
 		var key = main.game_ingredients.keys()[i]
 		storage_node.get_child(i).text = key.capitalize() + ": " + str(main.game_ingredients[key]["quantity"]) + "/" + str(main.game_ingredients[key]["Storage_Limit"])
-
+	for ingredient in main.game_ingredients.keys():
+		var storage_bar = main.get_node("GameUI/StorageBars/" + ingredient)
+		var quantity = main.game_ingredients[ingredient]["quantity"]
+		var limit = main.game_ingredients[ingredient]["Storage_Limit"]
+		storage_bar.value = quantity
+		storage_bar.max_value = limit
 
 func move_price_icons():
 	for ingredient in main.game_ingredients.keys():

@@ -17,6 +17,19 @@
 [ext_resource type="PackedScene" uid="uid://c7gqmxdaljena" path="res://scenes/tea.tscn" id="13_0ld40"]
 [ext_resource type="PackedScene" uid="uid://bllr8h2latc6t" path="res://scenes/lemon.tscn" id="14_gqmmt"]
 [ext_resource type="PackedScene" uid="uid://0482j1n5nglx" path="res://scenes/strawberry.tscn" id="15_yc10j"]
+[ext_resource type="Script" uid="uid://ct5hfo4jcb6tr" path="res://scenes/panel.gd" id="17_dp3eg"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dp3eg"]
+bg_color = Color(1, 0.8392157, 0.8784314, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0ld40"]
+bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gqmmt"]
+bg_color = Color(1, 0.8784314, 0.78431374, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yc10j"]
+bg_color = Color(0.2901961, 0.23137255, 0.32156864, 1)
 
 [node name="main" type="Node2D" unique_id=1553475821]
 script = ExtResource("1_h2yge")
@@ -105,7 +118,7 @@ offset_bottom = 428.0
 [node name="Lines" type="Node2D" parent="GameUI/PriceBar" unique_id=860485155]
 
 [node name="Line2D" type="Line2D" parent="GameUI/PriceBar/Lines" unique_id=1175171820]
-position = Vector2(0, 79)
+position = Vector2(0, 75)
 points = PackedVector2Array(0, 0, 150, 0)
 width = 4.0
 default_color = Color(0.78431374, 0.47843137, 0.6901961, 0.44705883)
@@ -117,50 +130,50 @@ width = 4.0
 default_color = Color(0.78431374, 0.47843137, 0.6901961, 0.44705883)
 
 [node name="Line2D3" type="Line2D" parent="GameUI/PriceBar/Lines" unique_id=1233859533]
-position = Vector2(0, 219)
+position = Vector2(0, 225)
 points = PackedVector2Array(0, 0, 150, 0)
 width = 4.0
 default_color = Color(0.78431374, 0.47843137, 0.6901961, 0.44705883)
 
 [node name="Label" type="Label" parent="GameUI/PriceBar/Lines" unique_id=851004447]
-offset_left = 56.0
-offset_top = 58.0
-offset_right = 99.0
-offset_bottom = 81.0
+offset_left = 30.0
+offset_top = 18.0
+offset_right = 125.0
+offset_bottom = 68.0
 theme = ExtResource("5_choun")
+theme_override_colors/font_color = Color(0.2901961, 0.23137255, 0.32156864, 0.46666667)
+theme_override_font_sizes/font_size = 36
 text = "$4.00"
 
 [node name="Label2" type="Label" parent="GameUI/PriceBar/Lines" unique_id=832686847]
-offset_left = 56.0
-offset_top = 129.0
-offset_right = 99.0
-offset_bottom = 152.0
+offset_left = 30.0
+offset_top = 89.0
+offset_right = 125.0
+offset_bottom = 139.0
 theme = ExtResource("5_choun")
+theme_override_colors/font_color = Color(0.2901961, 0.23137255, 0.32156864, 0.46666667)
+theme_override_font_sizes/font_size = 36
 text = "$3.00"
 
 [node name="Label3" type="Label" parent="GameUI/PriceBar/Lines" unique_id=1194205160]
-offset_left = 56.0
-offset_top = 198.0
-offset_right = 99.0
-offset_bottom = 221.0
+offset_left = 30.0
+offset_top = 166.0
+offset_right = 125.0
+offset_bottom = 216.0
 theme = ExtResource("5_choun")
+theme_override_colors/font_color = Color(0.2901961, 0.23137255, 0.32156864, 0.46666667)
+theme_override_font_sizes/font_size = 36
 text = "$2.00"
 
 [node name="Label4" type="Label" parent="GameUI/PriceBar/Lines" unique_id=1672751921]
-offset_left = 56.0
-offset_top = 276.0
-offset_right = 99.0
-offset_bottom = 299.0
+offset_left = 30.0
+offset_top = 236.0
+offset_right = 125.0
+offset_bottom = 286.0
 theme = ExtResource("5_choun")
+theme_override_colors/font_color = Color(0.2901961, 0.23137255, 0.32156864, 0.46666667)
+theme_override_font_sizes/font_size = 36
 text = "$1.00"
-
-[node name="Label6" type="Label" parent="GameUI/PriceBar/Lines" unique_id=1322229416]
-offset_left = 56.0
-offset_top = -19.0
-offset_right = 98.0
-offset_bottom = 4.0
-theme = ExtResource("5_choun")
-text = "$4.00"
 
 [node name="icons" type="Control" parent="GameUI/PriceBar" unique_id=1952473343]
 anchors_preset = 0
@@ -184,6 +197,78 @@ position = Vector2(132.30307, 263.40408)
 
 [node name="strawberry" parent="GameUI/PriceBar/icons" unique_id=1006039960 instance=ExtResource("15_yc10j")]
 position = Vector2(111.30307, 271.40408)
+
+[node name="StorageBars" type="Panel" parent="GameUI" unique_id=1426862772]
+layout_mode = 0
+offset_left = 645.0
+offset_top = 184.0
+offset_right = 779.0
+offset_bottom = 442.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_dp3eg")
+script = ExtResource("17_dp3eg")
+
+[node name="milk" type="ProgressBar" parent="GameUI/StorageBars" unique_id=246665569]
+layout_mode = 0
+offset_left = 9.0
+offset_right = 30.0
+offset_bottom = 258.0
+theme_override_styles/fill = SubResource("StyleBoxFlat_0ld40")
+max_value = 5.0
+step = 1.0
+fill_mode = 3
+show_percentage = false
+
+[node name="tea" type="ProgressBar" parent="GameUI/StorageBars" unique_id=1056966691]
+layout_mode = 0
+offset_left = 30.0
+offset_right = 51.0
+offset_bottom = 258.0
+theme_override_styles/fill = SubResource("StyleBoxFlat_gqmmt")
+max_value = 5.0
+step = 1.0
+fill_mode = 3
+show_percentage = false
+
+[node name="pearls" type="ProgressBar" parent="GameUI/StorageBars" unique_id=2051290418]
+layout_mode = 0
+offset_left = 51.0
+offset_right = 72.0
+offset_bottom = 258.0
+theme_override_styles/fill = SubResource("StyleBoxFlat_yc10j")
+max_value = 5.0
+step = 1.0
+fill_mode = 3
+show_percentage = false
+
+[node name="lemon" type="ProgressBar" parent="GameUI/StorageBars" unique_id=1108115428]
+layout_mode = 0
+offset_left = 72.0
+offset_right = 93.0
+offset_bottom = 258.0
+max_value = 5.0
+step = 1.0
+fill_mode = 3
+show_percentage = false
+
+[node name="strawberry" type="ProgressBar" parent="GameUI/StorageBars" unique_id=1864107645]
+layout_mode = 0
+offset_left = 114.0
+offset_right = 135.0
+offset_bottom = 258.0
+max_value = 5.0
+step = 1.0
+fill_mode = 3
+show_percentage = false
+
+[node name="taro" type="ProgressBar" parent="GameUI/StorageBars" unique_id=1225798291]
+layout_mode = 0
+offset_left = 93.0
+offset_right = 114.0
+offset_bottom = 258.0
+max_value = 5.0
+step = 1.0
+fill_mode = 3
+show_percentage = false
 
 [node name="GameOver" type="Node2D" parent="." unique_id=166650162]
 visible = false

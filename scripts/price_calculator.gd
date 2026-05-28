@@ -8,7 +8,7 @@ var main
 func _ready() -> void:
 	main = get_tree().root.get_node("main")
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	pass
 
 func _on_timer_timeout() -> void:

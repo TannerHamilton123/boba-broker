@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://xvovxdquna4e"]
 
 [ext_resource type="Theme" uid="uid://b8msacrlqyrhr" path="res://themes/gameplay_theme.tres" id="1_goadl"]
-[ext_resource type="Script" uid="uid://bkwe1x1tm600l" path="res://scenes/titlescreen.gd" id="1_tt55a"]
+[ext_resource type="Script" uid="uid://bkwe1x1tm600l" path="res://scripts/titlescreen.gd" id="1_tt55a"]
 [ext_resource type="FontFile" uid="uid://bkq7isl3bkgjh" path="res://themes/Fredoka-Bold.ttf" id="2_2bjoa"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3jj3l"]
