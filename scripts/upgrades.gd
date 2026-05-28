@@ -1,10 +1,6 @@
 class_name UpgradeData
 
-'''
-Button label for each upgrade at each level.
-Index = current level (what you are about to buy).
-Add more strings to extend the max level.
-'''
+# Index = current level (what you are about to buy).
 const labels: Dictionary = {
 	"Storage": [
 		"Extra Shelf",
@@ -35,4 +31,13 @@ const labels: Dictionary = {
 		"Direct Farm Import",
 		"Co-op Membership"
 	]
+}
+
+# Cost in dollars for each level purchase (parallel to labels arrays).
+const costs: Dictionary = {
+	"Storage":    [75,  150, 300, 500],
+	"Ingredient": [100, 150, 225],
+	"WaitTime":   [50,  100, 200, 350],
+	"Popularity": [100, 200, 400, 750],
+	"Supply":     [75,  175, 350, 600]
 }

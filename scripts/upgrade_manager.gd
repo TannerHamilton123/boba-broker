@@ -28,9 +28,10 @@ func _process(_delta: float) -> void:
 	pass
 
 func _on_UpgradeButton_pressed(upgrade_type: String) -> void:
-	print("Upgrade button pressed: ", upgrade_type)
 	if upgrade_levels[upgrade_type] >= upgrade_max_levels[upgrade_type]:
-		print("Upgrade ", upgrade_type, " is already at max level!")
+		return
+	if not main.can_afford(set_price(upgrade_type)):
+		main.on_cannot_afford()
 		return
 	if upgrade_type == "Storage":
 		upgrade_storage()
@@ -40,47 +41,50 @@ func _on_UpgradeButton_pressed(upgrade_type: String) -> void:
 		upgrade_wait_time()
 	elif upgrade_type == "Popularity":
 		upgrade_popularity()
-	elif upgrade_type == "Supply":	
+	elif upgrade_type == "Supply":
 		upgrade_supply()
-	else:
-		print("Unknown upgrade type: ", upgrade_type)
 
+# Returns the cost for the next purchase of upgrade_type.
 func set_price(upgrade_type: String) -> int:
-	var base_price = 100
 	var level = upgrade_levels[upgrade_type]
-	return base_price * (level + 1)
+	var costs: Array = UpgradeData.costs[upgrade_type]
+	if level >= costs.size():
+		return 0
+	return costs[level]
+
+func _purchase(upgrade_type: String) -> void:
+	main.player_balance -= set_price(upgrade_type)
 
 func upgrade_storage() -> void:
-	var price = set_price("Storage")
+	_purchase("Storage")
 	main.ingredient_storage += 5
 	upgrade_levels["Storage"] += 1
 	_refresh_button("Storage")
-	print("Storage upgraded to level ", upgrade_levels["Storage"], " for $", price)
 
 func upgrade_ingredient() -> void:
+	_purchase("Ingredient")
 	main.ingredient_level += 1
 	upgrade_levels["Ingredient"] += 1
 	_refresh_button("Ingredient")
 	_unlock_ingredient(main.ingredient_level)
-	print("Ingredient quality upgraded to level ", upgrade_levels["Ingredient"])
 
 func upgrade_wait_time() -> void:
+	_purchase("WaitTime")
 	main.wait_time_increase += 0.1
 	upgrade_levels["WaitTime"] += 1
 	_refresh_button("WaitTime")
-	print("Wait time reduction upgraded to level ", upgrade_levels["WaitTime"])
 
 func upgrade_popularity() -> void:
+	_purchase("Popularity")
 	main.popularity += 1
 	upgrade_levels["Popularity"] += 1
 	_refresh_button("Popularity")
-	print("Popularity upgraded to level ", upgrade_levels["Popularity"])
 
 func upgrade_supply() -> void:
+	_purchase("Supply")
 	main.supply_level += 1
 	upgrade_levels["Supply"] += 1
 	_refresh_button("Supply")
-	print("Supply upgraded to level ", upgrade_levels["Supply"])
 
 '''
 Finds the matching button in the EOW scene and
