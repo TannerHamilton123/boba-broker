@@ -1,16 +1,25 @@
 [gd_scene format=3 uid="uid://cfeu453jfmiot"]
 
-[ext_resource type="Script" uid="uid://3kcvo1tkcy1q" path="res://scenes/upgrades_page.gd" id="1_15hgd"]
+[ext_resource type="Script" uid="uid://3kcvo1tkcy1q" path="res://scripts/upgrades_page.gd" id="1_15hgd"]
 [ext_resource type="Theme" uid="uid://b8msacrlqyrhr" path="res://themes/gameplay_theme.tres" id="2_jcj7r"]
 [ext_resource type="FontFile" uid="uid://bkq7isl3bkgjh" path="res://themes/Fredoka-Bold.ttf" id="3_js5n2"]
 [ext_resource type="PackedScene" uid="uid://bcj2knqij31qx" path="res://scenes/upgrade_button.tscn" id="4_ef3hr"]
 
 [node name="UpgradesPage" type="Control" unique_id=377314579]
+z_index = 21
 layout_mode = 3
 anchors_preset = 0
 offset_right = 800.0
 offset_bottom = 600.0
 script = ExtResource("1_15hgd")
+
+[node name="Panel" type="Panel" parent="." unique_id=620909519]
+modulate = Color(0.34117648, 0.28627452, 0.36862746, 1)
+layout_mode = 0
+offset_left = -120.0
+offset_top = -72.0
+offset_right = 856.0
+offset_bottom = 640.0
 
 [node name="ColorRect" type="Panel" parent="." unique_id=415948330]
 layout_mode = 0
@@ -19,6 +28,44 @@ offset_top = 48.0
 offset_right = 748.0
 offset_bottom = 548.0
 theme = ExtResource("2_jcj7r")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ColorRect" unique_id=620212578]
+layout_mode = 0
+offset_left = 48.0
+offset_top = 128.0
+offset_right = 648.0
+offset_bottom = 360.0
+alignment = 1
+
+[node name="Storage" parent="ColorRect/HBoxContainer" unique_id=1322697764 instance=ExtResource("4_ef3hr")]
+layout_mode = 2
+size_flags_horizontal = 15
+size_flags_vertical = 13
+upgrade_description_text = "Store more ingredients"
+
+[node name="Ingredient" parent="ColorRect/HBoxContainer" unique_id=1870107473 instance=ExtResource("4_ef3hr")]
+layout_mode = 2
+size_flags_horizontal = 15
+size_flags_vertical = 13
+upgrade_description_text = "Unlock a new ingredient!"
+
+[node name="Popularity" parent="ColorRect/HBoxContainer" unique_id=478226035 instance=ExtResource("4_ef3hr")]
+layout_mode = 2
+size_flags_horizontal = 15
+size_flags_vertical = 13
+upgrade_description_text = "Get more orders coming in!"
+
+[node name="WaitTime" parent="ColorRect/HBoxContainer" unique_id=634028518 instance=ExtResource("4_ef3hr")]
+layout_mode = 2
+size_flags_horizontal = 15
+size_flags_vertical = 13
+upgrade_description_text = "Orders will wait longer before disappearing!"
+
+[node name="Supply" parent="ColorRect/HBoxContainer" unique_id=1527111958 instance=ExtResource("4_ef3hr")]
+layout_mode = 2
+size_flags_horizontal = 15
+size_flags_vertical = 13
+upgrade_description_text = "More chances to buy ingredients!"
 
 [node name="Label" type="Label" parent="ColorRect" unique_id=1744153793]
 layout_mode = 1
@@ -35,53 +82,12 @@ theme_override_fonts/font = ExtResource("3_js5n2")
 theme_override_font_sizes/font_size = 24
 text = "End of the Week"
 
-[node name="Upgrades" type="Panel" parent="ColorRect" unique_id=1606752082]
-layout_mode = 0
-offset_left = 72.0
-offset_top = 142.0
-offset_right = 616.0
-offset_bottom = 320.0
-theme = ExtResource("2_jcj7r")
-
-[node name="HBoxContainer" type="HBoxContainer" parent="ColorRect" unique_id=620212578]
-layout_mode = 0
-offset_left = 48.0
-offset_top = 160.0
-offset_right = 648.0
-offset_bottom = 312.0
-alignment = 1
-
-[node name="Storage" parent="ColorRect/HBoxContainer" unique_id=1322697764 instance=ExtResource("4_ef3hr")]
-layout_mode = 2
-size_flags_horizontal = 15
-size_flags_vertical = 13
-
-[node name="Ingredient" parent="ColorRect/HBoxContainer" unique_id=1870107473 instance=ExtResource("4_ef3hr")]
-layout_mode = 2
-size_flags_horizontal = 15
-size_flags_vertical = 13
-
-[node name="Popularity" parent="ColorRect/HBoxContainer" unique_id=478226035 instance=ExtResource("4_ef3hr")]
-layout_mode = 2
-size_flags_horizontal = 15
-size_flags_vertical = 13
-
-[node name="WaitTime" parent="ColorRect/HBoxContainer" unique_id=634028518 instance=ExtResource("4_ef3hr")]
-layout_mode = 2
-size_flags_horizontal = 15
-size_flags_vertical = 13
-
-[node name="Supply" parent="ColorRect/HBoxContainer" unique_id=1527111958 instance=ExtResource("4_ef3hr")]
-layout_mode = 2
-size_flags_horizontal = 15
-size_flags_vertical = 13
-
 [node name="Continue" type="Button" parent="." unique_id=1669623248]
 layout_mode = 0
 offset_left = 280.0
-offset_top = 416.0
+offset_top = 488.0
 offset_right = 528.0
-offset_bottom = 504.0
+offset_bottom = 536.0
 theme = ExtResource("2_jcj7r")
 text = "Start next week!"
 

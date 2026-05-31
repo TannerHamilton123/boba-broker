@@ -4,7 +4,9 @@
 [ext_resource type="Script" uid="uid://dtkww0apdukl5" path="res://scripts/main.gd" id="1_h2yge"]
 [ext_resource type="Script" uid="uid://d3qa12m4oahrb" path="res://scripts/price_calculator.gd" id="2_4c57u"]
 [ext_resource type="Script" uid="uid://d0jyq6x2my6on" path="res://scripts/time_manager.gd" id="2_choun"]
+[ext_resource type="PackedScene" uid="uid://eakmu4gcfqm4" path="res://scenes/sound.tscn" id="2_jscy8"]
 [ext_resource type="Script" uid="uid://cw7fm14j7e3ba" path="res://scripts/ui_manager.gd" id="3_choun"]
+[ext_resource type="Script" uid="uid://bi83ke28bsr7k" path="res://scripts/event_manager.gd" id="3_gqmmt"]
 [ext_resource type="Script" uid="uid://v650stxr8ad7" path="res://scripts/summary_manager.gd" id="3_muem4"]
 [ext_resource type="Script" uid="uid://cwxdmeo0qjubt" path="res://scripts/order_manager.gd" id="4_choun"]
 [ext_resource type="Theme" uid="uid://b8msacrlqyrhr" path="res://themes/gameplay_theme.tres" id="5_choun"]
@@ -14,14 +16,66 @@
 [ext_resource type="PackedScene" uid="uid://8xupw1dx74q5" path="res://scenes/pearls.tscn" id="10_jbj1t"]
 [ext_resource type="PackedScene" uid="uid://drbkplepsvmeo" path="res://scenes/milk.tscn" id="11_muem4"]
 [ext_resource type="PackedScene" uid="uid://6cyfjghqf6ic" path="res://scenes/taro.tscn" id="12_dp3eg"]
+[ext_resource type="FontFile" uid="uid://bkq7isl3bkgjh" path="res://themes/Fredoka-Bold.ttf" id="12_yc10j"]
 [ext_resource type="PackedScene" uid="uid://c7gqmxdaljena" path="res://scenes/tea.tscn" id="13_0ld40"]
 [ext_resource type="PackedScene" uid="uid://bllr8h2latc6t" path="res://scenes/lemon.tscn" id="14_gqmmt"]
 [ext_resource type="PackedScene" uid="uid://0482j1n5nglx" path="res://scenes/strawberry.tscn" id="15_yc10j"]
-[ext_resource type="Script" uid="uid://ct5hfo4jcb6tr" path="res://scenes/panel.gd" id="17_dp3eg"]
-[ext_resource type="PackedScene" uid="uid://dwx7jabjq2oqf" path="res://tutorial.tscn" id="19_0ld40"]
+[ext_resource type="Script" uid="uid://ct5hfo4jcb6tr" path="res://scripts/panel.gd" id="17_dp3eg"]
+[ext_resource type="PackedScene" uid="uid://dwx7jabjq2oqf" path="res://scenes/tutorial.tscn" id="19_0ld40"]
+[ext_resource type="Script" uid="uid://ca7j8ov3njfgr" path="res://scenes/notification.gd" id="21_pm3ni"]
+[ext_resource type="PackedScene" uid="uid://da52leltxcmh3" path="res://scenes/benny.tscn" id="22_y6deb"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dp3eg"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_og1vs"]
+bg_color = Color(1, 0.972549, 0.9411765, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2wyq8"]
+bg_color = Color(1, 0.972549, 0.9411765, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.78431374, 0.47843137, 0.6901961, 1)
+corner_radius_top_left = 24
+corner_radius_top_right = 24
+corner_radius_bottom_right = 24
+corner_radius_bottom_left = 24
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vxglm"]
 bg_color = Color(1, 0.8392157, 0.8784314, 1)
+border_width_bottom = 4
+border_color = Color(0.78431374, 0.47843137, 0.6901961, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tel4y"]
+bg_color = Color(0.78431374, 0.47843137, 0.6901961, 1)
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qkpxi"]
+bg_color = Color(1, 0.8392157, 0.8784314, 1)
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.78431374, 0.47843137, 0.6901961, 1)
+corner_radius_top_right = 24
+corner_radius_bottom_right = 24
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2f3dj"]
+bg_color = Color(1, 0.8392157, 0.8784314, 1)
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.78431374, 0.47843137, 0.6901961, 1)
+corner_radius_top_right = 24
+corner_radius_bottom_right = 24
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yq6so"]
+bg_color = Color(1, 0.8392157, 0.8784314, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_bottom = 4
+border_color = Color(0.78431374, 0.47843137, 0.6901961, 1)
+corner_radius_top_left = 24
+corner_radius_bottom_left = 24
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0ld40"]
 bg_color = Color(1, 1, 1, 1)
@@ -32,14 +86,120 @@ bg_color = Color(1, 0.8784314, 0.78431374, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yc10j"]
 bg_color = Color(0.2901961, 0.23137255, 0.32156864, 1)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jscy8"]
+bg_color = Color(0.9098039, 0.8352941, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pm3ni"]
+bg_color = Color(1, 0.9411765, 0.6901961, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y6deb"]
+bg_color = Color(1, 0.8392157, 0.8784314, 1)
+
+[sub_resource type="Animation" id="Animation_y6deb"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.2901961, 0.23137255, 0.32156864, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Panel:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Label2:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_og1vs"]
+resource_name = "game_over"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.2901961, 0.23137255, 0.32156864, 0), Color(0.78431374, 0.9411765, 0.8784314, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Panel:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1, 1.3, 1.6),
+"transitions": PackedFloat32Array(1, 0.35355347, 0.2102241),
+"update": 0,
+"values": [Vector2(1, 1e-05), Vector2(1, 1.1), Vector2(1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Label2:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1.01),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2wyq8"]
+_data = {
+&"RESET": SubResource("Animation_y6deb"),
+&"game_over": SubResource("Animation_og1vs")
+}
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fv21b"]
+bg_color = Color(1, 0.8392157, 0.8784314, 1)
+border_width_top = 4
+border_color = Color(0.78431374, 0.47843137, 0.6901961, 1)
+
 [node name="main" type="Node2D" unique_id=1553475821]
 script = ExtResource("1_h2yge")
+
+[node name="sound" parent="." unique_id=623265398 instance=ExtResource("2_jscy8")]
+process_mode = 3
 
 [node name="Panel" type="Panel" parent="." unique_id=642137560]
 z_index = -1
 offset_right = 800.0
 offset_bottom = 600.0
 theme = ExtResource("5_choun")
+theme_override_styles/panel = SubResource("StyleBoxFlat_og1vs")
+
+[node name="EventManager" type="Node" parent="." unique_id=2104137009]
+script = ExtResource("3_gqmmt")
 
 [node name="SummaryManager" type="Node" parent="." unique_id=259713520]
 script = ExtResource("3_muem4")
@@ -71,6 +231,7 @@ wait_time = 10.0
 autostart = true
 
 [node name="GameUI" type="Control" parent="." unique_id=740147094]
+z_index = 10
 layout_mode = 3
 anchors_preset = 0
 offset_right = 800.0
@@ -80,7 +241,82 @@ size_flags_vertical = 3
 mouse_filter = 1
 theme = ExtResource("5_choun")
 
-[node name="TimeTracker" type="VBoxContainer" parent="GameUI" unique_id=2070056805]
+[node name="Bank" type="Panel" parent="GameUI" unique_id=1943637748]
+z_index = 25
+z_as_relative = false
+layout_mode = 0
+offset_left = 270.0
+offset_top = 439.0
+offset_right = 535.0
+offset_bottom = 478.0
+
+[node name="BankAccount" type="Label" parent="GameUI/Bank" unique_id=1960964850]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -17.0
+offset_right = 100.0
+offset_bottom = 17.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(100, 12)
+theme = ExtResource("5_choun")
+theme_override_colors/font_color = Color(1, 0.972549, 0.9411765, 1)
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 24
+text = "$$$"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="Event" type="Panel" parent="GameUI" unique_id=2128202480]
+visible = false
+z_index = 2
+layout_mode = 0
+offset_left = 201.0
+offset_top = 44.0
+offset_right = 601.0
+offset_bottom = 123.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_2wyq8")
+
+[node name="EventTitle" type="Label" parent="GameUI/Event" unique_id=13699803]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -400.0
+offset_top = -32.5
+offset_right = 400.0
+offset_bottom = -9.5
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("5_choun")
+theme_override_fonts/font = ExtResource("12_yc10j")
+theme_override_font_sizes/font_size = 20
+horizontal_alignment = 1
+
+[node name="EventDescription" type="Label" parent="GameUI/Event" unique_id=1818147366]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -401.0
+offset_top = 1.5
+offset_right = 399.0
+offset_bottom = 24.5
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("5_choun")
+horizontal_alignment = 1
+
+[node name="TimeTracker" type="Control" parent="GameUI" unique_id=1243673635]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -88,33 +324,64 @@ offset_bottom = 58.0
 grow_horizontal = 2
 theme = ExtResource("5_choun")
 
-[node name="DayTracker" type="ProgressBar" parent="GameUI/TimeTracker" unique_id=201131605]
-layout_mode = 2
-theme = ExtResource("5_choun")
-
 [node name="WeekTracker" type="ProgressBar" parent="GameUI/TimeTracker" unique_id=2098167443]
-layout_mode = 2
-theme = ExtResource("5_choun")
-max_value = 7.0
-value = 1.0
-
-[node name="clock" type="Label" parent="GameUI/TimeTracker" unique_id=999258031]
-layout_mode = 2
-theme = ExtResource("5_choun")
-
-[node name="Storage" type="VBoxContainer" parent="GameUI" unique_id=555058453]
 layout_mode = 0
-offset_left = 656.0
-offset_top = 136.0
 offset_right = 800.0
-offset_bottom = 496.0
+offset_bottom = 31.0
 theme = ExtResource("5_choun")
+theme_override_constants/outline_size = 5
+theme_override_styles/background = SubResource("StyleBoxFlat_vxglm")
+theme_override_styles/fill = SubResource("StyleBoxFlat_tel4y")
+max_value = 7.0
+value = 3.0
+show_percentage = false
+
+[node name="DayTracker" type="ProgressBar" parent="GameUI/TimeTracker" unique_id=201131605]
+visible = false
+layout_mode = 0
+theme = ExtResource("5_choun")
+
+[node name="Panel2" type="Panel" parent="GameUI/TimeTracker" unique_id=1179627980]
+layout_mode = 0
+offset_top = 76.0
+offset_right = 161.0
+offset_bottom = 134.0
+theme = ExtResource("5_choun")
+theme_override_styles/panel = SubResource("StyleBoxFlat_qkpxi")
+
+[node name="clock" type="Label" parent="GameUI/TimeTracker/Panel2" unique_id=999258031]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -80.5
+offset_top = -24.5
+offset_right = 80.5
+offset_bottom = 24.5
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("5_choun")
+text = "Week
+Day"
+horizontal_alignment = 1
+
+[node name="Events" type="Control" parent="GameUI/TimeTracker" unique_id=1231462309]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
 
 [node name="PriceBar" type="Panel" parent="GameUI" unique_id=476105927]
-layout_mode = 0
-offset_top = 128.0
-offset_right = 150.0
-offset_bottom = 428.0
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -429.0
+offset_right = 161.0
+offset_bottom = -123.0
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_2f3dj")
 
 [node name="Lines" type="Node2D" parent="GameUI/PriceBar" unique_id=860485155]
 
@@ -187,135 +454,267 @@ position = Vector2(16.303059, 271.40408)
 [node name="milk" parent="GameUI/PriceBar/icons" unique_id=74981698 instance=ExtResource("11_muem4")]
 position = Vector2(45.30305, 279.4041)
 
-[node name="taro" parent="GameUI/PriceBar/icons" unique_id=648707611 instance=ExtResource("12_dp3eg")]
-position = Vector2(126.303055, 263.40408)
-
 [node name="tea" parent="GameUI/PriceBar/icons" unique_id=374827546 instance=ExtResource("13_0ld40")]
-position = Vector2(70.303055, 271.40408)
+position = Vector2(65, 276.00003)
+
+[node name="taro" parent="GameUI/PriceBar/icons" unique_id=648707611 instance=ExtResource("12_dp3eg")]
+visible = false
+position = Vector2(97.09783, 266.79715)
 
 [node name="lemon" parent="GameUI/PriceBar/icons" unique_id=1621878304 instance=ExtResource("14_gqmmt")]
-position = Vector2(132.30307, 263.40408)
+visible = false
+position = Vector2(178.09784, 266.79715)
 
 [node name="strawberry" parent="GameUI/PriceBar/icons" unique_id=1006039960 instance=ExtResource("15_yc10j")]
-position = Vector2(111.30307, 271.40408)
+visible = false
+position = Vector2(123.09784, 276.79715)
 
 [node name="StorageBars" type="Panel" parent="GameUI" unique_id=1426862772]
-layout_mode = 0
-offset_left = 645.0
-offset_top = 184.0
-offset_right = 779.0
-offset_bottom = 442.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_dp3eg")
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -160.0
+offset_top = -129.0
+offset_bottom = 177.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_yq6so")
 script = ExtResource("17_dp3eg")
 
 [node name="milk" type="ProgressBar" parent="GameUI/StorageBars" unique_id=246665569]
 layout_mode = 0
-offset_left = 9.0
-offset_right = 30.0
-offset_bottom = 258.0
+offset_left = 29.0
+offset_top = 4.0
+offset_right = 50.0
+offset_bottom = 303.0
 theme_override_styles/fill = SubResource("StyleBoxFlat_0ld40")
 max_value = 5.0
-step = 1.0
+step = 0.1
+value = 1.0
 fill_mode = 3
 show_percentage = false
 
 [node name="tea" type="ProgressBar" parent="GameUI/StorageBars" unique_id=1056966691]
 layout_mode = 0
-offset_left = 30.0
-offset_right = 51.0
-offset_bottom = 258.0
+offset_left = 50.0
+offset_top = 4.0
+offset_right = 71.0
+offset_bottom = 303.0
 theme_override_styles/fill = SubResource("StyleBoxFlat_gqmmt")
 max_value = 5.0
-step = 1.0
+step = 0.1
+value = 2.0
 fill_mode = 3
 show_percentage = false
 
 [node name="pearls" type="ProgressBar" parent="GameUI/StorageBars" unique_id=2051290418]
 layout_mode = 0
-offset_left = 51.0
-offset_right = 72.0
-offset_bottom = 258.0
+offset_left = 71.0
+offset_top = 4.0
+offset_right = 92.0
+offset_bottom = 303.0
 theme_override_styles/fill = SubResource("StyleBoxFlat_yc10j")
 max_value = 5.0
-step = 1.0
-fill_mode = 3
-show_percentage = false
-
-[node name="lemon" type="ProgressBar" parent="GameUI/StorageBars" unique_id=1108115428]
-layout_mode = 0
-offset_left = 72.0
-offset_right = 93.0
-offset_bottom = 258.0
-max_value = 5.0
-step = 1.0
-fill_mode = 3
-show_percentage = false
-
-[node name="strawberry" type="ProgressBar" parent="GameUI/StorageBars" unique_id=1864107645]
-layout_mode = 0
-offset_left = 114.0
-offset_right = 135.0
-offset_bottom = 258.0
-max_value = 5.0
-step = 1.0
+step = 0.1
+value = 3.0
 fill_mode = 3
 show_percentage = false
 
 [node name="taro" type="ProgressBar" parent="GameUI/StorageBars" unique_id=1225798291]
 layout_mode = 0
-offset_left = 93.0
-offset_right = 114.0
-offset_bottom = 258.0
+offset_left = 92.0
+offset_top = 4.0
+offset_right = 113.0
+offset_bottom = 303.0
+theme_override_styles/fill = SubResource("StyleBoxFlat_jscy8")
 max_value = 5.0
-step = 1.0
+step = 0.1
 fill_mode = 3
 show_percentage = false
 
-[node name="BankAccount" type="Label" parent="GameUI" unique_id=1960964850]
+[node name="lemon" type="ProgressBar" parent="GameUI/StorageBars" unique_id=1108115428]
+layout_mode = 0
+offset_left = 134.0
+offset_top = 4.0
+offset_right = 155.0
+offset_bottom = 303.0
+theme_override_styles/fill = SubResource("StyleBoxFlat_pm3ni")
+max_value = 5.0
+step = 0.1
+fill_mode = 3
+show_percentage = false
+
+[node name="strawberry" type="ProgressBar" parent="GameUI/StorageBars" unique_id=1864107645]
+layout_mode = 0
+offset_left = 113.0
+offset_top = 4.0
+offset_right = 134.0
+offset_bottom = 303.0
+theme_override_styles/fill = SubResource("StyleBoxFlat_y6deb")
+max_value = 5.0
+step = 0.1
+fill_mode = 3
+show_percentage = false
+
+[node name="Notification" type="Label" parent="GameUI" unique_id=2070367598]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -103.0
+offset_top = -208.0
+offset_right = 103.0
+offset_bottom = -163.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(0.9194352, 0.4045219, 0.47091717, 1)
+theme_override_colors/font_outline_color = Color(0.2901961, 0.23137255, 0.32156864, 1)
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("12_yc10j")
+theme_override_font_sizes/font_size = 24
+script = ExtResource("21_pm3ni")
+
+[node name="GameOver" type="ColorRect" parent="." unique_id=1491156990]
+visible = false
+z_index = 100
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 801.0
+offset_bottom = 600.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.2901961, 0.23137255, 0.32156864, 1)
+
+[node name="Label2" type="Label" parent="GameOver" unique_id=1851402359]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -59.0
-offset_top = 442.0
-offset_right = 75.0
-offset_bottom = 479.0
+offset_left = -200.0
+offset_top = 31.0
+offset_right = 200.0
+offset_bottom = 110.0
 grow_horizontal = 2
+pivot_offset = Vector2(200, 0)
 theme = ExtResource("5_choun")
-theme_override_font_sizes/font_size = 24
-text = "$BANK"
+theme_override_fonts/font = ExtResource("12_yc10j")
+theme_override_font_sizes/font_size = 64
+text = "GAME OVER"
+
+[node name="Panel" type="Panel" parent="GameOver" unique_id=906489979]
+z_index = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.49793297
+anchor_top = 0.5720942
+anchor_right = 0.49793297
+anchor_bottom = 0.6374364
+offset_left = -157.34637
+offset_top = -68.46182
+offset_right = 162.65363
+offset_bottom = 91.53818
+pivot_offset = Vector2(0, 100)
+theme = ExtResource("5_choun")
+metadata/_edit_use_anchors_ = true
+
+[node name="Benny" parent="GameOver/Panel" unique_id=435675722 instance=ExtResource("22_y6deb")]
+z_index = -1
+position = Vector2(244.84845, -75.53819)
+scale = Vector2(0.23224507, 0.23224507)
+
+[node name="Label" type="Label" parent="GameOver/Panel" unique_id=326576674]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = -0.04375
+anchor_bottom = -0.04375
+offset_left = 24.0
+offset_top = 16.0
+offset_right = 304.0
+offset_bottom = 169.0
+theme = ExtResource("5_choun")
+text = "Sorry kid, looks you don't have enough for rent for this week! 
+You broke the bank!
+
+But hey, we fail, and try again!"
 horizontal_alignment = 1
-vertical_alignment = 2
+vertical_alignment = 1
+autowrap_mode = 2
+metadata/_edit_use_anchors_ = true
 
-[node name="GameOver" type="Node2D" parent="." unique_id=166650162]
+[node name="restart" type="Button" parent="GameOver/Panel" unique_id=103572654]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.34375
+anchor_top = 1.03125
+anchor_right = 0.64375
+anchor_bottom = 1.03125
+offset_left = -48.0
+offset_top = -48.0
+offset_right = 56.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = ExtResource("5_choun")
+text = "Try Again"
+metadata/_edit_use_anchors_ = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="GameOver" unique_id=1830020499]
+libraries/ = SubResource("AnimationLibrary_2wyq8")
+
+[node name="Tutorial" parent="." unique_id=1182671964 instance=ExtResource("19_0ld40")]
 visible = false
-position = Vector2(348, 8)
-
-[node name="ColorRect" type="ColorRect" parent="GameOver" unique_id=1491156990]
-offset_left = -348.0
-offset_top = -8.0
-offset_right = 452.0
-offset_bottom = 592.0
-color = Color(0.5254902, 0.24705882, 0.25882354, 0.5294118)
 
 [node name="OrderList" type="Node" parent="." unique_id=797184050]
 script = ExtResource("9_4c57u")
 
-[node name="OrderContainer" type="ColorRect" parent="OrderList" unique_id=1868295799]
-offset_left = 128.0
-offset_top = 479.0
-offset_right = 672.0
-offset_bottom = 600.0
+[node name="OrderContainer" type="Panel" parent="OrderList" unique_id=1182886416]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -400.0
+offset_top = -126.0
+offset_right = 401.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+theme = ExtResource("5_choun")
+theme_override_styles/panel = SubResource("StyleBoxFlat_fv21b")
+
+[node name="OrderContainerarchive" type="ColorRect" parent="OrderList" unique_id=1868295799]
+visible = false
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -239.5
+offset_top = -121.0
+offset_right = 239.5
+grow_horizontal = 2
+grow_vertical = 0
 mouse_filter = 1
 color = Color(0.24477637, 0.2447764, 0.24477637, 1)
 
 [node name="Timer" type="Timer" parent="OrderList" unique_id=1999790851]
 autostart = true
 
-[node name="Tutorial" parent="." unique_id=1182671964 instance=ExtResource("19_0ld40")]
-visible = false
-z_index = 10
+[node name="upgrade_levels" type="Label" parent="." unique_id=1779534752]
+offset_left = 241.0
+offset_top = 134.0
+offset_right = 281.0
+offset_bottom = 157.0
+theme = ExtResource("5_choun")
+text = "adsf"
 
 [connection signal="timeout" from="BubbleSpawner/Timer" to="BubbleSpawner" method="_on_timer_timeout"]
 [connection signal="timeout" from="PriceCalculator/Timer" to="PriceCalculator" method="_on_timer_timeout"]
+[connection signal="pressed" from="GameOver/Panel/restart" to="." method="_on_restart_pressed"]
 [connection signal="timeout" from="OrderList/Timer" to="OrderList" method="_on_timer_timeout"]

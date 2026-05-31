@@ -6,6 +6,10 @@ var upgrade_description
 var upgrade_name
 var price_label
 var upgrade_manager
+var level_label 
+var price: float = 0.0
+@onready var main = get_node("/root/main")
+@export var upgrade_description_text: String = ""
 '''
 Sets button text from UpgradeData based on
 upgrade_type and current_level
@@ -18,6 +22,7 @@ func _ready() -> void:
 	upgrade_manager = get_tree().root.get_node("main/UpgradeManager")
 	upgrade_type = self.name
 	current_level = upgrade_manager.upgrade_levels[upgrade_type]
+	level_label = $Level
 	refresh_label()
 
 
@@ -35,17 +40,32 @@ func refresh_label() -> void:
 		price_label.text = ""
 		self.disabled = true
 	else:
+		level_label.text = "Level " + str(current_level)
 		upgrade_name.text = levels[current_level]
-		upgrade_description.text = upgrade_type
-		var price = UpgradeData.prices[upgrade_type][current_level]
+		upgrade_description.text = upgrade_description_text
+		price = UpgradeData.prices[upgrade_type][current_level]
 		price_label.text = "$" + str(price)
 		self.disabled = false
 
 
 func _on_pressed() -> void:
-	upgrade_manager._on_UpgradeButton_pressed(upgrade_type)
+	if price > get_tree().root.get_node("main").player_balance:
+		print("Not enough money to purchase ", upgrade_type, " upgrade!")
+		return
+	get_tree().root.get_node("main").player_balance -= price
+	#add dollar sign instance
+	main.get_node("sound/click").play()
+	main.get_node("sound/casino").play()
+	change_text_color()
+
+	upgrade_manager._on_UpgradeButton_pressed(upgrade_type,price)
 	self.disabled = true # Prevent multiple clicks until label is refreshed
 
 
 
 	pass
+
+func change_text_color() -> void:
+	$UpgradeDescription.modulate = Color.html("c87ab0")
+	$UpgradeName.modulate = Color.html("c87ab0")
+	$Price.modulate = Color.html("c87ab0")

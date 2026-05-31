@@ -1,7 +1,15 @@
 [gd_scene format=3 uid="uid://8xupw1dx74q5"]
 
 [ext_resource type="Texture2D" uid="uid://by5x7p1qtlsbd" path="res://assets/boba.png" id="1_uxf5w"]
+[ext_resource type="PackedScene" uid="uid://cs0htxiv1fee" path="res://scenes/arrows.tscn" id="2_n0s0v"]
 
-[node name="pearls" type="Sprite2D" unique_id=2120347878]
+[node name="Node2D" type="Node2D" unique_id=981637033]
+
+[node name="Arrows" parent="." unique_id=1709246464 instance=ExtResource("2_n0s0v")]
+position = Vector2(0, -8.999999)
+scale = Vector2(0.057917338, 0.057917338)
+
+[node name="pearls" type="Sprite2D" parent="." unique_id=2120347878]
+position = Vector2(0, -8.999999)
 scale = Vector2(0.057917338, 0.057917338)
 texture = ExtResource("1_uxf5w")

@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://cs0htxiv1fee"]
+
+[ext_resource type="Texture2D" uid="uid://d2t3n152fowat" path="res://assets/up_arrow.png" id="1_skkvd"]
+[ext_resource type="Texture2D" uid="uid://dcyk22cq3445x" path="res://assets/down_arrow.png" id="2_gchtb"]
+
+[node name="Arrows" type="Node2D" unique_id=1709246464]
+
+[node name="down_arrow" type="Sprite2D" parent="." unique_id=529756178]
+visible = false
+position = Vector2(-1274.7476, -1546.3301)
+rotation = -3.1415927
+scale = Vector2(1.8180484, 1.8180484)
+texture = ExtResource("1_skkvd")
+
+[node name="up_arrow" type="Sprite2D" parent="." unique_id=1801373727]
+visible = false
+position = Vector2(-632.51984, -1525.0256)
+rotation = -3.1415927
+scale = Vector2(1.8180484, 1.8180484)
+texture = ExtResource("2_gchtb")

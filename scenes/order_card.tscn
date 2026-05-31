@@ -2,16 +2,32 @@
 
 [ext_resource type="Script" uid="uid://dvqasluc5lpfr" path="res://scripts/order_card.gd" id="1_5yx2q"]
 [ext_resource type="Theme" uid="uid://b8msacrlqyrhr" path="res://themes/gameplay_theme.tres" id="2_jukm1"]
+[ext_resource type="PackedScene" uid="uid://c53ioo38omfbd" path="res://scenes/dollar_animation.tscn" id="3_p1008"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jukm1"]
+bg_color = Color(1, 0.972549, 0.9411765, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.78431374, 0.47843137, 0.6901961, 1)
+corner_radius_top_left = 24
+corner_radius_top_right = 24
+corner_radius_bottom_right = 24
+corner_radius_bottom_left = 24
 
 [node name="OrderCard" type="ColorRect" unique_id=705807321]
 offset_right = 80.0
 offset_bottom = 128.0
+color = Color(1, 1, 1, 0)
 script = ExtResource("1_5yx2q")
 
-[node name="ColorRect" type="ColorRect" parent="." unique_id=1688724087]
+[node name="ColorRect" type="Panel" parent="." unique_id=205242449]
 layout_mode = 0
 offset_right = 80.0
 offset_bottom = 128.0
+theme = ExtResource("2_jukm1")
+theme_override_styles/panel = SubResource("StyleBoxFlat_jukm1")
 
 [node name="Label" type="Label" parent="." unique_id=1878356465]
 layout_mode = 0
@@ -19,11 +35,15 @@ offset_top = 88.0
 offset_right = 80.0
 offset_bottom = 128.0
 theme = ExtResource("2_jukm1")
+theme_override_colors/font_color = Color(1, 0.972549, 0.9411765, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
 text = "PRICE"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="ProgressBar" type="ProgressBar" parent="." unique_id=1553035776]
+visible = false
 layout_mode = 0
 offset_top = 112.0
 offset_right = 80.0
@@ -42,11 +62,15 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -40.0
-offset_top = -56.0
+offset_top = -48.0
 offset_right = 40.0
-offset_bottom = 56.0
+offset_bottom = 64.0
 grow_horizontal = 2
 grow_vertical = 2
 columns = 2
+
+[node name="DollarAnimation" parent="." unique_id=1099685661 instance=ExtResource("3_p1008")]
+z_index = 15
+scale = Vector2(0.050000012, 0.050000012)
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

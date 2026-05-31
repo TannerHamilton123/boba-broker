@@ -3,11 +3,13 @@ extends ColorRect
 var order_difficulty: int = 1
 var order
 var price
+var in_demand = false
 # Called when the node enters the scene tree for the first time.
 var order_number := 0
 
 @onready var main = get_node("/root/main")
 @onready var OrderManager = get_node("/root/main/OrderManager")
+@onready var dollar_sign = load("res://scenes/dollar_animation.tscn")
 
 signal order_failed(order,price)
 signal order_fulfilled(order,price)
@@ -17,8 +19,8 @@ func _ready() -> void:
 
 	#wait time is variable, plus the effects of upgrades that represent a customers willingness to wait longer
 	var wait_time_increase = main.wait_time_increase
-
-	$Timer.wait_time = randf_range(10.0, 15.0) + wait_time_increase - order_difficulty
+	check_in_demand()
+	$Timer.wait_time = randf_range(10.0, 15.0) + wait_time_increase
 
 	$Timer.start()
 	pass # Replace with function body.
@@ -31,7 +33,7 @@ func _process(_delta: float) -> void:
 
 func label_order():
 	var col_positions = [16, 54]
-	var row_positions = [18, 54]
+	var row_positions = [24, 60, 96]
 	var icon_index = 0
 
 	for ingredient in order.keys():
@@ -70,8 +72,22 @@ func check_order():
 			return
 	
 	#All ingredients are present, so now order is fulfilled
-	print("Order ", order_number, " fulfilled!")
+
 	emit_signal("order_fulfilled",order,price)
-	queue_free()
+	# $DollarAnimation.visible = true
+	# self.modulate = Color(1,1,1,0) # Hide the order card while the dollar sign animation plays
+	# await $DollarAnimation.trigger()
+	var dollar_instance = dollar_sign.instantiate()
+	dollar_instance.position = position + Vector2(50, 20)
+	get_parent().add_child(dollar_instance)
 
 	
+	queue_free()
+
+
+func check_in_demand():
+	if in_demand:
+		$"Label".modulate = Color.html("#C8F0E0") # Highlight price in orange if in demand
+	else:
+		# $"Label".modulate = Color.BLACK
+		pass

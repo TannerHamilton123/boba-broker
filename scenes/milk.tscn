@@ -1,8 +1,13 @@
 [gd_scene format=3 uid="uid://drbkplepsvmeo"]
 
 [ext_resource type="Texture2D" uid="uid://6ti6wklsprtc" path="res://assets/milk.png" id="1_b1h7t"]
+[ext_resource type="PackedScene" uid="uid://cs0htxiv1fee" path="res://scenes/arrows.tscn" id="2_i8xox"]
 
 [node name="milk" type="Sprite2D" unique_id=74981698]
+position = Vector2(0, 14.999999)
 scale = Vector2(0.0448377, 0.0448377)
 texture = ExtResource("1_b1h7t")
 offset = Vector2(500, 600)
+
+[node name="Arrows" parent="." unique_id=1709246464 instance=ExtResource("2_i8xox")]
+position = Vector2(-133.81596, -223.0266)

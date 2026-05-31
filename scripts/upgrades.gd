@@ -38,9 +38,9 @@ const labels: Dictionary = {
 }
 
 const prices = {
-	"Storage": [100, 200, 400, 800],
-	"Ingredient": [150, 300, 600],
-	"WaitTime": [120, 240, 480, 960],
-	"Popularity": [130, 260, 520, 1040],
-	"Supply": [110, 220, 440, 880]
+	"Storage": [10, 20, 30, 50],
+	"Ingredient": [10, 20, 30],
+	"WaitTime": [30, 60, 120, 240],
+	"Popularity": [30, 40, 60, 80],
+	"Supply": [10, 20, 30, 40]
 }

@@ -1,22 +1,30 @@
 extends Node
 
 @onready var main = get_parent()
-
+@onready var Summary_Manager = get_node("/root/main/SummaryManager")
 var time: String = ""
 var day: String = ""
-var day_length: float = 10
+var day_length: float = 20
 var time_elapsed: float = 0.0
 var shop_open_hour: int = 10
 var shop_close_hour: int = 20
 var shop_hours: int = shop_close_hour - shop_open_hour
 var days_of_week: Array = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
-var current_day_index: int = 6
+var current_day_index: int = 0
 var week_is_active: bool = true
 var weeks_completed: int = 0
 
 @export var eow_scene: PackedScene
 func _process(delta: float) -> void:
 	_update_day_tracker()
+
+	#After 5 weeks, the game ends.
+
+	if weeks_completed > 5 and not main.game_over:
+		main.game_over = true
+		main.game_over_sequence()
+	else:
+		handle_time(delta)
 
 
 func handle_time(delta: float) -> void:
@@ -42,7 +50,7 @@ func handle_time(delta: float) -> void:
 	var display_hour: int = current_hour if current_hour <= 12 else current_hour - 12
 	time = "%d:%02d %s" % [display_hour, current_minute, suffix]
 	day = days_of_week[current_day_index]
-	main.get_node("GameUI/TimeTracker/clock").text = ("Day: %s  Time: %s" % [day, time])
+	main.get_node("GameUI/TimeTracker/Panel2/clock").text = ("Week %d\n%s" %[weeks_completed + 1, day])
 
 
 func _update_day_tracker():
@@ -77,3 +85,6 @@ func start_next_week() -> void:
 	main.get_node("PriceCalculator/Timer").start()
 	main.get_node("BubbleSpawner/Timer").start()
 	main.get_node("OrderList/Timer").start()
+	main.get_node("EventManager").begin_week_scheduling()
+	main.get_node("UIManager").start_new_week()
+	Summary_Manager.reset_week()

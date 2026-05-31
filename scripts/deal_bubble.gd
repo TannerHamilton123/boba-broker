@@ -3,12 +3,14 @@ extends Area2D
 @export var rise_speed: float = 80.0
 @export var drift_speed: float = 1.5
 @export var drift_amplitude: float = 30.0
-
+@export var rise_speed_multiplier: float = 0.75
 signal bubble_clicked(ingredient: String, price: float)
+signal No_Storage
 var _time: float = 0.0
 var _start_x: float = 0.0
 var ingredient: String
 var price: float = 1.0
+var _popping: bool = false
 var milk_sprite_scene = preload("res://scenes/milk.tscn")
 var pearl_sprite_scene = preload("res://scenes/pearls.tscn")
 var tea_sprite_scene = preload("res://scenes/tea.tscn")
@@ -29,14 +31,27 @@ func _process(delta: float) -> void:
 
 
 func _on_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
+	if _popping:
+		return
 	if not (event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed):
 		return
 	get_viewport().set_input_as_handled()
 	var main = get_node("/root/main")
 	var ingredient_storage = main.ingredient_storage
+
+	if price > main.player_balance:
+		main._on_not_enough_money(ingredient)
+		return
+
 	if main.game_ingredients[ingredient]["quantity"] < ingredient_storage:
+		_popping = true
 		emit_signal("bubble_clicked", ingredient, price)
+		$AnimationPlayer.play("pop")
+		main.get_node("sound/pop").play()
+		await $AnimationPlayer.animation_finished
 		queue_free()
+	else:
+		emit_signal("No_Storage",ingredient)
 
 
 func _on_visibility_screen_exited() -> void:
@@ -45,49 +60,69 @@ func _on_visibility_screen_exited() -> void:
 func deal_type(ingredient_type: String, bubble_price: float) -> void:
 	ingredient = ingredient_type
 	price = bubble_price
+
 	$CollisionShape2D.scale = Vector2( 1 + price / 20, 1 + price / 20) # Scale bubble based on price
 	$Price.modulate = _price_color(price)
+	$Circle.modulate = Color.html("#987aa7")
+	$Price.text = "$%.2f" % price
+
 	match ingredient_type:
 		"tea":
-			rise_speed = 80.0
+			rise_speed = 80.0 *rise_speed_multiplier
 			drift_speed = 1.5
 			drift_amplitude = 30.0
 
 			var sprite = tea_sprite_scene.instantiate()
 			sprite.position = Vector2.ZERO
 			add_child(sprite)
-
-			# $CollisionShape2D/Circle.modulate = Color(0.8, 0.6, 0.4)
-			$Price.text = "$%.2f" % price
 			
 		"pearls":
-			rise_speed = 60.0
+			rise_speed = 60.0 *rise_speed_multiplier
 			drift_speed = 1.0
 			drift_amplitude = 20.0
 			var sprite = pearls_sprite_scene.instantiate()
 			sprite.position = Vector2.ZERO
 			add_child(sprite)
-			
-			# $CollisionShape2D/Circle.modulate = Color.LIGHT_PINK
-			$Price.text = "$%.2f" % price
 
 		"milk":
-			rise_speed = 100.0
+			rise_speed = 100.0*rise_speed_multiplier
 			drift_speed = 2.0
 			drift_amplitude = 40.0
 			var sprite = milk_sprite_scene.instantiate()
 			sprite.position = Vector2.ZERO
 			add_child(sprite)
 
-			# $CollisionShape2D/Circle.modulate = Color(1.0, 1.0, 1.0)
-			$Price.text = "$%.2f" % price
-	$Circle.modulate = Color.html("#987aa7")
-	# $CollisionShape2D/Circle.modulate.a = 0.5
+		"taro":
+			rise_speed = 90.0*rise_speed_multiplier
+			drift_speed = 1.8
+			drift_amplitude = 35.0
+			var sprite = taro_sprite_scene.instantiate()
+			sprite.position = Vector2.ZERO
+			add_child(sprite)
+
+		"strawberry":
+			rise_speed = 70.0*rise_speed_multiplier
+			drift_speed = 1.2
+			drift_amplitude = 25.0
+			var sprite = strawberry_sprite_scene.instantiate()
+			sprite.position = Vector2.ZERO
+			add_child(sprite)
+
+		"lemon":
+			rise_speed = 75.0*rise_speed_multiplier
+			drift_speed = 1.0
+			drift_amplitude = 30.0
+			var sprite = lemons_sprite_scene.instantiate()
+			sprite.position = Vector2.ZERO
+			add_child(sprite)
+
+	
 
 
-func _price_color(price: float) -> Color:
+
+func _price_color(deal_price: float) -> Color:
 	var mint  := Color.html("C8F0E0")
 	var cream := Color.html("FFF8F0")
 	var rose  := Color.html("FFB8C8")
-	var t := clampf((price - 1.0) / 4.0, 0.0, 1.0)
+	var t := clampf((deal_price - 1.0) / 4.0, 0.0, 1.0)
 	return mint.lerp(cream, t * 2.0) if t <= 0.5 else cream.lerp(rose, (t - 0.5) * 2.0)

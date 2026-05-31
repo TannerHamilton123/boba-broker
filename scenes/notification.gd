@@ -1,4 +1,4 @@
-extends Control
+extends Label
 
 
 # Called when the node enters the scene tree for the first time.
@@ -8,10 +8,5 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	self.modulate.a = max(self.modulate.a - delta * 0.3, 0)
 	pass
-
-func _on_continue_pressed() -> void:
-	print("Continue button pressed, starting next week...")
-	var main = get_node("/root/main")
-	queue_free()
-	main.start_next_week()

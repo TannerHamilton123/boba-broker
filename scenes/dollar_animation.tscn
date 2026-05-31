@@ -1,0 +1,91 @@
+[gd_scene format=3 uid="uid://c53ioo38omfbd"]
+
+[ext_resource type="Script" uid="uid://ve56mdmgwsf7" path="res://scripts/dollar_animation.gd" id="1_4voim"]
+[ext_resource type="Texture2D" uid="uid://c8wwsnv2ww2kv" path="res://assets/dollar_sign.png" id="1_tp8x6"]
+
+[sub_resource type="Animation" id="Animation_qshjs"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("dollars:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.05, 0.05)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("dollars:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_m84kv"]
+resource_name = "fulfill"
+length = 0.5
+step = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("dollars:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0.2, 0.2)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("dollars:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_nrfwq"]
+_data = {
+&"RESET": SubResource("Animation_qshjs"),
+&"fulfill": SubResource("Animation_m84kv")
+}
+
+[node name="DollarAnimation" type="Node2D" unique_id=1099685661]
+z_index = 11
+script = ExtResource("1_4voim")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1847544317]
+libraries/ = SubResource("AnimationLibrary_nrfwq")
+
+[node name="dollars" type="Node2D" parent="." unique_id=738730923]
+scale = Vector2(0.05, 0.05)
+
+[node name="DollarSign" type="Sprite2D" parent="dollars" unique_id=2086846692]
+position = Vector2(391.83264, 260.2422)
+texture = ExtResource("1_tp8x6")
+
+[node name="DollarSign2" type="Sprite2D" parent="dollars" unique_id=2129871052]
+position = Vector2(326.5272, 488.81125)
+rotation = 0.5235988
+texture = ExtResource("1_tp8x6")
+
+[node name="DollarSign3" type="Sprite2D" parent="dollars" unique_id=609994922]
+position = Vector2(293.87448, 211.26309)
+rotation = -0.2617994
+scale = Vector2(0.99999994, 0.99999994)
+texture = ExtResource("1_tp8x6")

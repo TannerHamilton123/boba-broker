@@ -1,0 +1,144 @@
+[gd_scene format=3 uid="uid://dxukjujrxiw13"]
+
+[ext_resource type="Script" uid="uid://cylr2pv158e0x" path="res://scenes/falling_ingredients.gd" id="1_82vcb"]
+[ext_resource type="PackedScene" uid="uid://c7gqmxdaljena" path="res://scenes/tea.tscn" id="1_amb0o"]
+[ext_resource type="PackedScene" uid="uid://6cyfjghqf6ic" path="res://scenes/taro.tscn" id="2_82vcb"]
+[ext_resource type="PackedScene" uid="uid://bllr8h2latc6t" path="res://scenes/lemon.tscn" id="3_1hyni"]
+[ext_resource type="PackedScene" uid="uid://drbkplepsvmeo" path="res://scenes/milk.tscn" id="4_orntj"]
+[ext_resource type="PackedScene" uid="uid://8xupw1dx74q5" path="res://scenes/pearls.tscn" id="5_q45qr"]
+[ext_resource type="PackedScene" uid="uid://0482j1n5nglx" path="res://scenes/strawberry.tscn" id="6_sjone"]
+[ext_resource type="Texture2D" uid="uid://c8wwsnv2ww2kv" path="res://assets/dollar_sign.png" id="8_1hyni"]
+
+[node name="FallingIngredients" type="Node2D" unique_id=791796579]
+script = ExtResource("1_82vcb")
+
+[node name="tea" parent="." unique_id=1175955380 instance=ExtResource("1_amb0o")]
+position = Vector2(96, 16)
+
+[node name="taro" parent="." unique_id=648707611 instance=ExtResource("2_82vcb")]
+position = Vector2(184, 40)
+rotation = 0.7853982
+
+[node name="lemon" parent="." unique_id=1621878304 instance=ExtResource("3_1hyni")]
+position = Vector2(199.99998, 264)
+
+[node name="milk" parent="." unique_id=74981698 instance=ExtResource("4_orntj")]
+position = Vector2(72.00001, 80)
+
+[node name="boba" parent="." unique_id=981637033 instance=ExtResource("5_q45qr")]
+position = Vector2(66, 176)
+
+[node name="boba3" parent="." unique_id=1631913988 instance=ExtResource("5_q45qr")]
+position = Vector2(624.00006, 24)
+rotation = 0.7853982
+
+[node name="boba4" parent="." unique_id=732270975 instance=ExtResource("5_q45qr")]
+position = Vector2(184.00003, 168.00003)
+rotation = 1.0471976
+
+[node name="strawberry" parent="." unique_id=1006039960 instance=ExtResource("6_sjone")]
+position = Vector2(136, 143)
+rotation = 0.0
+
+[node name="strawberry3" parent="." unique_id=153466301 instance=ExtResource("6_sjone")]
+position = Vector2(680, 64)
+rotation = 0.2617994
+
+[node name="strawberry4" parent="." unique_id=575844883 instance=ExtResource("6_sjone")]
+position = Vector2(88, 376)
+
+[node name="strawberry5" parent="." unique_id=362627985 instance=ExtResource("6_sjone")]
+position = Vector2(648, 440)
+rotation = -0.5235988
+
+[node name="tea2" parent="." unique_id=348339576 instance=ExtResource("1_amb0o")]
+position = Vector2(638.97577, 194.7971)
+
+[node name="tea5" parent="." unique_id=820612906 instance=ExtResource("1_amb0o")]
+position = Vector2(676, 568)
+
+[node name="tea3" parent="." unique_id=1021371719 instance=ExtResource("1_amb0o")]
+position = Vector2(48, 288)
+
+[node name="tea4" parent="." unique_id=1090109076 instance=ExtResource("1_amb0o")]
+position = Vector2(176.00002, 456)
+rotation = 0.2617994
+
+[node name="taro2" parent="." unique_id=1715187845 instance=ExtResource("2_82vcb")]
+position = Vector2(768, 47.999985)
+
+[node name="taro4" parent="." unique_id=566268228 instance=ExtResource("2_82vcb")]
+position = Vector2(727.99994, 231)
+rotation = -0.5235988
+
+[node name="taro3" parent="." unique_id=1698575977 instance=ExtResource("2_82vcb")]
+position = Vector2(600, 520)
+
+[node name="lemon2" parent="." unique_id=1476017803 instance=ExtResource("3_1hyni")]
+position = Vector2(742.97577, 442.79712)
+rotation = 2.6179938
+
+[node name="lemon3" parent="." unique_id=691181724 instance=ExtResource("3_1hyni")]
+position = Vector2(744.00006, 128.00003)
+rotation = 1.8325958
+
+[node name="milk2" parent="." unique_id=2042707154 instance=ExtResource("4_orntj")]
+position = Vector2(614.9757, 258.7971)
+
+[node name="milk3" parent="." unique_id=58753496 instance=ExtResource("4_orntj")]
+position = Vector2(765, 528)
+rotation = -0.7853982
+
+[node name="milk4" parent="." unique_id=1489320365 instance=ExtResource("4_orntj")]
+position = Vector2(97.00006, 488.00006)
+rotation = 0.5235988
+
+[node name="milk5" parent="." unique_id=1656413525 instance=ExtResource("4_orntj")]
+position = Vector2(184.00003, 360)
+rotation = -0.2617994
+
+[node name="boba2" parent="." unique_id=1025602149 instance=ExtResource("5_q45qr")]
+position = Vector2(608.97577, 354.79712)
+
+[node name="strawberry2" parent="." unique_id=878315470 instance=ExtResource("6_sjone")]
+position = Vector2(678.97577, 321.79712)
+
+[node name="dollars" type="Sprite2D" parent="." unique_id=740178383]
+position = Vector2(256.00003, 136)
+rotation = -0.2617994
+scale = Vector2(0.10508845, 0.10508845)
+texture = ExtResource("8_1hyni")
+
+[node name="dollars2" type="Sprite2D" parent="." unique_id=756293064]
+position = Vector2(158, 272)
+rotation = -0.2617994
+scale = Vector2(0.10508845, 0.10508845)
+texture = ExtResource("8_1hyni")
+
+[node name="dollars3" type="Sprite2D" parent="." unique_id=176362710]
+position = Vector2(72, 488.00003)
+rotation = 0.2617994
+scale = Vector2(0.10508845, 0.10508845)
+texture = ExtResource("8_1hyni")
+
+[node name="dollars7" type="Sprite2D" parent="." unique_id=647957308]
+position = Vector2(192, 616)
+scale = Vector2(0.10508845, 0.10508845)
+texture = ExtResource("8_1hyni")
+
+[node name="dollars4" type="Sprite2D" parent="." unique_id=649343258]
+position = Vector2(832, 336.00006)
+rotation = -0.2617994
+scale = Vector2(0.10508845, 0.10508845)
+texture = ExtResource("8_1hyni")
+
+[node name="dollars5" type="Sprite2D" parent="." unique_id=1164348237]
+position = Vector2(680.00006, 136.00003)
+scale = Vector2(0.10508845, 0.10508845)
+texture = ExtResource("8_1hyni")
+
+[node name="dollars6" type="Sprite2D" parent="." unique_id=1411960624]
+position = Vector2(608, 495.99997)
+rotation = 0.5235988
+scale = Vector2(0.10508845, 0.10508845)
+texture = ExtResource("8_1hyni")

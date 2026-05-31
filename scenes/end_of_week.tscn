@@ -4,7 +4,67 @@
 [ext_resource type="Theme" uid="uid://b8msacrlqyrhr" path="res://themes/gameplay_theme.tres" id="1_q21ax"]
 [ext_resource type="FontFile" uid="uid://bkq7isl3bkgjh" path="res://themes/Fredoka-Bold.ttf" id="4_lrvch"]
 
+[sub_resource type="Animation" id="Animation_6ubf8"]
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Panel:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.34117648, 0.28627452, 0.36862746, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ColorRect:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_lrvch"]
+resource_name = "start"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Panel:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.34117648, 0.28627452, 0.36862746, 0), Color(0.34117648, 0.28627452, 0.36862746, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ColorRect:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.43333334, 1),
+"transitions": PackedFloat32Array(0.45062512, 0.96593624),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2lxnh"]
+_data = {
+&"RESET": SubResource("Animation_6ubf8"),
+&"start": SubResource("Animation_lrvch")
+}
+
 [node name="EndOfWeek" type="Control" unique_id=377314579]
+z_index = 20
 layout_mode = 3
 anchors_preset = 0
 offset_right = 800.0
@@ -12,18 +72,44 @@ offset_bottom = 600.0
 script = ExtResource("1_lrvch")
 
 [node name="Panel" type="Panel" parent="." unique_id=1819233240]
-modulate = Color(0.24840015, 0.24840018, 0.24840015, 1)
+modulate = Color(0.34117648, 0.28627452, 0.36862746, 1)
 layout_mode = 0
-offset_right = 800.0
-offset_bottom = 600.0
+offset_left = -72.0
+offset_top = -64.0
+offset_right = 848.0
+offset_bottom = 648.0
 
 [node name="ColorRect" type="Panel" parent="." unique_id=415948330]
-layout_mode = 0
-offset_left = 48.0
-offset_top = 48.0
-offset_right = 748.0
-offset_bottom = 548.0
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -352.0
+offset_top = -252.0
+offset_right = 352.0
+offset_bottom = 252.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(350, 250)
 theme = ExtResource("1_q21ax")
+
+[node name="Button" type="Button" parent="ColorRect" unique_id=1669623248]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -124.0
+offset_top = -64.0
+offset_right = 124.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = ExtResource("1_q21ax")
+text = "UPGRADES"
 
 [node name="Label" type="Label" parent="ColorRect" unique_id=1744153793]
 layout_mode = 1
@@ -37,7 +123,7 @@ offset_bottom = 116.0
 grow_horizontal = 2
 theme = ExtResource("1_q21ax")
 theme_override_fonts/font = ExtResource("4_lrvch")
-theme_override_font_sizes/font_size = 24
+theme_override_font_sizes/font_size = 36
 text = "End of the Week"
 
 [node name="Summary" type="Panel" parent="ColorRect" unique_id=1783960967]
@@ -50,88 +136,90 @@ anchor_bottom = 0.5
 offset_left = -269.0
 offset_top = -93.5
 offset_right = 269.0
-offset_bottom = 93.5
+offset_bottom = 132.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_q21ax")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect/Summary" unique_id=1631469614]
+[node name="category" type="VBoxContainer" parent="ColorRect/Summary" unique_id=1631469614]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -116.0
+offset_left = -176.0
 offset_top = -90.5
-offset_right = 137.0
+offset_right = 29.0
 offset_bottom = 92.5
 grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
 
-[node name="GridContainer" type="GridContainer" parent="ColorRect/Summary/VBoxContainer" unique_id=2097156206]
-unique_name_in_owner = true
+[node name="Label" type="Label" parent="ColorRect/Summary/category" unique_id=2074878237]
 layout_mode = 2
-columns = 2
+text = "Orders fulfilled:"
 
-[node name="BobaSold" type="Label" parent="ColorRect/Summary/VBoxContainer/GridContainer" unique_id=173745514]
+[node name="Label2" type="Label" parent="ColorRect/Summary/category" unique_id=1229092116]
 layout_mode = 2
-theme = ExtResource("1_q21ax")
-text = "Boba sold:"
+text = "Revenue"
 
-[node name="BobaSold2" type="Label" parent="ColorRect/Summary/VBoxContainer/GridContainer" unique_id=830297031]
+[node name="Label3" type="Label" parent="ColorRect/Summary/category" unique_id=704623046]
 layout_mode = 2
-theme = ExtResource("1_q21ax")
-text = "10"
+text = "ingredient costs:"
 
-[node name="Ingredients" type="Label" parent="ColorRect/Summary/VBoxContainer/GridContainer" unique_id=1304677073]
+[node name="Label4" type="Label" parent="ColorRect/Summary/category" unique_id=1721994100]
 layout_mode = 2
-theme = ExtResource("1_q21ax")
-text = "Money spent on materials"
+text = "Rent:"
 
-[node name="label2" type="Label" parent="ColorRect/Summary/VBoxContainer/GridContainer" unique_id=1595331166]
+[node name="Label5" type="Label" parent="ColorRect/Summary/category" unique_id=900413341]
 layout_mode = 2
-theme = ExtResource("1_q21ax")
-text = "$"
+text = "Profit:"
 
-[node name="Label4" type="Label" parent="ColorRect/Summary/VBoxContainer/GridContainer" unique_id=823937629]
+[node name="Label6" type="Label" parent="ColorRect/Summary/category" unique_id=1422784107]
 layout_mode = 2
-theme = ExtResource("1_q21ax")
-text = "Money earned from sales"
+text = "Gains from each ingredient:"
 
-[node name="Label8" type="Label" parent="ColorRect/Summary/VBoxContainer/GridContainer" unique_id=1511632503]
+[node name="quantity" type="VBoxContainer" parent="ColorRect/Summary" unique_id=1827475241]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 64.0
+offset_top = -90.25
+offset_right = 269.0
+offset_bottom = 92.75
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="OrdersFulfilled" type="Label" parent="ColorRect/Summary/quantity" unique_id=355335549]
 layout_mode = 2
-theme = ExtResource("1_q21ax")
-text = "$"
+text = "Orders fulfilled:"
 
-[node name="Label5" type="Label" parent="ColorRect/Summary/VBoxContainer/GridContainer" unique_id=615699564]
+[node name="Revenue" type="Label" parent="ColorRect/Summary/quantity" unique_id=196174808]
 layout_mode = 2
-theme = ExtResource("1_q21ax")
-text = "Average price of goods bought"
+text = "Revenue"
 
-[node name="Label9" type="Label" parent="ColorRect/Summary/VBoxContainer/GridContainer" unique_id=288038445]
+[node name="IngredientCosts" type="Label" parent="ColorRect/Summary/quantity" unique_id=151869663]
 layout_mode = 2
-theme = ExtResource("1_q21ax")
-text = "$"
+text = "ingredient costs:"
 
-[node name="Label6" type="Label" parent="ColorRect/Summary/VBoxContainer/GridContainer" unique_id=958246212]
+[node name="Rent" type="Label" parent="ColorRect/Summary/quantity" unique_id=51527383]
 layout_mode = 2
-theme = ExtResource("1_q21ax")
-text = "Customer Satisfaction"
+text = "Rent:"
 
-[node name="Label10" type="Label" parent="ColorRect/Summary/VBoxContainer/GridContainer" unique_id=2056728062]
+[node name="Profit" type="Label" parent="ColorRect/Summary/quantity" unique_id=710653348]
 layout_mode = 2
-theme = ExtResource("1_q21ax")
-text = "%"
+text = "Profit:"
 
-[node name="Button" type="Button" parent="." unique_id=1669623248]
-layout_mode = 0
-offset_left = 280.0
-offset_top = 416.0
-offset_right = 528.0
-offset_bottom = 504.0
-theme = ExtResource("1_q21ax")
-text = "UPGRADES"
+[node name="GainsFromEachIngredient" type="Label" parent="ColorRect/Summary/quantity" unique_id=1802145097]
+layout_mode = 2
+text = "Gains from each ingredient:"
 
-[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=448725155]
+libraries/ = SubResource("AnimationLibrary_2lxnh")
+
+[connection signal="pressed" from="ColorRect/Button" to="." method="_on_button_pressed"]

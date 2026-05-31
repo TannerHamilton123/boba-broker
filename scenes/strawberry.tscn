@@ -1,8 +1,13 @@
 [gd_scene format=3 uid="uid://0482j1n5nglx"]
 
 [ext_resource type="Texture2D" uid="uid://cc2y5ee2onmiq" path="res://assets/strawberry.png" id="1_13m7n"]
+[ext_resource type="PackedScene" uid="uid://cs0htxiv1fee" path="res://scenes/arrows.tscn" id="2_qrwac"]
 
 [node name="strawberry" type="Sprite2D" unique_id=1006039960]
 rotation = 0.5235988
 scale = Vector2(0.041705552, 0.041705552)
 texture = ExtResource("1_13m7n")
+
+[node name="Arrows" parent="." unique_id=1709246464 instance=ExtResource("2_qrwac")]
+position = Vector2(-253.25589, -102.9654)
+rotation = -0.5235988

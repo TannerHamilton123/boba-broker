@@ -1,9 +1,14 @@
 [gd_scene format=3 uid="uid://bllr8h2latc6t"]
 
 [ext_resource type="Texture2D" uid="uid://dl03ldnhsgjd8" path="res://assets/lemon.png" id="1_x2ngj"]
+[ext_resource type="PackedScene" uid="uid://cs0htxiv1fee" path="res://scenes/arrows.tscn" id="2_726da"]
 
 [node name="lemon" type="Sprite2D" unique_id=1621878304]
 rotation = 1.0471976
 scale = Vector2(0.04506368, 0.04506368)
 texture = ExtResource("1_x2ngj")
 offset = Vector2(-200, 700)
+
+[node name="Arrows" parent="." unique_id=1709246464 instance=ExtResource("2_726da")]
+position = Vector2(-446.7893, 818.2435)
+rotation = -1.0471976

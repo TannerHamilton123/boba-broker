@@ -1,7 +1,7 @@
 extends Node
 const max_orders = 5
 var order_count = 0
-
+var popularity = 0.0
 '''
 The lowest price of a drink is $5.00
 The price increases with the difficulty, and some variety
@@ -14,7 +14,7 @@ It decreases by 10 for each failed order and increases by 10 for each completed 
 Happiness affects the timer
 Happiness increases and decreases are handled by main.gd
 '''
-var happiness_score := 50
+var happiness_score := 20.0
 
 """
 Difficulty ranges from 1 to 5
@@ -37,6 +37,13 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
+	popularity = get_node("/root/main").popularity
+
+	if happiness_score < 0:
+		happiness_score = 0
+	elif happiness_score > 100:
+		happiness_score = 100
+
 	order_count = $"OrderContainer".get_child_count()
 	for order in $"OrderContainer".get_children():
 		shift_orders(order, _delta)
@@ -48,9 +55,9 @@ func add_order():
 		$"OrderContainer".add_child(new_order)
 		order_count += 1
 		new_order.order_number = order_count
-		var order_data = generate_order()
-		new_order.order = order_data[0]
-		new_order.price = order_data[1]
+		new_order.order = generate_order()
+		new_order.price = generate_market_price(new_order.order)[0]
+		new_order.in_demand = generate_market_price(new_order.order)[1]
 		new_order.label_order()
 		new_order.position = Vector2(800, 0)
 		_reorder_orders()
@@ -63,21 +70,21 @@ This is handled by the _reorder_orders() function, which is called after an orde
 '''
 func _reorder_orders():
 	var current_number = 1
-	print("Reordering orders..." + str($"OrderContainer".get_child_count()) + " orders remaining.")
 	for order in $"OrderContainer".get_children():
+		if not "order_number" in order:
+			continue
 		order.order_number = current_number
-		
 		current_number += 1
 
-func shift_orders(order,delta):
+func shift_orders(order, delta):
+	if not "order_number" in order:
+		return
 	var position = Vector2(0,0) + Vector2((order.order_number-1) * 110, 0)
 	order.position -= (order.position - position) * delta
 
 
 func generate_order():
 	var number_of_ingredients = difficulty_check()[0]
-	var price_multiplier = difficulty_check()[1]
-	var price = initial_price * price_multiplier
 	var game_ingredients = get_node("/root/main").game_ingredients
 	var order = {"tea": 1, "milk": 1}
 	var ingredient_list = game_ingredients.keys()
@@ -91,30 +98,56 @@ func generate_order():
 			order[ingredient] += 1
 		else:
 			order[ingredient] = 1
-	return [order, price]
+	
+
+	return order
+
+
+func generate_market_price(order):
+	var in_demand = false
+	var price_multiplier = difficulty_check()[1]
+	var order_price = 0.00
+	for ingredient in order.keys():
+		var base_price = get_node("/root/main").game_ingredients[ingredient]["Price"]
+		if base_price > 2.51:
+			in_demand = true
+
+		var price_variation = randf_range(-0.5, 0.5) # Random variation of +/- $0.50
+		order_price += (base_price + price_variation) * order[ingredient]
+
+	if in_demand:
+		order_price *= 1.20 # 20% increase if any ingredient is in demand
+	return [snappedf(order_price *1.10 * price_multiplier, 0.5),in_demand]
 
 
 
 '''	
-adjust timer based on happiness score, 
-with a range of 5 to 10 seconds at 0 happiness 
-and 1 to 2 seconds at 100 happiness
-Starting at 3.5 to 12 seconds at 50 happiness
+Adjust timer based on happiness
+At 0 happiness, timer is 5-10 seconds
+At 100 happiness, timer is 1-2 seconds
 '''
+
+
 func _on_timer_timeout() -> void:
-	
-	var happiness_modifier = (100.0 - happiness_score) / 20.0 + 1.0
-	var min_range = 1.0 * happiness_modifier
-	var max_range = 2.0 * happiness_modifier
+
+	var min_range = 3.0 - 2 * happiness_score/100.0 - popularity * 0.5
+	var max_range = 5.0 - 4 * happiness_score/100.0 - popularity * 0.5
 	$Timer.wait_time = randf_range(min_range, max_range)
 	$Timer.start()
 	add_order()
 
 
 func difficulty_check():
-	order_difficulty = floor(min(5, 1.0 + happiness_score / 20.0))
-	#determine number of ingredients based on difficulty
-	#Determine price based on difficulty
-	var number_of_ingredients = min(order_difficulty, 5)-2
+
+
+
+	
+	order_difficulty = clamp(happiness_score / 20, 1, 5)
+
+	#orders start with 2 ingredients,
+	#Then the number of ingredients ranges from 1 to 3 based on difficulty
+	#At 50 happiness, a total of 4 ingredients will be in an order
+	#At 100 happiness, a total of 5 ingredients will be in an order
+	var number_of_ingredients = min(order_difficulty, 4)
 	var price_multiplier = 1.0 + (order_difficulty - 1) * 0.5
 	return [number_of_ingredients, price_multiplier]

@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://ce8m8qlcqqy6k"]
+
+[ext_resource type="PackedScene" uid="uid://c3nlvmd4d86qr" path="res://scenes/dollar_animation.tscn" id="1_37kl0"]
+
+[node name="Node2D" type="Node2D" unique_id=1716326126]
+
+[node name="Node2D" parent="." unique_id=1330387653 instance=ExtResource("1_37kl0")]
+position = Vector2(296, 328)
