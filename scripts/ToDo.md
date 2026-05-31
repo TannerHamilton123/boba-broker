@@ -45,6 +45,17 @@ On the End of Week screen, add a **"Start Next Week"** button that:
 
 ---
 
+## Bugs
+
+- Load bar at end of week is not full, despite being full right before showing EOW
+- Update rent display $
+- Round upgrade prices to whole $
+- Proofread tutorial
+
+---
+
 ## Would Be Nice
 
 - **Dynamic demand multiplier (pricing v2):** Add a demand scalar that fluctuates independently of ingredient costs. High demand = orders pay a bonus on top of the base boba price; low demand = base price only. This gives the sell side its own decision layer without coupling order value to ingredient prices, and creates a natural reason to sometimes hold stock and wait for a spike rather than fulfilling immediately.
+- Pause button during game
+- Transition from title screen to tutorial
