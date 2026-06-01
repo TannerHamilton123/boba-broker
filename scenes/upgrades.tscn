@@ -4,6 +4,18 @@
 [ext_resource type="Theme" uid="uid://b8msacrlqyrhr" path="res://themes/gameplay_theme.tres" id="2_jcj7r"]
 [ext_resource type="FontFile" uid="uid://bkq7isl3bkgjh" path="res://themes/Fredoka-Bold.ttf" id="3_js5n2"]
 [ext_resource type="PackedScene" uid="uid://bcj2knqij31qx" path="res://scenes/upgrade_button.tscn" id="4_ef3hr"]
+[ext_resource type="PackedScene" uid="uid://da52leltxcmh3" path="res://scenes/benny.tscn" id="5_jcj7r"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jcj7r"]
+bg_color = Color(0.2901961, 0.23137255, 0.32156864, 1)
+
+[sub_resource type="Animation" id="Animation_jcj7r"]
+resource_name = "fade_away"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_js5n2"]
+_data = {
+&"fade_away": SubResource("Animation_jcj7r")
+}
 
 [node name="UpgradesPage" type="Control" unique_id=377314579]
 z_index = 21
@@ -14,12 +26,12 @@ offset_bottom = 600.0
 script = ExtResource("1_15hgd")
 
 [node name="Panel" type="Panel" parent="." unique_id=620909519]
-modulate = Color(0.34117648, 0.28627452, 0.36862746, 1)
 layout_mode = 0
 offset_left = -120.0
 offset_top = -72.0
 offset_right = 856.0
 offset_bottom = 640.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_jcj7r")
 
 [node name="ColorRect" type="Panel" parent="." unique_id=415948330]
 layout_mode = 0
@@ -90,5 +102,44 @@ offset_right = 528.0
 offset_bottom = 536.0
 theme = ExtResource("2_jcj7r")
 text = "Start next week!"
+
+[node name="Benny" type="Node2D" parent="." unique_id=1681985125]
+z_index = 1
+position = Vector2(664, 520)
+
+[node name="Panel" type="Panel" parent="Benny" unique_id=1391160228]
+z_index = 1
+offset_left = -64.0
+offset_top = -72.0
+offset_right = 136.0
+offset_bottom = 78.0
+theme = ExtResource("2_jcj7r")
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="Benny/Panel" unique_id=1265901055]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -97.653625
+offset_top = -54.538177
+offset_right = 97.346375
+offset_bottom = 73.46182
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_jcj7r")
+text = "Purchase upgrades to improve your shop. 
+But make sure you have enough for the week!"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Benny" parent="Benny" unique_id=435675722 instance=ExtResource("5_jcj7r")]
+position = Vector2(96, -152.00002)
+scale = Vector2(0.23224507, 0.23224507)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=308202036]
+libraries/ = SubResource("AnimationLibrary_js5n2")
 
 [connection signal="pressed" from="Continue" to="." method="_on_continue_pressed"]

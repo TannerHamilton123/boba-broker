@@ -10,6 +10,10 @@ On load: fetch the weekly summary and
 fill the grid with one row per ingredient
 '''
 func _ready() -> void:
+	if main.get_node("TimeManager").weeks_completed == 1:
+		$Benny.visible = true
+	else:
+		$Benny.visible = false
 	main.menu_music = true
 	$AnimationPlayer.play("start")
 	#Pay Rent
@@ -51,3 +55,5 @@ func _on_button_pressed() -> void:
 func check_game_over() -> void:
 	if main.player_balance <= 0:
 		main.game_over = true
+		main.game_over_sequence()
+		queue_free()

@@ -6,8 +6,8 @@ extends Node
 var events = {
 	"tea": [
 		{
-			"name": "Drought",
-			"description": "A drought has reduced tea harvests. 
+			"name": "Someone spilled the tea!",
+			"description": "Less tea to go around. 
 			Prices rise sharply.",
 			"price_multiplier": 1.5,
 			"symbol": "up",
@@ -19,7 +19,7 @@ var events = {
 			"symbol": "up",
 		},
 		{
-			"name": "Bumper Harvest",
+			"name": "Super tea leaf discovered!",
 			"description": "An exceptional harvest floods the market. 
 			Tea prices drop.",
 			"price_multiplier": 0.65,
@@ -42,8 +42,8 @@ var events = {
 			"symbol": "down",
 		},
 		{
-			"name": "Milk Tea Demand",
-			"description": "Milk boba is trending online. 
+			"name": "An Udder Disaster!",
+			"description": "No cows were harmed, but our profit is! 
 			Milk costs more.",
 			"price_multiplier": 1.35,
 			"symbol": "up",
@@ -51,21 +51,21 @@ var events = {
 	],
 	"pearls": [
 		{
-			"name": "Tapioca Shortage",
+			"name": "Tapioca Tornado Disaster!",
 			"description": "Pearls cost much more!",
 			"price_multiplier": 1.7,
 			"symbol": "up",
 		},
 		{
-			"name": "New Supplier",
-			"description": "You found a new pearl supplier.
+			"name": "Tapioca Takeover",
+			"description": "New Tapioca tycoon is selling at a discount.
 			Costs go down.",
 			"price_multiplier": 0.6,
 			"symbol": "down",
 		},
 		{
-			"name": "Quality Concerns",
-			"description": "Reports of poor-quality pearls.
+			"name": "Tapioca Oversupply",
+			"description": "Too much tapioca is a good thing!
 			Prices go down.",
 			"price_multiplier": 0.75,
 			"symbol": "down",
@@ -73,13 +73,13 @@ var events = {
 	],
 	"taro": [
 		{
-			"name": "Taro Season",
-			"description": "Low Taro costs.",
+			"name": "Rooting for the Root",
+			"description": "Great taro harvest this season.",
 			"price_multiplier": 0.65,
 			"symbol": "down",
 		},
 		{
-			"name": "Import Delays",
+			"name": "Big Trouble in little Taro Shipping",
 			"description": "Shipping delays have cut taro imports. 
 			Prices spike hard.",
 			"price_multiplier": 1.6,
@@ -95,7 +95,7 @@ var events = {
 	],
 	"strawberry": [
 		{
-			"name": "Berry Surplus",
+			"name": "Berry Blast!",
 			"description": "A great strawberry season
 			Strawberry prices are down.",
 			"price_multiplier": 0.6,
@@ -118,15 +118,15 @@ var events = {
 	],
 	"lemon": [
 		{
-			"name": "Citrus Frost",
+			"name": "Suppply Chain Soured!",
 			"description": "A frost damaged citrus crops. 
 			Lemon prices have jumped.",
 			"price_multiplier": 1.55,
 			"symbol": "up",
 		},
 		{
-			"name": "Citrus Surplus",
-			"description": "Mild weather produced a bumper crop. 
+			"name": "Life gives you lemons",
+			"description": "Lets sell them for a discount! 
 			Lemons are cheap.",
 			"price_multiplier": 0.65,
 			"symbol": "down",
@@ -186,9 +186,9 @@ func _pick_random_event() -> Dictionary:
 	return {"ingredient": ingredient, "event": event}
 
 func schedule_week_events(event_count: int = 7) -> void:
-	var base_ingredients = ["milk","tea"]
+	#var base_ingredients = ["milk","tea"]
 	scheduled_events.clear()
-	var time_manager = main.get_node("TimeManager")
+	#var time_manager = main.get_node("TimeManager")
 	var day_pool = range(time_manager.days_of_week.size())
 	day_pool.shuffle()
 
@@ -229,7 +229,7 @@ func _process(_delta: float) -> void:
 	_check_scheduled_events()
 
 func add_event_to_calendar():
-	var week_bar = main.get_node("GameUI/TimeTracker/WeekTracker")
+	#var week_bar = main.get_node("GameUI/TimeTracker/WeekTracker")
 	var bar_width = 800.0
 	var total_days = 7.0
 	var day_len = time_manager.day_length

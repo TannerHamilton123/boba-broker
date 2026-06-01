@@ -64,7 +64,7 @@ var game_ingredients = {
 
 
 func _ready() -> void:
-	await get_tree().create_timer(0.1).timeout
+	await get_tree().create_timer(0.01).timeout
 	$sound/menu_music.volume_db = -20
 	$sound/game_music.volume_db = -80
 	menu_music = true
@@ -77,7 +77,6 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
-	$upgrade_levels.text = "Storage: %d\nIngredient: %d\nWait Time: %d\nPopularity: %d\nSupply: %d" % [upgrade_manager.upgrade_levels["Storage"], upgrade_manager.upgrade_levels["Ingredient"], upgrade_manager.upgrade_levels["WaitTime"], upgrade_manager.upgrade_levels["Popularity"], upgrade_manager.upgrade_levels["Supply"]]
 	# if $Tutorial.visible == true:
 	# 	menu_music = true
 	# 	game_music = false
@@ -142,5 +141,5 @@ func game_over_sequence():
 	has_been_done = true
 
 func _on_restart_pressed() -> void:
-	get_tree().reload_current_scene()
+	get_tree().change_scene_to_file("res://scenes/titlescreen.tscn")
 	pass # Replace with function body.

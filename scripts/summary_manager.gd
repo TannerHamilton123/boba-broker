@@ -19,8 +19,9 @@ var ingredient_summary: Dictionary = {}
 var total_ingredients_sold: int = 0
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	await get_tree().process_frame
+	main = get_node("/root/main")
 	week_start_bank_balance = main.player_balance
-	pass # Replace with function body.
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -59,7 +60,7 @@ func _accumulate_ingredient_cost(ingredient,cost):
 		ingredient_cost[ingredient] = { "quantity": 1, "cost": cost }
 	ingredient_cost[ingredient]["quantity"] += 1
 	ingredient_cost[ingredient]["cost"] += cost
-	ingredient_cost[ingredient]["quantity"] += 1
+	
 
 
 
@@ -68,7 +69,7 @@ Returns a dict of each ingredient's average sell price per unit
 based on all orders fulfilled this week
 '''
 func calculate_weekly_summary():
-
+	main = get_node("/root/main")
 	week_profit = main.player_balance - week_start_bank_balance
 	week_cost = week_revenue - week_profit - main.rent
 	

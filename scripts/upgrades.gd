@@ -14,8 +14,9 @@ const labels: Dictionary = {
 	],
 	"Ingredient": [
 		"Taro",
-		"Lemon",
 		"Strawberry",
+		"Lemon"
+		
 	],
 	"WaitTime": [
 		"Comfy Stools",

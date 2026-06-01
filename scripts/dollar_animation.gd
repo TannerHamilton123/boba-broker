@@ -9,4 +9,3 @@ func trigger() -> void:
 	$AnimationPlayer.play("fulfill")
 	await $AnimationPlayer.animation_finished
 	queue_free()
-	print("Dollar animation finished")

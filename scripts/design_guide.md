@@ -18,7 +18,7 @@ Use these exact hex values when assigning colors in code:
 | **Highlight** | `yellow` | `#FFF0B0` | Rewards, emphasis |
 | **Secondary** | `lilac` | `#D8CCFF` | Supporting elements |
 | **Accent Alt** | `rose` | `#FFB8C8` | Blush, accents |
-| **Accent Alt 2** | `sage` | `#B8E8C8` | Supporting elements |
+| **Accent Alt 2** | `sage` | `#C8E8FF` | Supporting elements |
 | **Outline** | `text` | `#4A3B52` | Strokes at 2–3px only |
 
 ## Typography

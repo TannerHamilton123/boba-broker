@@ -15,14 +15,19 @@ var week_is_active: bool = true
 var weeks_completed: int = 0
 
 @export var eow_scene: PackedScene
+
+
+func _ready() -> void:
+	start_next_week()
 func _process(delta: float) -> void:
+	$"../GameUI/StartWeek".modulate.a -= delta * 0.2
 	_update_day_tracker()
 
 	#After 5 weeks, the game ends.
 
-	if weeks_completed > 5 and not main.game_over:
+	if weeks_completed >= 5 and not main.game_over:
 		main.game_over = true
-		main.game_over_sequence()
+		main.end_game()
 	else:
 		handle_time(delta)
 
@@ -79,6 +84,14 @@ func _show_eow() -> void:
 	main.get_tree().root.add_child(eow)
 
 func start_next_week() -> void:
+	$"../GameUI/StartWeek".modulate.a = 1.0
+	$"../GameUI/StartWeek".text = "Starting Week %d" % (weeks_completed + 1)
+	if weeks_completed >= 1:
+		$"../GameUI/StartWeek".text = "Continue to Week %d" % (weeks_completed + 1)
+	if weeks_completed >= 5:
+		$"../GameUI/StartWeek".text = "Final Week!"
+	
+	$"../GameUI/StartWeek".visible = true
 	week_is_active = true
 	current_day_index = 0
 	time_elapsed = 0.0

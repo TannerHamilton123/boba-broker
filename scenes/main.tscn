@@ -241,13 +241,29 @@ size_flags_vertical = 3
 mouse_filter = 1
 theme = ExtResource("5_choun")
 
+[node name="Label" type="Label" parent="GameUI" unique_id=1338857612]
+modulate = Color(1, 1, 1, 0.23529412)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 253.0
+offset_top = 130.0
+offset_right = 394.0
+offset_bottom = 170.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("12_yc10j")
+theme_override_font_sizes/font_size = 32
+text = "STORAGE"
+horizontal_alignment = 1
+
 [node name="Bank" type="Panel" parent="GameUI" unique_id=1943637748]
 z_index = 25
 z_as_relative = false
 layout_mode = 0
-offset_left = 270.0
+offset_left = 201.0
 offset_top = 439.0
-offset_right = 535.0
+offset_right = 601.0
 offset_bottom = 478.0
 
 [node name="BankAccount" type="Label" parent="GameUI/Bank" unique_id=1960964850]
@@ -277,9 +293,9 @@ visible = false
 z_index = 2
 layout_mode = 0
 offset_left = 201.0
-offset_top = 44.0
+offset_top = 364.0
 offset_right = 601.0
-offset_bottom = 123.0
+offset_bottom = 443.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_2wyq8")
 
 [node name="EventTitle" type="Label" parent="GameUI/Event" unique_id=13699803]
@@ -350,6 +366,7 @@ theme = ExtResource("5_choun")
 theme_override_styles/panel = SubResource("StyleBoxFlat_qkpxi")
 
 [node name="clock" type="Label" parent="GameUI/TimeTracker/Panel2" unique_id=999258031]
+modulate = Color(1, 1, 1, 0.6313726)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -363,6 +380,9 @@ offset_bottom = 24.5
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("5_choun")
+theme_override_constants/line_spacing = 0
+theme_override_fonts/font = ExtResource("12_yc10j")
+theme_override_font_sizes/font_size = 20
 text = "Week
 Day"
 horizontal_alignment = 1
@@ -469,6 +489,18 @@ position = Vector2(178.09784, 266.79715)
 visible = false
 position = Vector2(123.09784, 276.79715)
 
+[node name="Label" type="Label" parent="GameUI/PriceBar" unique_id=723232653]
+modulate = Color(1, 1, 1, 0.23529412)
+layout_mode = 0
+offset_left = 5.0
+offset_top = -37.0
+offset_right = 146.0
+offset_bottom = 3.0
+theme_override_fonts/font = ExtResource("12_yc10j")
+theme_override_font_sizes/font_size = 32
+text = "MARKET"
+horizontal_alignment = 1
+
 [node name="StorageBars" type="Panel" parent="GameUI" unique_id=1426862772]
 layout_mode = 1
 anchors_preset = 6
@@ -560,6 +592,7 @@ fill_mode = 3
 show_percentage = false
 
 [node name="Notification" type="Label" parent="GameUI" unique_id=2070367598]
+z_index = 100
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -578,6 +611,24 @@ theme_override_constants/outline_size = 4
 theme_override_fonts/font = ExtResource("12_yc10j")
 theme_override_font_sizes/font_size = 24
 script = ExtResource("21_pm3ni")
+
+[node name="StartWeek" type="Label" parent="GameUI" unique_id=1796107169]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -48.0
+offset_top = -29.75
+offset_right = 48.0
+offset_bottom = 29.75
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("12_yc10j")
+theme_override_font_sizes/font_size = 32
+text = "Week X"
+horizontal_alignment = 1
 
 [node name="GameOver" type="ColorRect" parent="." unique_id=1491156990]
 visible = false
@@ -688,6 +739,18 @@ mouse_filter = 2
 theme = ExtResource("5_choun")
 theme_override_styles/panel = SubResource("StyleBoxFlat_fv21b")
 
+[node name="Label" type="Label" parent="OrderList/OrderContainer" unique_id=1407630452]
+modulate = Color(1, 1, 1, 0.23529412)
+layout_mode = 0
+offset_left = 5.0
+offset_top = 5.0
+offset_right = 140.0
+offset_bottom = 45.0
+theme_override_fonts/font = ExtResource("12_yc10j")
+theme_override_font_sizes/font_size = 32
+text = "ORDERS"
+horizontal_alignment = 1
+
 [node name="OrderContainerarchive" type="ColorRect" parent="OrderList" unique_id=1868295799]
 visible = false
 anchors_preset = 7
@@ -705,14 +768,6 @@ color = Color(0.24477637, 0.2447764, 0.24477637, 1)
 
 [node name="Timer" type="Timer" parent="OrderList" unique_id=1999790851]
 autostart = true
-
-[node name="upgrade_levels" type="Label" parent="." unique_id=1779534752]
-offset_left = 241.0
-offset_top = 134.0
-offset_right = 281.0
-offset_bottom = 157.0
-theme = ExtResource("5_choun")
-text = "adsf"
 
 [connection signal="timeout" from="BubbleSpawner/Timer" to="BubbleSpawner" method="_on_timer_timeout"]
 [connection signal="timeout" from="PriceCalculator/Timer" to="PriceCalculator" method="_on_timer_timeout"]

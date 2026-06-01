@@ -34,10 +34,12 @@ func _on_UpgradeButton_pressed(upgrade_type: String,price: float) -> void:
 	if main.player_balance < price:
 		emit_signal("not_enough_money", upgrade_type)
 		return
-	print("Upgrade button pressed: ", upgrade_type)
+
 	if upgrade_levels[upgrade_type] >= upgrade_max_levels[upgrade_type]:
 		print("Upgrade ", upgrade_type, " is already at max level!")
 		return
+
+	main.player_balance -= price
 	if upgrade_type == "Storage":
 		upgrade_storage()
 	elif upgrade_type == "Ingredient":

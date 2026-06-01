@@ -33,7 +33,7 @@ func _process(_delta: float) -> void:
 
 func label_order():
 	var col_positions = [16, 54]
-	var row_positions = [24, 60, 96]
+	var row_positions = [28, 58, 88]
 	var icon_index = 0
 
 	for ingredient in order.keys():

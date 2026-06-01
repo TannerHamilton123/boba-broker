@@ -44,15 +44,17 @@ func refresh_label() -> void:
 		upgrade_name.text = levels[current_level]
 		upgrade_description.text = upgrade_description_text
 		price = UpgradeData.prices[upgrade_type][current_level]
-		price_label.text = "$" + str(price)
+		price_label.text = "$%d" % int(price)
+
 		self.disabled = false
 
 
 func _on_pressed() -> void:
-	if price > get_tree().root.get_node("main").player_balance:
+	if price > main.player_balance:
 		print("Not enough money to purchase ", upgrade_type, " upgrade!")
 		return
-	get_tree().root.get_node("main").player_balance -= price
+	print("Buying " + upgrade_type + "for " + str(price))
+
 	#add dollar sign instance
 	main.get_node("sound/click").play()
 	main.get_node("sound/casino").play()

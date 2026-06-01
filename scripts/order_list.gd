@@ -85,15 +85,16 @@ func shift_orders(order, delta):
 
 func generate_order():
 	var number_of_ingredients = difficulty_check()[0]
+	if number_of_ingredients >= 6:
+		number_of_ingredients = 6
 	var game_ingredients = get_node("/root/main").game_ingredients
 	var order = {"tea": 1, "milk": 1}
 	var ingredient_list = game_ingredients.keys()
 	for i in range(number_of_ingredients):
 		var ingredient = ingredient_list[randi() % ingredient_list.size()]
 
-		if ingredient in order:
-			while order[ingredient] > 2: # limit to 2 of the same ingredient per order
-				ingredient = ingredient_list[randi() % ingredient_list.size()]
+		while ingredient in order and order[ingredient] >= 2:
+			ingredient = ingredient_list[randi() % ingredient_list.size()]
 		if ingredient in order:
 			order[ingredient] += 1
 		else:
