@@ -5,7 +5,7 @@ var fade_away: bool = false
 func _ready() -> void:
 	$AnimationPlayer.play("start")
 	await $AnimationPlayer.animation_finished
-	$IngredientSpawner/Timer.start()
+	
 	pass # Replace with function body.
 
 

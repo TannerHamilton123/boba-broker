@@ -18,9 +18,13 @@ func process(_delta: float) -> void:
 	visible_bars()
 
 func _draw() -> void:
+	var font = ThemeDB.fallback_font
+	var font_size = 16
 	for i in range(1, _max_storage):
 		var y = size.y * (1.0 - i / float(_max_storage))
 		draw_line(Vector2(0, y), Vector2(size.x, y), _line_color, _line_width)
+		draw_string(font, Vector2(8, y - 2), str(i), HORIZONTAL_ALIGNMENT_LEFT, -1, font_size, Color.html("c87ab0"))
+		
 
 func create_storage_lines(max_storage: int, line_color: Color, line_width: float) -> void:
 	_max_storage = max_storage

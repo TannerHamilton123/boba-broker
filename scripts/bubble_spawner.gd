@@ -25,7 +25,7 @@ func spawn_bubble() -> void:
 
 	bubble_instance.position = Vector2(randf_range(200, 600), randf_range(550,600))
 
-	get_parent().add_child(bubble_instance)
+	get_parent().get_node("Bubbles").add_child(bubble_instance)
 	var bubble_ingredient = choose_ingredient()
 	var price: float = game_ingredients[bubble_ingredient]["Price"]
 

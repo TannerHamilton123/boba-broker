@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" uid="uid://dvqasluc5lpfr" path="res://scripts/order_card.gd" id="1_5yx2q"]
 [ext_resource type="Theme" uid="uid://b8msacrlqyrhr" path="res://themes/gameplay_theme.tres" id="2_jukm1"]
-[ext_resource type="PackedScene" uid="uid://c53ioo38omfbd" path="res://scenes/dollar_animation.tscn" id="3_p1008"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jukm1"]
 bg_color = Color(1, 0.972549, 0.9411765, 1)
@@ -68,9 +67,5 @@ offset_bottom = 64.0
 grow_horizontal = 2
 grow_vertical = 2
 columns = 2
-
-[node name="DollarAnimation" parent="." unique_id=1099685661 instance=ExtResource("3_p1008")]
-z_index = 15
-scale = Vector2(0.050000012, 0.050000012)
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

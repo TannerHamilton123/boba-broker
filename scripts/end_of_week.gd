@@ -10,6 +10,15 @@ On load: fetch the weekly summary and
 fill the grid with one row per ingredient
 '''
 func _ready() -> void:
+	
+	var OrderList = main.get_node("OrderList/OrderContainer")
+	var Bubbles = main.get_node("Bubbles")
+	for children in OrderList.get_children():
+		OrderList.remove_child(children)
+	for children in Bubbles.get_children():
+		Bubbles.remove_child(children)
+	
+	
 	if main.get_node("TimeManager").weeks_completed == 1:
 		$Benny.visible = true
 	else:
@@ -43,6 +52,7 @@ func populate_summary_grid() -> void:
 	quantity.get_node("IngredientCosts").text = "$%.2f" % week_cost
 	quantity.get_node("Profit").text = "$%.2f" % week_profit
 	quantity.get_node("GainsFromEachIngredient").text = "$%.2f" % gains_from_each_ingredient
+	quantity.get_node("Rent").text = "$%.2f" % main.rent
 
 
 

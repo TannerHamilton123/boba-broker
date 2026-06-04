@@ -118,7 +118,9 @@ func generate_market_price(order):
 
 	if in_demand:
 		order_price *= 1.20 # 20% increase if any ingredient is in demand
-	return [snappedf(order_price *1.10 * price_multiplier, 0.5),in_demand]
+
+	#The price was getting very high, so I'm going to remove the price_multiplier from difficulty for now
+	return [snappedf(order_price *1.10 , 0.5),in_demand]
 
 
 

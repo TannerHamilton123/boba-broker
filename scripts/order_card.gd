@@ -69,6 +69,8 @@ func check_order():
 	for ingredient in order.keys():
 		if game_ingredients[ingredient]["quantity"] < order[ingredient]:
 			print("Order ", order_number, " failed! Not enough ", ingredient)
+			main.get_node("UIManager").show_notification("Not enough " + ingredient + "!", 1.5)
+			main.get_node("sound/fail").play()
 			return
 	
 	#All ingredients are present, so now order is fulfilled

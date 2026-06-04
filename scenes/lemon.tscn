@@ -6,9 +6,12 @@
 [node name="lemon" type="Sprite2D" unique_id=1621878304]
 rotation = 1.0471976
 scale = Vector2(0.04506368, 0.04506368)
-texture = ExtResource("1_x2ngj")
 offset = Vector2(-200, 700)
 
 [node name="Arrows" parent="." unique_id=1709246464 instance=ExtResource("2_726da")]
 position = Vector2(-446.7893, 818.2435)
 rotation = -1.0471976
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=698685696]
+position = Vector2(52.504036, -46.558033)
+texture = ExtResource("1_x2ngj")

@@ -9,6 +9,18 @@
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jcj7r"]
 bg_color = Color(0.2901961, 0.23137255, 0.32156864, 1)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_js5n2"]
+bg_color = Color(1, 0.8392157, 0.8784314, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.78431374, 0.47843137, 0.6901961, 1)
+corner_radius_top_left = 24
+corner_radius_top_right = 24
+corner_radius_bottom_right = 24
+corner_radius_bottom_left = 24
+
 [sub_resource type="Animation" id="Animation_jcj7r"]
 resource_name = "fade_away"
 
@@ -40,6 +52,7 @@ offset_top = 48.0
 offset_right = 748.0
 offset_bottom = 548.0
 theme = ExtResource("2_jcj7r")
+theme_override_styles/panel = SubResource("StyleBoxFlat_js5n2")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="ColorRect" unique_id=620212578]
 layout_mode = 0

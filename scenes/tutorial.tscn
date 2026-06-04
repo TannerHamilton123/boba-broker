@@ -3,6 +3,10 @@
 [ext_resource type="Script" uid="uid://cqvhvvi0uvct" path="res://scripts/tutorial_manager.gd" id="1_ehuit"]
 [ext_resource type="Theme" uid="uid://b8msacrlqyrhr" path="res://themes/gameplay_theme.tres" id="2_5mrt3"]
 [ext_resource type="PackedScene" uid="uid://da52leltxcmh3" path="res://scenes/benny.tscn" id="3_ph3nu"]
+[ext_resource type="PackedScene" uid="uid://drbkplepsvmeo" path="res://scenes/milk.tscn" id="4_4kmhl"]
+[ext_resource type="PackedScene" uid="uid://djmqh6c5rd38b" path="res://scenes/order_card.tscn" id="5_gbqnl"]
+[ext_resource type="PackedScene" uid="uid://c7gqmxdaljena" path="res://scenes/tea.tscn" id="6_ckvwl"]
+[ext_resource type="PackedScene" uid="uid://8xupw1dx74q5" path="res://scenes/pearls.tscn" id="7_nlqja"]
 
 [sub_resource type="Animation" id="Animation_ehuit"]
 length = 0.001
@@ -71,6 +75,8 @@ _data = {
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4kmhl"]
 bg_color = Color(0.2901961, 0.23137255, 0.32156864, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_ph3nu"]
 
 [node name="Tutorial" type="Node2D" unique_id=1182671964]
 z_index = 30
@@ -146,6 +152,68 @@ offset_right = 800.0
 offset_bottom = 600.0
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_4kmhl")
+
+[node name="bubble" type="Node2D" parent="." unique_id=447571112]
+visible = false
+z_index = 100
+
+[node name="Label" type="Label" parent="bubble" unique_id=1314229887]
+z_index = 5
+offset_left = 267.0
+offset_top = 187.0
+offset_right = 310.0
+offset_bottom = 210.0
+theme = ExtResource("2_5mrt3")
+theme_override_colors/font_color = Color(0.78431374, 0.9411765, 0.8784314, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+text = "$2.50"
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="bubble" unique_id=410386259]
+modulate = Color(0.2901961, 0.23137255, 0.32156864, 1)
+position = Vector2(288, 184.00002)
+scale = Vector2(64.57257, 64.50001)
+mesh = SubResource("SphereMesh_ph3nu")
+
+[node name="milk" parent="bubble" unique_id=74981698 instance=ExtResource("4_4kmhl")]
+position = Vector2(289, 177)
+
+[node name="OrderCard" parent="." unique_id=705807321 instance=ExtResource("5_gbqnl")]
+visible = false
+z_index = 100
+offset_left = 133.0
+offset_top = 477.0
+offset_right = 213.0
+offset_bottom = 599.0
+script = null
+
+[node name="milk" parent="OrderCard" unique_id=1781134813 instance=ExtResource("4_4kmhl")]
+position = Vector2(57, 29)
+
+[node name="Node2D" parent="OrderCard" unique_id=1175955380 instance=ExtResource("6_ckvwl")]
+position = Vector2(20, 33)
+
+[node name="Node2D2" parent="OrderCard" unique_id=981637033 instance=ExtResource("7_nlqja")]
+position = Vector2(21, 68)
+
+[node name="ColorRect2" type="ColorRect" parent="OrderCard" unique_id=536865521]
+layout_mode = 0
+offset_left = 14.0
+offset_top = 96.0
+offset_right = 65.0
+offset_bottom = 117.0
+color = Color(1, 0.972549, 0.9411765, 1)
+
+[node name="Label2" type="Label" parent="OrderCard" unique_id=1555435949]
+layout_mode = 0
+offset_left = 17.0
+offset_top = 96.0
+offset_right = 60.0
+offset_bottom = 119.0
+theme = ExtResource("2_5mrt3")
+theme_override_colors/font_color = Color(0.78431374, 0.9411765, 0.8784314, 1)
+theme_override_constants/outline_size = 4
+text = "$9.00"
 
 [connection signal="pressed" from="Node2D/Panel/Button" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="SkipButton" to="." method="_on_skip_button_pressed"]

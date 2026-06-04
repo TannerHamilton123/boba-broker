@@ -29,7 +29,7 @@
 bg_color = Color(1, 0.972549, 0.9411765, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2wyq8"]
-bg_color = Color(1, 0.972549, 0.9411765, 1)
+bg_color = Color(1, 0.972549, 0.9411765, 0.6509804)
 border_width_left = 4
 border_width_top = 4
 border_width_right = 4
@@ -188,6 +188,8 @@ border_color = Color(0.78431374, 0.47843137, 0.6901961, 1)
 [node name="main" type="Node2D" unique_id=1553475821]
 script = ExtResource("1_h2yge")
 
+[node name="Bubbles" type="Node" parent="." unique_id=497389933]
+
 [node name="sound" parent="." unique_id=623265398 instance=ExtResource("2_jscy8")]
 process_mode = 3
 
@@ -296,9 +298,11 @@ offset_left = 201.0
 offset_top = 364.0
 offset_right = 601.0
 offset_bottom = 443.0
+mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_2wyq8")
 
 [node name="EventTitle" type="Label" parent="GameUI/Event" unique_id=13699803]
+modulate = Color(1, 1, 1, 0.67058825)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -317,6 +321,7 @@ theme_override_font_sizes/font_size = 20
 horizontal_alignment = 1
 
 [node name="EventDescription" type="Label" parent="GameUI/Event" unique_id=1818147366]
+modulate = Color(1, 1, 1, 0.67058825)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -483,7 +488,7 @@ position = Vector2(97.09783, 266.79715)
 
 [node name="lemon" parent="GameUI/PriceBar/icons" unique_id=1621878304 instance=ExtResource("14_gqmmt")]
 visible = false
-position = Vector2(178.09784, 266.79715)
+position = Vector2(147.00002, 273)
 
 [node name="strawberry" parent="GameUI/PriceBar/icons" unique_id=1006039960 instance=ExtResource("15_yc10j")]
 visible = false
@@ -529,6 +534,9 @@ value = 1.0
 fill_mode = 3
 show_percentage = false
 
+[node name="milk" parent="GameUI/StorageBars/milk" unique_id=734973503 instance=ExtResource("11_muem4")]
+position = Vector2(11, 296)
+
 [node name="tea" type="ProgressBar" parent="GameUI/StorageBars" unique_id=1056966691]
 layout_mode = 0
 offset_left = 50.0
@@ -541,6 +549,9 @@ step = 0.1
 value = 2.0
 fill_mode = 3
 show_percentage = false
+
+[node name="Node2D" parent="GameUI/StorageBars/tea" unique_id=1175955380 instance=ExtResource("13_0ld40")]
+position = Vector2(9, 299)
 
 [node name="pearls" type="ProgressBar" parent="GameUI/StorageBars" unique_id=2051290418]
 layout_mode = 0
@@ -555,6 +566,9 @@ value = 3.0
 fill_mode = 3
 show_percentage = false
 
+[node name="Node2D" parent="GameUI/StorageBars/pearls" unique_id=981637033 instance=ExtResource("10_jbj1t")]
+position = Vector2(9, 299)
+
 [node name="taro" type="ProgressBar" parent="GameUI/StorageBars" unique_id=1225798291]
 layout_mode = 0
 offset_left = 92.0
@@ -566,6 +580,9 @@ max_value = 5.0
 step = 0.1
 fill_mode = 3
 show_percentage = false
+
+[node name="taro" parent="GameUI/StorageBars/taro" unique_id=984215347 instance=ExtResource("12_dp3eg")]
+position = Vector2(12, 286)
 
 [node name="lemon" type="ProgressBar" parent="GameUI/StorageBars" unique_id=1108115428]
 layout_mode = 0
@@ -579,6 +596,9 @@ step = 0.1
 fill_mode = 3
 show_percentage = false
 
+[node name="lemon" parent="GameUI/StorageBars/lemon" unique_id=267476907 instance=ExtResource("14_gqmmt")]
+position = Vector2(12.999991, 291)
+
 [node name="strawberry" type="ProgressBar" parent="GameUI/StorageBars" unique_id=1864107645]
 layout_mode = 0
 offset_left = 113.0
@@ -590,6 +610,9 @@ max_value = 5.0
 step = 0.1
 fill_mode = 3
 show_percentage = false
+
+[node name="strawberry" parent="GameUI/StorageBars/strawberry" unique_id=1950297082 instance=ExtResource("15_yc10j")]
+position = Vector2(15, 295)
 
 [node name="Notification" type="Label" parent="GameUI" unique_id=2070367598]
 z_index = 100

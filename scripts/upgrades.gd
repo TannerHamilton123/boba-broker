@@ -19,10 +19,10 @@ const labels: Dictionary = {
 		
 	],
 	"WaitTime": [
-		"Comfy Stools",
+		"Comfy Couches",
 		"Chill Playlist",
-		"Free Sample Station",
-		"Loyalty Punch Card"
+		"Selfie Wall",
+		"Big Benny Plushie"
 	],
 	"Popularity": [
 		"Sidewalk Chalkboard",
@@ -39,9 +39,9 @@ const labels: Dictionary = {
 }
 
 const prices = {
-	"Storage": [10, 20, 30, 50],
-	"Ingredient": [10, 20, 30],
-	"WaitTime": [30, 60, 120, 240],
-	"Popularity": [30, 40, 60, 80],
+	"Storage": [10, 20, 30, 40],
+	"Ingredient": [10, 15, 20],
+	"WaitTime": [10, 20, 30, 40],
+	"Popularity": [10, 20, 30, 40],
 	"Supply": [10, 20, 30, 40]
 }

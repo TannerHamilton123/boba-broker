@@ -13,6 +13,7 @@ var days_of_week: Array = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday
 var current_day_index: int = 0
 var week_is_active: bool = true
 var weeks_completed: int = 0
+var tick_tock_played: bool = false
 
 @export var eow_scene: PackedScene
 
@@ -22,14 +23,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	$"../GameUI/StartWeek".modulate.a -= delta * 0.2
 	_update_day_tracker()
-
-	#After 5 weeks, the game ends.
-
-	if weeks_completed >= 5 and not main.game_over:
-		main.game_over = true
-		main.end_game()
-	else:
-		handle_time(delta)
+	handle_time(delta)
 
 
 func handle_time(delta: float) -> void:
@@ -37,6 +31,11 @@ func handle_time(delta: float) -> void:
 		return
 
 	time_elapsed += delta
+
+	var time_remaining = (days_of_week.size() - current_day_index) * day_length - time_elapsed
+	if time_remaining <= 9.0 and not tick_tock_played:
+		tick_tock_played = true
+		main.get_node("sound/tick_tock").play()
 
 	if time_elapsed >= day_length:
 		time_elapsed -= day_length
@@ -69,7 +68,11 @@ func end_week() -> void:
 	week_is_active = false
 	weeks_completed += 1
 	_stop_timers()
-	_show_eow()
+	if weeks_completed >= 5:
+		main.game_over = true
+		main.end_game()
+	else:
+		_show_eow()
 
 func _stop_timers() -> void:
 	main.get_node("PriceCalculator/Timer").stop()
@@ -95,6 +98,7 @@ func start_next_week() -> void:
 	week_is_active = true
 	current_day_index = 0
 	time_elapsed = 0.0
+	tick_tock_played = false
 	main.get_node("PriceCalculator/Timer").start()
 	main.get_node("BubbleSpawner/Timer").start()
 	main.get_node("OrderList/Timer").start()

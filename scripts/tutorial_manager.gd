@@ -26,6 +26,7 @@ func _ready() -> void:
 	$Node2D/AnimationPlayer.play("start")
 	await $Node2D/AnimationPlayer.animation_finished
 	print("tutorial fade in done")
+	main.get_node("sound/menu_music").volume_db = -5
 	rent_amount = "$%.2f" % main.rent
 	location_of_text = {
 		"center": Vector2(400, 300),
@@ -44,7 +45,8 @@ func _ready() -> void:
 		[location_of_text["right"],   "Your bought goods go to storage. You can only store so much!", StorageBars],
 		[location_of_text["bottom"],    "Down at the bottom is where you make the money. Boba orders come in with different ingredients.", OrderList],
 		[location_of_text["bottom"],    "Click the card to fulfill the order. If you've got enough ingredients, then the order will get fulfilled.", OrderList],
-		[location_of_text["bottom"], "Boba price is determined by the number and cost of ingredients.", OrderList],
+		[location_of_text["bottom"], "Selling price is determined by the number and cost of ingredients.
+		Orders get red if customers wait too long, then they'll leave!", OrderList],
 		[location_of_text["top"],    "Up here is the clock and calendar. Events affect the ingredient prices, so keep an eye on it!.", TimeTracker],
 		[location_of_text["center"], "Each week, you gotta pay " + rent_amount + " in rent to keep your shop open.\nIf you can't pay it, you gotta close shop (and lose the game!)",Bank],
 		[location_of_text["center"], "I know its a lot, but you got this. When in doubt..."],
@@ -77,6 +79,18 @@ func _process(delta: float) -> void:
 
 
 func _show_step(index: int) -> void:
+
+	if index == 6 or index == 7:
+		$OrderCard.visible = true
+	else:		
+		$OrderCard.visible = false
+
+	if index == 3:
+		print("Showing bubble for step ", index)
+		$bubble.visible = true
+	else:		
+		$bubble.visible = false
+
 	if steps[index -1].size() >=3:
 		steps[index -1][2].z_index = 0
 		print("Resetting z-index of ", steps[index -1][2])

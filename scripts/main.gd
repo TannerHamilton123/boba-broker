@@ -77,6 +77,7 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
+	Global.week_5_profit = player_balance
 	# if $Tutorial.visible == true:
 	# 	menu_music = true
 	# 	game_music = false
@@ -131,7 +132,8 @@ func _on_no_storage(ingredient: String) -> void:
 	$UIManager.show_notification("Not enough storage for %s!" % ingredient)
 
 func end_game():
-	get_tree().change_scene_to(after_5_weeks_scene)
+	print("Game Over! Total profit: $%.2f" % player_balance)
+	get_tree().change_scene_to_file("res://scenes/after_5_weeks.tscn")
 
 func game_over_sequence():
 	if has_been_done:

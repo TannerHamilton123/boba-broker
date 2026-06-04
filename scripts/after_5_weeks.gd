@@ -4,7 +4,7 @@ var total_profit: float = 100.00
 var current_profit_value:= 0.0
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	total_profit = Global.week_5_profit + 100.00 #for a test
+	total_profit = Global.week_5_profit #for a test
 	$AnimationPlayer.play("start")
 	print("Playing animation")
 	await $AnimationPlayer.animation_finished
@@ -14,6 +14,7 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+ 
 	var score_label = get_node("Summary/profit")
 	if current_profit_value < total_profit:
 		current_profit_value += delta * 100
@@ -31,5 +32,5 @@ func _on_play_button_pressed() -> void:
 	$AnimationPlayer.play("transition")
 	fade_away = true
 	await $AnimationPlayer.animation_finished
-	get_tree().change_scene_to_file("res://scenes/main.tscn")
+	get_tree().change_scene_to_file("res://scenes/titlescreen.tscn")
 	pass # Replace with function body.

@@ -38,6 +38,7 @@ func refresh_label() -> void:
 		upgrade_name.text = upgrade_type + ": Maxed Out"
 		upgrade_description.text = "You've purchased all available upgrades for " + upgrade_type + "!"
 		price_label.text = ""
+		change_text_color(Color.html("ffd6e0"))
 		self.disabled = true
 	else:
 		level_label.text = "Level " + str(current_level)
@@ -67,7 +68,7 @@ func _on_pressed() -> void:
 
 	pass
 
-func change_text_color() -> void:
-	$UpgradeDescription.modulate = Color.html("c87ab0")
-	$UpgradeName.modulate = Color.html("c87ab0")
-	$Price.modulate = Color.html("c87ab0")
+func change_text_color(color: Color = Color.html("c87ab0")) -> void:
+	$UpgradeDescription.add_theme_color_override("font_color", color)
+	$UpgradeName.add_theme_color_override("font_color", color)
+	$Price.add_theme_color_override("font_color", color)
