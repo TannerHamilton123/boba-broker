@@ -80,7 +80,7 @@ func shift_orders(order, delta):
 	if not "order_number" in order:
 		return
 	var position = Vector2(0,0) + Vector2((order.order_number-1) * 110, 0)
-	order.position -= (order.position - position) * delta
+	order.position -= (order.position - position) * delta/2
 
 
 func generate_order():

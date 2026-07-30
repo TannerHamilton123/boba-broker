@@ -84,6 +84,8 @@ upgrade_description_text = "Get more orders coming in!"
 layout_mode = 2
 size_flags_horizontal = 15
 size_flags_vertical = 13
+theme_override_colors/font_color = Color(0.09016866, 0.29470134, 0.2751959, 1)
+theme_override_colors/font_disabled_color = Color(0.68925667, 0.59317476, 0.11820612, 1)
 upgrade_description_text = "Orders will wait longer before disappearing!"
 
 [node name="Supply" parent="ColorRect/HBoxContainer" unique_id=1527111958 instance=ExtResource("4_ef3hr")]

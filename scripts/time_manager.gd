@@ -4,7 +4,7 @@ extends Node
 @onready var Summary_Manager = get_node("/root/main/SummaryManager")
 var time: String = ""
 var day: String = ""
-var day_length: float = 20
+@export var day_length: float = 30.0
 var time_elapsed: float = 0.0
 var shop_open_hour: int = 10
 var shop_close_hour: int = 20
@@ -16,6 +16,7 @@ var weeks_completed: int = 0
 var tick_tock_played: bool = false
 
 @export var eow_scene: PackedScene
+@export var total_weeks: int = 10
 
 
 func _ready() -> void:
@@ -68,7 +69,7 @@ func end_week() -> void:
 	week_is_active = false
 	weeks_completed += 1
 	_stop_timers()
-	if weeks_completed >= 5:
+	if weeks_completed >= total_weeks:
 		main.game_over = true
 		main.end_game()
 	else:
@@ -91,7 +92,7 @@ func start_next_week() -> void:
 	$"../GameUI/StartWeek".text = "Starting Week %d" % (weeks_completed + 1)
 	if weeks_completed >= 1:
 		$"../GameUI/StartWeek".text = "Continue to Week %d" % (weeks_completed + 1)
-	if weeks_completed >= 5:
+	if weeks_completed >= total_weeks - 1:
 		$"../GameUI/StartWeek".text = "Final Week!"
 	
 	$"../GameUI/StartWeek".visible = true

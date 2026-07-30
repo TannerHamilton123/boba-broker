@@ -93,8 +93,17 @@ Finds the matching button in the EOW scene and
 updates its level then refreshes its label text
 '''
 func _refresh_button(_upgrade_type: String) -> void:
+	var upgrades_page = get_tree().root.get_node_or_null("UpgradesPage")
+	if upgrades_page == null:
+		return
+	var upgrade_buttons = upgrades_page.get_node("ColorRect/HBoxContainer")
 
-	pass
+	# Refresh all buttons to see if they are affordable or maxed out
+	for button in upgrade_buttons.get_children():
+		if button.upgrade_type == _upgrade_type or button.disabled:
+			continue
+		
+		button.refresh_label()
 
 
 func _unlock_ingredient(level: int) -> void:

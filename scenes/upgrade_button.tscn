@@ -2487,7 +2487,7 @@ ProgressBar/fonts/font = ExtResource("1_o77qo")
 
 [node name="StorageUpgrade" type="Button" unique_id=1322697764]
 offset_right = 128.0
-offset_bottom = 200.0
+offset_bottom = 240.0
 theme = SubResource("Theme_1axxs")
 theme_override_colors/font_disabled_color = Color(0.78431374, 0.47843137, 0.6901961, 1)
 text_overrun_behavior = 5
@@ -2567,6 +2567,27 @@ grow_horizontal = 2
 theme_override_constants/line_spacing = 0
 theme_override_fonts/font = ExtResource("3_isks0")
 text = "upgrade name"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="CannotAfford" type="Label" parent="." unique_id=94938586]
+visible = false
+z_index = 1
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -64.0
+offset_top = -32.0
+offset_right = 64.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(1, 0.72156864, 0.78431374, 1)
+theme_override_constants/line_spacing = 0
+theme_override_fonts/font = ExtResource("3_isks0")
+text = "Cannot Afford!"
 horizontal_alignment = 1
 autowrap_mode = 2
 

@@ -47,7 +47,11 @@ func refresh_label() -> void:
 		price = UpgradeData.prices[upgrade_type][current_level]
 		price_label.text = "$%d" % int(price)
 
-		self.disabled = false
+		self.disabled = price > main.player_balance
+		if self.disabled:
+			change_text_color(Color.html("ffd6e0"))
+			$CannotAfford.show()
+		
 
 
 func _on_pressed() -> void:
@@ -72,3 +76,4 @@ func change_text_color(color: Color = Color.html("c87ab0")) -> void:
 	$UpgradeDescription.add_theme_color_override("font_color", color)
 	$UpgradeName.add_theme_color_override("font_color", color)
 	$Price.add_theme_color_override("font_color", color)
+	$CannotAfford.add_theme_color_override("font_color", color)

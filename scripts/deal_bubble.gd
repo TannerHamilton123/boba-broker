@@ -3,7 +3,7 @@ extends Area2D
 @export var rise_speed: float = 80.0
 @export var drift_speed: float = 1.5
 @export var drift_amplitude: float = 30.0
-@export var rise_speed_multiplier: float = 0.75
+@export var rise_speed_multiplier: float = 0.5
 @export var Text = "Default Text"
 signal bubble_clicked(ingredient: String, price: float)
 signal No_Storage
