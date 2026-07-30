@@ -193,5 +193,6 @@ func game_over_sequence():
 	has_been_done = true
 
 func _on_restart_pressed() -> void:
+	SaveManager.clear_save()
 	get_tree().change_scene_to_file("res://scenes/titlescreen.tscn")
 	pass # Replace with function body.

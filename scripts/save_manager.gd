@@ -23,8 +23,16 @@ func load_game(path: String = SAVE_PATH) -> Dictionary:
 	return parsed if parsed is Dictionary else {}
 
 func clear_save(path: String = SAVE_PATH) -> void:
+	print("Clearing save at %s" % path)
 	if FileAccess.file_exists(path):
-		DirAccess.remove_absolute(path)
+		var dir := DirAccess.open(path.get_base_dir())
+		if dir == null:
+			push_warning("SaveManager: could not open %s for deletion (error %d)" % [path.get_base_dir(), DirAccess.get_open_error()])
+		else:
+			var err := dir.remove(path.get_file())
+			print(err)
+			if err != OK:
+				push_warning("SaveManager: failed to delete %s (error %d)" % [path, err])
 	_sync_web_filesystem()
 
 '''

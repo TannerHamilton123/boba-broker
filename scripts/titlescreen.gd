@@ -5,6 +5,7 @@ var fade_away: bool = false
 func _ready() -> void:
 	if SaveManager.has_save():
 		$Panel/PlayButton.text = "Continue"
+		$Panel/RestartButton.show()
 	$AnimationPlayer.play("start")
 	await $AnimationPlayer.animation_finished
 
@@ -24,3 +25,11 @@ func _on_play_button_pressed() -> void:
 	await $AnimationPlayer.animation_finished
 	get_tree().change_scene_to_file("res://scenes/main.tscn")
 	pass # Replace with function body.
+
+func _on_restart_button_pressed() -> void:
+	print("Restarting game...")
+	$AnimationPlayer.play("transition")
+	fade_away = true
+	await $AnimationPlayer.animation_finished
+	SaveManager.clear_save()
+	get_tree().change_scene_to_file("res://scenes/main.tscn")

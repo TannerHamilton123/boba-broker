@@ -1,7 +1,11 @@
 {
   "permissions": {
     "allow": [
-      "Bash(grep -E \"\\\\.\\(md|txt|cfg|tres\\)$\")"
+      "Bash(grep -E \"\\\\.\\(md|txt|cfg|tres\\)$\")",
+      "Bash(where godot *)",
+      "Bash(where godot4 *)",
+      "Read(//c/Program Files/**)",
+      "Read(//c/Users/Tanner/AppData/Local/Godot/**)"
     ]
   }
 }
