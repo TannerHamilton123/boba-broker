@@ -48,10 +48,13 @@ func _on_UpgradeButton_pressed(upgrade_type: String,price: float) -> void:
 		upgrade_wait_time()
 	elif upgrade_type == "Popularity":
 		upgrade_popularity()
-	elif upgrade_type == "Supply":	
+	elif upgrade_type == "Supply":
 		upgrade_supply()
 	else:
 		print("Unknown upgrade type: ", upgrade_type)
+		return
+
+	SaveManager.save_game(main.get_save_data())
 
 
 

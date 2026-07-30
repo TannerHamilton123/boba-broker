@@ -3,9 +3,11 @@ var fade_away: bool = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	if SaveManager.has_save():
+		$Panel/PlayButton.text = "Continue"
 	$AnimationPlayer.play("start")
 	await $AnimationPlayer.animation_finished
-	
+
 	pass # Replace with function body.
 
 

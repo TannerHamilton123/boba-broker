@@ -20,7 +20,8 @@ var tick_tock_played: bool = false
 
 
 func _ready() -> void:
-	start_next_week()
+	if not SaveManager.has_save():
+		start_next_week()
 func _process(delta: float) -> void:
 	$"../GameUI/StartWeek".modulate.a -= delta * 0.2
 	_update_day_tracker()
@@ -69,6 +70,7 @@ func end_week() -> void:
 	week_is_active = false
 	weeks_completed += 1
 	_stop_timers()
+	SaveManager.save_game(main.get_save_data())
 	if weeks_completed >= total_weeks:
 		main.game_over = true
 		main.end_game()
