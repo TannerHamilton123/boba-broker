@@ -1,16 +1,16 @@
 [gd_scene format=3 uid="uid://dr15obsyuck6a"]
 
 [ext_resource type="Script" uid="uid://2g63qbyrm0dy" path="res://scripts/bubble_spawner.gd" id="1_0xm2m"]
-[ext_resource type="Script" uid="uid://dtkww0apdukl5" path="res://scripts/main.gd" id="1_h2yge"]
+[ext_resource type="Script" uid="uid://b7glxmijelirs" path="res://scripts/main.gd" id="1_h2yge"]
 [ext_resource type="Script" uid="uid://d3qa12m4oahrb" path="res://scripts/price_calculator.gd" id="2_4c57u"]
-[ext_resource type="Script" uid="uid://d0jyq6x2my6on" path="res://scripts/time_manager.gd" id="2_choun"]
+[ext_resource type="Script" uid="uid://dqluflbaebv85" path="res://scripts/time_manager.gd" id="2_choun"]
 [ext_resource type="PackedScene" uid="uid://eakmu4gcfqm4" path="res://scenes/sound.tscn" id="2_jscy8"]
 [ext_resource type="Script" uid="uid://cw7fm14j7e3ba" path="res://scripts/ui_manager.gd" id="3_choun"]
 [ext_resource type="Script" uid="uid://bi83ke28bsr7k" path="res://scripts/event_manager.gd" id="3_gqmmt"]
 [ext_resource type="Script" uid="uid://v650stxr8ad7" path="res://scripts/summary_manager.gd" id="3_muem4"]
 [ext_resource type="Script" uid="uid://cwxdmeo0qjubt" path="res://scripts/order_manager.gd" id="4_choun"]
 [ext_resource type="Theme" uid="uid://b8msacrlqyrhr" path="res://themes/gameplay_theme.tres" id="5_choun"]
-[ext_resource type="Script" uid="uid://cgfrhur7u61o5" path="res://scripts/upgrade_manager.gd" id="5_jkv2x"]
+[ext_resource type="Script" uid="uid://csviqoq7drmky" path="res://scripts/upgrade_manager.gd" id="5_jkv2x"]
 [ext_resource type="Script" uid="uid://bmigby0thk4f5" path="res://scripts/order_list.gd" id="9_4c57u"]
 [ext_resource type="PackedScene" uid="uid://col4f6pr4vpab" path="res://scenes/end_of_week.tscn" id="10_choun"]
 [ext_resource type="PackedScene" uid="uid://8xupw1dx74q5" path="res://scenes/pearls.tscn" id="10_jbj1t"]
@@ -24,6 +24,7 @@
 [ext_resource type="PackedScene" uid="uid://dwx7jabjq2oqf" path="res://scenes/tutorial.tscn" id="19_0ld40"]
 [ext_resource type="Script" uid="uid://ca7j8ov3njfgr" path="res://scenes/notification.gd" id="21_pm3ni"]
 [ext_resource type="PackedScene" uid="uid://da52leltxcmh3" path="res://scenes/benny.tscn" id="22_y6deb"]
+[ext_resource type="Script" uid="uid://nwtc2awk30yl" path="res://scenes/domain_validator.gd" id="25_og1vs"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_og1vs"]
 bg_color = Color(1, 0.972549, 0.9411765, 1)
@@ -792,6 +793,9 @@ color = Color(0.24477637, 0.2447764, 0.24477637, 1)
 
 [node name="Timer" type="Timer" parent="OrderList" unique_id=1999790851]
 autostart = true
+
+[node name="DomainValidator" type="Node" parent="." unique_id=1157752212]
+script = ExtResource("25_og1vs")
 
 [connection signal="timeout" from="BubbleSpawner/Timer" to="BubbleSpawner" method="_on_timer_timeout"]
 [connection signal="timeout" from="PriceCalculator/Timer" to="PriceCalculator" method="_on_timer_timeout"]

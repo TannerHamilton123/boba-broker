@@ -306,6 +306,7 @@ theme_override_font_sizes/font_size = 48
 text = "PLAY"
 
 [node name="RestartButton" type="Button" parent="Panel" unique_id=481329512]
+visible = false
 z_index = 10
 layout_mode = 1
 anchors_preset = 7

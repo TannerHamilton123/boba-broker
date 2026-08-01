@@ -70,6 +70,7 @@ func end_week() -> void:
 	week_is_active = false
 	weeks_completed += 1
 	_stop_timers()
+	main.player_balance -= main.rent
 	SaveManager.save_game(main.get_save_data())
 	if weeks_completed >= total_weeks:
 		main.game_over = true

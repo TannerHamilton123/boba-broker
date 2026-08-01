@@ -27,6 +27,11 @@ var ingredient_level: int = 0
 var unlockable_ingredients = ["taro","strawberry","lemon"]
 
 
+var _callback_adbreak_start = JavaScriptBridge.create_callback(_on_adbreak_start)
+var _callback_adbreak_complete = JavaScriptBridge.create_callback(_on_adbreak_complete)
+
+
+
 @export var eow_scene: PackedScene
 @onready var game_music_player = $sound/game_music
 @onready var menu_music_player = $sound/menu_music
@@ -56,14 +61,20 @@ var game_ingredients = {
 		"PriceChange": "stable",
 		"Storage_Limit": ingredient_storage,
 		"Spawn_Probability": 0.1}
-	
-	
 }
 
-
-
-
 func _ready() -> void:
+	if OS.get_name()=="HTML5":
+		
+		JavaScriptBridge.get_interface("document").addEventListener("adBreakStart", _callback_adbreak_start)
+		JavaScriptBridge.get_interface("document").addEventListener("adBreakComplete", _callback_adbreak_complete)
+
+	#Validate domain for cool math games
+	if not $DomainValidator.is_valid():
+		# Do stuff here if you want to do something at an invalid domain
+		get_tree().quit()
+		return
+
 	await get_tree().create_timer(0.01).timeout
 	$sound/menu_music.volume_db = -20
 	$sound/game_music.volume_db = -80
@@ -145,6 +156,7 @@ func _process(delta: float) -> void:
 			menu_music_player.volume_db += delta * 5.0
 			game_music_player.volume_db -= delta * 5.0
 	if game_over:
+		SaveManager.clear_save()
 		game_music_player.volume_db -= delta * 5.0
 		menu_music_player.volume_db -= delta * 5.0
 		game_over_sequence()
@@ -196,3 +208,24 @@ func _on_restart_pressed() -> void:
 	SaveManager.clear_save()
 	get_tree().change_scene_to_file("res://scenes/titlescreen.tscn")
 	pass # Replace with function body.
+
+
+# JavaScriptBridge callbacks
+
+
+
+
+func _on_adbreak_start(args):
+	JavaScriptBridge.get_interface("console").log("AdBreak Started")
+	#TODO:  Developer needs to add the logic to pause the game and sound here.
+#Example:
+	get_tree().paused = true
+	AudioServer.set_bus_mute(AudioServer.get_bus_index("Master"), true)
+	
+
+func _on_adbreak_complete(args):
+	JavaScriptBridge.get_interface("console").log("AdBreak Completed")
+	#TODO:  Developer needs to add the logic to resume the game and sound here. 
+#Example:
+	get_tree().paused = false
+	AudioServer.set_bus_mute(AudioServer.get_bus_index("Master"), false)
