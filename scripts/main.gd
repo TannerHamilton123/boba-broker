@@ -41,23 +41,26 @@ This dictionary contains ingredients and data
 Ingredients will be added to it after each level
 '''
 var game_ingredients = {
-	"tea": 
-		{"quantity": tea_quantity, 
-		"Price": TeaPrice, 
+	"tea":
+		{"quantity": tea_quantity,
+		"Price": TeaPrice,
+		"Premium": 0.0,
 		"PriceChange": "stable",
 		"Storage_Limit": ingredient_storage,
 		"Spawn_Probability": 0.3},
 
-	"milk": 
-		{"quantity": milk_quantity, 
-		"Price": MilkPrice, 
+	"milk":
+		{"quantity": milk_quantity,
+		"Price": MilkPrice,
+		"Premium": 0.0,
 		"PriceChange": "stable",
 		"Storage_Limit": ingredient_storage,
 		"Spawn_Probability": 0.3},
 
-	"pearls": 
-		{"quantity": pearls_quantity, 
-		"Price": PearlPrice, 
+	"pearls":
+		{"quantity": pearls_quantity,
+		"Price": PearlPrice,
+		"Premium": 0.0,
 		"PriceChange": "stable",
 		"Storage_Limit": ingredient_storage,
 		"Spawn_Probability": 0.1}

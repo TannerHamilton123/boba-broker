@@ -45,3 +45,12 @@ const prices = {
 	"Popularity": [10, 20, 30, 40],
 	"Supply": [10, 20, 30, 40]
 }
+
+'''
+Per-unit price premium each unlockable ingredient earns on top of its
+live market price when used in an order. Index = unlock level - 1,
+matching labels["Ingredient"] and prices["Ingredient"].
+'''
+const premiums: Dictionary = {
+	"Ingredient": [1.00, 2.00, 3.00]
+}

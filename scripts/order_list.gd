@@ -1,5 +1,6 @@
 extends Node
 const max_orders = 5
+const IN_DEMAND_THRESHOLD = 2.51
 var order_count = 0
 var popularity = 0.0
 '''
@@ -18,13 +19,13 @@ var happiness_score := 20.0
 
 """
 Difficulty ranges from 1 to 5
-Difficulty affects price and order complexity (number of ingredients)
+Difficulty affects order complexity (number of ingredients)
 Difficulty increases based on happiness score
-Difficulty 1: 2 ingredient, price multiplier 1.0
-Difficulty 2: 2 ingredients, price multiplier 1.5
-Difficulty 3: 3 ingredients, price multiplier 2.0
-Difficulty 4: 4 ingredients, price multiplier 2.5
-Difficulty 5: 5 ingredients, price multiplier 3.0
+Difficulty 1: 2 ingredients
+Difficulty 2: 2 ingredients
+Difficulty 3: 3 ingredients
+Difficulty 4: 4 ingredients
+Difficulty 5: 4 ingredients
 
 """
 var order_difficulty: int = 1
@@ -56,8 +57,9 @@ func add_order():
 		order_count += 1
 		new_order.order_number = order_count
 		new_order.order = generate_order()
-		new_order.price = generate_market_price(new_order.order)[0]
-		new_order.in_demand = generate_market_price(new_order.order)[1]
+		var market_price = generate_market_price(new_order.order)
+		new_order.price = market_price[0]
+		new_order.in_demand = market_price[1]
 		new_order.label_order()
 		new_order.position = Vector2(800, 0)
 		_reorder_orders()
@@ -84,7 +86,7 @@ func shift_orders(order, delta):
 
 
 func generate_order():
-	var number_of_ingredients = difficulty_check()[0]
+	var number_of_ingredients = difficulty_check()
 	if number_of_ingredients >= 6:
 		number_of_ingredients = 6
 	var game_ingredients = get_node("/root/main").game_ingredients
@@ -106,21 +108,15 @@ func generate_order():
 
 func generate_market_price(order):
 	var in_demand = false
-	var price_multiplier = difficulty_check()[1]
 	var order_price = 0.00
 	for ingredient in order.keys():
-		var base_price = get_node("/root/main").game_ingredients[ingredient]["Price"]
-		if base_price > 2.51:
+		var ingredient_data = get_node("/root/main").game_ingredients[ingredient]
+		var effective_price = ingredient_data["Price"] + ingredient_data["Premium"]
+		if effective_price > IN_DEMAND_THRESHOLD:
 			in_demand = true
+		order_price += effective_price * order[ingredient]
 
-		var price_variation = randf_range(-0.5, 0.5) # Random variation of +/- $0.50
-		order_price += (base_price + price_variation) * order[ingredient]
-
-	if in_demand:
-		order_price *= 1.20 # 20% increase if any ingredient is in demand
-
-	#The price was getting very high, so I'm going to remove the price_multiplier from difficulty for now
-	return [snappedf(order_price *1.10 , 0.5),in_demand]
+	return [order_price, in_demand]
 
 
 
@@ -152,5 +148,4 @@ func difficulty_check():
 	#At 50 happiness, a total of 4 ingredients will be in an order
 	#At 100 happiness, a total of 5 ingredients will be in an order
 	var number_of_ingredients = min(order_difficulty, 4)
-	var price_multiplier = 1.0 + (order_difficulty - 1) * 0.5
-	return [number_of_ingredients, price_multiplier]
+	return number_of_ingredients

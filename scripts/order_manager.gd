@@ -33,7 +33,7 @@ func _on_order_fulfilled(order: Dictionary, price: float) -> void:
 '''
 Logs failed order and reorders the queue
 '''
-func _on_order_failed(order_number) -> void:
+func _on_order_failed() -> void:
 	order_list.happiness_score -= 10
 	await get_tree().create_timer(0.1).timeout
 	main.get_node("OrderList").call_deferred("_reorder_orders")

@@ -43,7 +43,11 @@ func refresh_label() -> void:
 	else:
 		level_label.text = "Level " + str(current_level)
 		upgrade_name.text = levels[current_level]
-		upgrade_description.text = upgrade_description_text
+		if upgrade_type == "Ingredient":
+			var premium: float = UpgradeData.premiums["Ingredient"][current_level]
+			upgrade_description.text = "Unlocks a new ingredient that sells for $%d extra per drink!" % int(premium)
+		else:
+			upgrade_description.text = upgrade_description_text
 		price = UpgradeData.prices[upgrade_type][current_level]
 		price_label.text = "$%d" % int(price)
 

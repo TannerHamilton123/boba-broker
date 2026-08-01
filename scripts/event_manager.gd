@@ -1,5 +1,14 @@
 extends Node
 
+'''
+Ingredient prices only ever sit at one of these three tiers.
+Events push a price to high_price or low_price; it reverts to
+medium_price (the default) once the event ends.
+'''
+@export var high_price: float = 5.0
+@export var medium_price: float = 2.5
+@export var low_price: float = 1.0
+
 @onready var main = get_node("/root/main")
 @onready var available = main.game_ingredients.keys()
 @onready var time_manager = main.get_node("TimeManager")
@@ -7,45 +16,39 @@ var events = {
 	"tea": [
 		{
 			"name": "Someone spilled the tea!",
-			"description": "Less tea to go around. 
+			"description": "Less tea to go around.
 			Prices rise sharply.",
-			"price_multiplier": 1.5,
 			"symbol": "up",
 		},
 		{
 			"name": "Tea Festival",
 			"description": "A local tea festival has driven up prices.",
-			"price_multiplier": 1.3,
 			"symbol": "up",
 		},
 		{
 			"name": "Super tea leaf discovered!",
-			"description": "An exceptional harvest floods the market. 
+			"description": "An exceptional harvest floods the market.
 			Tea prices drop.",
-			"price_multiplier": 0.65,
 			"symbol": "down",
 		},
 	],
 	"milk": [
 		{
 			"name": "Cows on Strike!",
-			"description": "The cows don't want to produce milk! 
+			"description": "The cows don't want to produce milk!
 			Milk costs much more.",
-			"price_multiplier": 2,
 			"symbol": "up",
 		},
 		{
 			"name": "Good Farm Connections",
-			"description": "A nearby farm is offering a bulk discount. 
+			"description": "A nearby farm is offering a bulk discount.
 			Milk prices fall.",
-			"price_multiplier": 0.7,
 			"symbol": "down",
 		},
 		{
 			"name": "An Udder Disaster!",
-			"description": "No cows were harmed, but our profit is! 
+			"description": "No cows were harmed, but our profit is!
 			Milk costs more.",
-			"price_multiplier": 1.35,
 			"symbol": "up",
 		},
 	],
@@ -53,21 +56,18 @@ var events = {
 		{
 			"name": "Tapioca Tornado Disaster!",
 			"description": "Pearls cost much more!",
-			"price_multiplier": 1.7,
 			"symbol": "up",
 		},
 		{
 			"name": "Tapioca Takeover",
 			"description": "New Tapioca tycoon is selling at a discount.
 			Costs go down.",
-			"price_multiplier": 0.6,
 			"symbol": "down",
 		},
 		{
 			"name": "Tapioca Oversupply",
 			"description": "Too much tapioca is a good thing!
 			Prices go down.",
-			"price_multiplier": 0.75,
 			"symbol": "down",
 		},
 	],
@@ -75,21 +75,18 @@ var events = {
 		{
 			"name": "Rooting for the Root",
 			"description": "Great taro harvest this season.",
-			"price_multiplier": 0.65,
 			"symbol": "down",
 		},
 		{
 			"name": "Big Trouble in little Taro Shipping",
-			"description": "Shipping delays have cut taro imports. 
+			"description": "Shipping delays have cut taro imports.
 			Prices spike hard.",
-			"price_multiplier": 1.6,
 			"symbol": "up",
 		},
 		{
 			"name": "Taro Craze",
-			"description": "Taro flavored everything is everywhere. 
+			"description": "Taro flavored everything is everywhere.
 			Prices are going up.",
-			"price_multiplier": 1.4,
 			"symbol": "up",
 		},
 	],
@@ -98,44 +95,38 @@ var events = {
 			"name": "Berry Blast!",
 			"description": "A great strawberry season
 			Strawberry prices are down.",
-			"price_multiplier": 0.6,
 			"symbol": "down",
 		},
 		{
 			"name": "Bears eat berries!",
 			"description": "They gotta eat!
 			But prices are up!",
-			"price_multiplier": 1.65,
 			"symbol": "up",
 		},
 		{
 			"name": "Summer Special",
-			"description": "Summer heat has spiked demand. 
+			"description": "Summer heat has spiked demand.
 			Suppliers are charging more.",
-			"price_multiplier": 1.35,
 			"symbol": "up",
 		},
 	],
 	"lemon": [
 		{
 			"name": "Suppply Chain Soured!",
-			"description": "A frost damaged citrus crops. 
+			"description": "A frost damaged citrus crops.
 			Lemon prices have jumped.",
-			"price_multiplier": 1.55,
 			"symbol": "up",
 		},
 		{
 			"name": "Life gives you lemons",
-			"description": "Lets sell them for a discount! 
+			"description": "Lets sell them for a discount!
 			Lemons are cheap.",
-			"price_multiplier": 0.65,
 			"symbol": "down",
 		},
 		{
 			"name": "Lemonade Trend",
-			"description": "Lemon boba is the drink of the season. 
+			"description": "Lemon boba is the drink of the season.
 			Prices have climbed.",
-			"price_multiplier": 1.4,
 			"symbol": "up",
 		},
 	],
@@ -143,21 +134,22 @@ var events = {
 
 var scheduled_events: Array = []
 
-func trigger_event(ingredient: String, event: Dictionary, event_duration:= 10.0, baseline_price:= 2.5) -> void:
-	
-	
+func trigger_event(ingredient: String, event: Dictionary, event_duration:= 10.0) -> void:
+
+
 	var baseline_spawn = main.game_ingredients[ingredient]["Spawn_Probability"]
 	#This baseline may be an issue, since i have varying spawn rates for the ingredients, but if there are 2 back to back events,
 	#Then they will overwrite the baseline.
-	
+
 	var event_description = main.get_node("GameUI/Event/EventDescription")
 	var event_name_title = main.get_node("GameUI/Event/EventTitle")
 	var event_panel = main.get_node("GameUI/Event")
 	if not main.game_ingredients.has(ingredient):
 		return
-	main.game_ingredients[ingredient]["Price"] *= event["price_multiplier"] * event["price_multiplier"] * event["price_multiplier"] #Apply the price multiplier 3 times for a more dramatic effect
-	main.game_ingredients[ingredient]["Price"] = clampf(main.game_ingredients[ingredient]["Price"], 1.0, 5.0)
-	main.game_ingredients[ingredient]["Price"] = snappedf(main.game_ingredients[ingredient]["Price"], 0.5)
+	if event["symbol"] == "up":
+		main.game_ingredients[ingredient]["Price"] = high_price
+	elif event["symbol"] == "down":
+		main.game_ingredients[ingredient]["Price"] = low_price
 	for i in range(2): #Apply the spawn multiplier 2 times for a more dramatic effect
 		main.get_node("BubbleSpawner").bag.push_front(ingredient) #Regenerate the bag to apply spawn probability changes immediately
 	print(main.get_node("BubbleSpawner").bag)
@@ -173,7 +165,7 @@ func trigger_event(ingredient: String, event: Dictionary, event_duration:= 10.0,
 	#When the event times out, revert all changes to the ingredient's price and spawn probability
 	await get_tree().create_timer(maxf(event_duration - 5.0, 0.0)).timeout
 	main.game_ingredients[ingredient]["Spawn_Probability"] = baseline_spawn
-	main.game_ingredients[ingredient]["Price"] = baseline_price
+	main.game_ingredients[ingredient]["Price"] = medium_price
 
 
 func _pick_random_event() -> Dictionary:
