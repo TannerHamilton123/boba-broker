@@ -26,12 +26,6 @@ var wait_time_increase: float = 0.0
 var ingredient_level: int = 0
 var unlockable_ingredients = ["taro","strawberry","lemon"]
 
-
-var _callback_adbreak_start = JavaScriptBridge.create_callback(_on_adbreak_start)
-var _callback_adbreak_complete = JavaScriptBridge.create_callback(_on_adbreak_complete)
-
-
-
 @export var eow_scene: PackedScene
 @onready var game_music_player = $sound/game_music
 @onready var menu_music_player = $sound/menu_music
@@ -67,11 +61,6 @@ var game_ingredients = {
 }
 
 func _ready() -> void:
-	if OS.get_name()=="HTML5":
-		
-		JavaScriptBridge.get_interface("document").addEventListener("adBreakStart", _callback_adbreak_start)
-		JavaScriptBridge.get_interface("document").addEventListener("adBreakComplete", _callback_adbreak_complete)
-
 	#Validate domain for cool math games
 	if not $DomainValidator.is_valid():
 		# Do stuff here if you want to do something at an invalid domain
@@ -208,27 +197,6 @@ func game_over_sequence():
 	has_been_done = true
 
 func _on_restart_pressed() -> void:
+	CMGApi.send_game_event("replay", 1)
 	SaveManager.clear_save()
 	get_tree().change_scene_to_file("res://scenes/titlescreen.tscn")
-	pass # Replace with function body.
-
-
-# JavaScriptBridge callbacks
-
-
-
-
-func _on_adbreak_start(args):
-	JavaScriptBridge.get_interface("console").log("AdBreak Started")
-	#TODO:  Developer needs to add the logic to pause the game and sound here.
-#Example:
-	get_tree().paused = true
-	AudioServer.set_bus_mute(AudioServer.get_bus_index("Master"), true)
-	
-
-func _on_adbreak_complete(args):
-	JavaScriptBridge.get_interface("console").log("AdBreak Completed")
-	#TODO:  Developer needs to add the logic to resume the game and sound here. 
-#Example:
-	get_tree().paused = false
-	AudioServer.set_bus_mute(AudioServer.get_bus_index("Master"), false)

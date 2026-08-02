@@ -91,6 +91,7 @@ func _show_eow() -> void:
 	main.get_tree().root.add_child(eow)
 
 func start_next_week() -> void:
+	CMGApi.send_game_event("start", weeks_completed + 1)
 	$"../GameUI/StartWeek".modulate.a = 1.0
 	$"../GameUI/StartWeek".text = "Starting Week %d" % (weeks_completed + 1)
 	if weeks_completed >= 1:

@@ -125,6 +125,7 @@ func _finish_typing() -> void:
 
 
 func _end_tutorial() -> void:
+	CMGApi.send_game_event("start", 0)
 	get_tree().paused = false
 	queue_free()
 

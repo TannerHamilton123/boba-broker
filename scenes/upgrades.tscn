@@ -5,6 +5,7 @@
 [ext_resource type="FontFile" uid="uid://bkq7isl3bkgjh" path="res://themes/Fredoka-Bold.ttf" id="3_js5n2"]
 [ext_resource type="PackedScene" uid="uid://bcj2knqij31qx" path="res://scenes/upgrade_button.tscn" id="4_ef3hr"]
 [ext_resource type="PackedScene" uid="uid://da52leltxcmh3" path="res://scenes/benny.tscn" id="5_jcj7r"]
+[ext_resource type="Texture2D" uid="uid://c8wwsnv2ww2kv" path="res://assets/dollar_sign.png" id="5_js5n2"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jcj7r"]
 bg_color = Color(0.2901961, 0.23137255, 0.32156864, 1)
@@ -110,13 +111,47 @@ theme_override_font_sizes/font_size = 24
 text = "End of the Week"
 
 [node name="Continue" type="Button" parent="." unique_id=1669623248]
-layout_mode = 0
-offset_left = 280.0
-offset_top = 488.0
-offset_right = 528.0
-offset_bottom = 536.0
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -88.0
+offset_top = 172.0
+offset_right = 88.0
+offset_bottom = 236.0
+grow_horizontal = 2
+grow_vertical = 2
 theme = ExtResource("2_jcj7r")
 text = "Start next week!"
+
+[node name="WatchAdButton" type="Button" parent="." unique_id=222690980]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -328.0
+offset_top = -112.0
+offset_right = -120.0
+offset_bottom = -64.0
+grow_horizontal = 2
+grow_vertical = 0
+pivot_offset = Vector2(160, 0)
+theme = ExtResource("2_jcj7r")
+text = "Watch Ad for $25"
+
+[node name="Sprite2D" type="Sprite2D" parent="WatchAdButton" unique_id=900881485]
+position = Vector2(56, 60.00003)
+scale = Vector2(0.09480852, 0.09480852)
+texture = ExtResource("5_js5n2")
+
+[node name="Sprite2D2" type="Sprite2D" parent="WatchAdButton" unique_id=1392852229]
+position = Vector2(225.17664, 59.951912)
+scale = Vector2(0.09304467, 0.093044676)
+texture = ExtResource("5_js5n2")
 
 [node name="Benny" type="Node2D" parent="." unique_id=1681985125]
 z_index = 1
@@ -158,3 +193,4 @@ scale = Vector2(0.23224507, 0.23224507)
 libraries/ = SubResource("AnimationLibrary_js5n2")
 
 [connection signal="pressed" from="Continue" to="." method="_on_continue_pressed"]
+[connection signal="pressed" from="WatchAdButton" to="." method="_on_watch_ad_pressed"]
