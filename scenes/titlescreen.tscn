@@ -1,7 +1,7 @@
 [gd_scene format=4 uid="uid://xvovxdquna4e"]
 
 [ext_resource type="Theme" uid="uid://b8msacrlqyrhr" path="res://themes/gameplay_theme.tres" id="1_goadl"]
-[ext_resource type="Script" uid="uid://bkwe1x1tm600l" path="res://scripts/titlescreen.gd" id="1_tt55a"]
+[ext_resource type="Script" uid="uid://b33h2iehf12mh" path="res://scripts/titlescreen.gd" id="1_tt55a"]
 [ext_resource type="FontFile" uid="uid://bkq7isl3bkgjh" path="res://themes/Fredoka-Bold.ttf" id="2_2bjoa"]
 [ext_resource type="PackedScene" uid="uid://da52leltxcmh3" path="res://scenes/benny.tscn" id="4_t7v6v"]
 [ext_resource type="Texture2D" uid="uid://2h6bttikb1t1" path="res://assets/benny_drinking_boba.png" id="5_v6ms7"]

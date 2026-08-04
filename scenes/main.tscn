@@ -209,7 +209,6 @@ script = ExtResource("3_muem4")
 
 [node name="TimeManager" type="Node" parent="." unique_id=2092677775]
 script = ExtResource("2_choun")
-day_length = 5.0
 eow_scene = ExtResource("10_choun")
 
 [node name="UpgradeManager" type="Node" parent="." unique_id=1780036871]
