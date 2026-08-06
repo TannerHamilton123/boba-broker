@@ -109,8 +109,9 @@ func _refresh_button(_upgrade_type: String) -> void:
 func _unlock_ingredient(level: int) -> void:
 	var new_ingredient = main.unlockable_ingredients[level-1]
 
-	main.game_ingredients[new_ingredient] = {"quantity": 0, 
-	"Price": 2.5, 
+	main.game_ingredients[new_ingredient] = {"quantity": 0,
+	"Price": 2.5,
+	"Premium": UpgradeData.premiums["Ingredient"][level - 1],
 	"PriceChange": "stable",
 	"Storage_Limit": main.ingredient_storage,
 	"Spawn_Probability": 0.1}

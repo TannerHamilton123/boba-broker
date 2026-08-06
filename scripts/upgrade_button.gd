@@ -51,6 +51,7 @@ func refresh_label() -> void:
 		if self.disabled:
 			change_text_color(Color.html("ffd6e0"))
 			$CannotAfford.show()
+			$UpgradeDescription.hide()
 		
 
 
