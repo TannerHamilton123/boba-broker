@@ -29,6 +29,16 @@
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_og1vs"]
 bg_color = Color(1, 0.972549, 0.9411765, 1)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5q0nq"]
+bg_color = Color(1, 0.8392157, 0.8784314, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_bottom = 4
+border_color = Color(0.78431374, 0.47843137, 0.6901961, 1)
+corner_radius_top_left = 24
+corner_radius_bottom_left = 24
+corner_detail = 20
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2wyq8"]
 bg_color = Color(1, 0.972549, 0.9411765, 0.6509804)
 border_width_left = 4
@@ -122,22 +132,9 @@ tracks/1/keys = {
 "update": 0,
 "values": [Vector2(1, 1)]
 }
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Label2:modulate")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
-}
 
 [sub_resource type="Animation" id="Animation_og1vs"]
 resource_name = "game_over"
-length = 2.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -148,7 +145,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Color(0.2901961, 0.23137255, 0.32156864, 0), Color(0.78431374, 0.9411765, 0.8784314, 1)]
+"values": [Color(0.2901961, 0.23137255, 0.32156864, 0), Color(0.78431374, 0.9411765, 0.8784314, 0.45882353)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -157,22 +154,10 @@ tracks/1/path = NodePath("Panel:scale")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(1, 1.3, 1.6),
+"times": PackedFloat32Array(0.5, 0.75, 1),
 "transitions": PackedFloat32Array(1, 0.35355347, 0.2102241),
 "update": 0,
 "values": [Vector2(1, 1e-05), Vector2(1, 1.1), Vector2(1, 1)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Label2:modulate")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 1.01),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_2wyq8"]
@@ -243,6 +228,15 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 mouse_filter = 1
 theme = ExtResource("5_choun")
+
+[node name="MENUBUTTON" type="Button" parent="GameUI" unique_id=1982647591]
+layout_mode = 0
+offset_left = 640.0
+offset_top = 76.0
+offset_right = 799.0
+offset_bottom = 134.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_5q0nq")
+text = "MENU BUTTON"
 
 [node name="Label" type="Label" parent="GameUI" unique_id=1338857612]
 modulate = Color(1, 1, 1, 0.23529412)
@@ -742,6 +736,77 @@ metadata/_edit_use_anchors_ = true
 [node name="AnimationPlayer" type="AnimationPlayer" parent="GameOver" unique_id=1830020499]
 libraries/ = SubResource("AnimationLibrary_2wyq8")
 
+[node name="Menu" type="ColorRect" parent="." unique_id=507716893]
+process_mode = 3
+visible = false
+z_index = 100
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 801.0
+offset_bottom = 600.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.2901961, 0.23137255, 0.32156864, 1)
+
+[node name="Panel" type="Panel" parent="Menu" unique_id=1704481260]
+z_index = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.49793297
+anchor_top = 0.5720942
+anchor_right = 0.49793297
+anchor_bottom = 0.6374364
+offset_left = -157.34637
+offset_top = -68.46182
+offset_right = 162.65363
+offset_bottom = 91.53818
+pivot_offset = Vector2(0, 100)
+theme = ExtResource("5_choun")
+metadata/_edit_use_anchors_ = true
+
+[node name="Benny" parent="Menu/Panel" unique_id=1690382473 instance=ExtResource("22_y6deb")]
+z_index = -1
+position = Vector2(244.84845, -75.53819)
+scale = Vector2(0.23224507, 0.23224507)
+
+[node name="restart" type="Button" parent="Menu/Panel" unique_id=1119479793]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.342194
+anchor_top = 0.3825465
+anchor_right = 0.642194
+anchor_bottom = 0.57330453
+offset_left = -48.0
+offset_top = -48.0
+offset_right = 56.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = ExtResource("5_choun")
+text = "RESTART"
+metadata/_edit_use_anchors_ = true
+
+[node name="unpause" type="Button" parent="Menu/Panel" unique_id=187612652]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.342194
+anchor_top = 0.76908237
+anchor_right = 0.642194
+anchor_bottom = 0.9598403
+offset_left = -48.0
+offset_top = -48.0
+offset_right = 56.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = ExtResource("5_choun")
+text = "UNPAUSE"
+metadata/_edit_use_anchors_ = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Menu" unique_id=578796828]
+libraries/ = SubResource("AnimationLibrary_2wyq8")
+
 [node name="Tutorial" parent="." unique_id=1182671964 instance=ExtResource("19_0ld40")]
 visible = false
 
@@ -798,5 +863,8 @@ script = ExtResource("25_og1vs")
 
 [connection signal="timeout" from="BubbleSpawner/Timer" to="BubbleSpawner" method="_on_timer_timeout"]
 [connection signal="timeout" from="PriceCalculator/Timer" to="PriceCalculator" method="_on_timer_timeout"]
+[connection signal="pressed" from="GameUI/MENUBUTTON" to="." method="_on_menubutton_pressed"]
 [connection signal="pressed" from="GameOver/Panel/restart" to="." method="_on_restart_pressed"]
+[connection signal="pressed" from="Menu/Panel/restart" to="." method="_on_restart_pressed"]
+[connection signal="pressed" from="Menu/Panel/unpause" to="." method="_on_unpause_pressed"]
 [connection signal="timeout" from="OrderList/Timer" to="OrderList" method="_on_timer_timeout"]

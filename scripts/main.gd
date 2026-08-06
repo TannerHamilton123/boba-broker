@@ -213,6 +213,18 @@ func game_over_sequence():
 	has_been_done = true
 
 func _on_restart_pressed() -> void:
+	get_tree().paused = false
 	CMGApi.send_game_event("replay", 1)
 	SaveManager.clear_save()
 	get_tree().change_scene_to_file("res://scenes/titlescreen.tscn")
+
+
+func _on_menubutton_pressed() -> void:
+	get_tree().paused = true
+	$Menu.visible = true
+	$Menu/AnimationPlayer.play("game_over")
+
+
+func _on_unpause_pressed() -> void:
+	$Menu.visible = false
+	get_tree().paused = false

@@ -123,7 +123,7 @@ func generate_market_price(order):
 		var base_price = ingredient_data["Price"] + ingredient_data["Premium"]
 		if base_price > 2.51:
 			in_demand = true
-		order_price += effective_price * order[ingredient]
+		order_price += base_price * order[ingredient]
 
 	return [order_price, in_demand]
 
