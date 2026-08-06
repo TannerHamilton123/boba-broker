@@ -61,9 +61,9 @@ var game_ingredients = {
 }
 
 func _ready() -> void:
-	if not $DomainValidator.is_valid():
-		get_tree().quit()
-		return
+	# if not $DomainValidator.is_valid():
+	# 	get_tree().quit()
+	# 	return
 
 	await get_tree().create_timer(0.01).timeout
 	$sound/menu_music.volume_db = -20
