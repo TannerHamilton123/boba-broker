@@ -71,7 +71,6 @@ func end_week() -> void:
 	weeks_completed += 1
 	_stop_timers()
 	main.player_balance -= main.rent
-	SaveManager.save_game(main.get_save_data())
 	if weeks_completed >= total_weeks:
 		main.game_over = true
 		main.end_game()
@@ -94,8 +93,8 @@ func start_next_week() -> void:
 	CMGApi.send_game_event("start", weeks_completed + 1)
 	$"../GameUI/StartWeek".modulate.a = 1.0
 	$"../GameUI/StartWeek".text = "Starting Week %d" % (weeks_completed + 1)
-	if weeks_completed >= 1:
-		$"../GameUI/StartWeek".text = "Continue to Week %d" % (weeks_completed + 1)
+	# if weeks_completed >= 1:
+	# 	$"../GameUI/StartWeek".text = "Continuing to Week %d\nGame Saved" % (weeks_completed + 1)
 	if weeks_completed >= total_weeks - 1:
 		$"../GameUI/StartWeek".text = "Final Week!"
 	
@@ -107,6 +106,7 @@ func start_next_week() -> void:
 	main.get_node("PriceCalculator/Timer").start()
 	main.get_node("BubbleSpawner/Timer").start()
 	main.get_node("OrderList/Timer").start()
+	main.get_node("OrderList").reset_happiness()
 	main.get_node("EventManager").begin_week_scheduling()
 	main.get_node("UIManager").start_new_week()
 	Summary_Manager.reset_week()

@@ -61,12 +61,13 @@ var game_ingredients = {
 }
 
 func _ready() -> void:
+	
 	#Validate domain for cool math games
 	if not $DomainValidator.is_valid():
 		# Do stuff here if you want to do something at an invalid domain
 		get_tree().quit()
 		return
-
+	$Tutorial.visible = true
 	await get_tree().create_timer(0.01).timeout
 	$sound/menu_music.volume_db = -20
 	$sound/game_music.volume_db = -80
@@ -74,10 +75,11 @@ func _ready() -> void:
 
 	var save_data: Dictionary = SaveManager.load_game()
 	if save_data.is_empty():
-		$Tutorial.visible = true
+		print("save data is empty, showing tutorial")
 	else:
 		apply_save_data(save_data)
 		$TimeManager.start_next_week()
+		$Tutorial.visible = false
 	# create_good_containers()
 	# create_storage()
 
@@ -100,7 +102,18 @@ func get_save_data() -> Dictionary:
 		"ingredient_level": ingredient_level,
 		"weeks_completed": $TimeManager.weeks_completed,
 		"upgrade_levels": $UpgradeManager.upgrade_levels,
+		"ingredient_quantities": _get_ingredient_quantities(),
 	}
+
+'''
+Snapshot of how much of each ingredient the player currently has in stock,
+so a returning player doesn't resume with empty storage.
+'''
+func _get_ingredient_quantities() -> Dictionary:
+	var quantities: Dictionary = {}
+	for ingredient in game_ingredients.keys():
+		quantities[ingredient] = game_ingredients[ingredient]["quantity"]
+	return quantities
 
 func apply_save_data(data: Dictionary) -> void:
 	player_balance = float(data.get("player_balance", player_balance))
@@ -119,6 +132,11 @@ func apply_save_data(data: Dictionary) -> void:
 	for level in range(ingredient_level + 1, saved_ingredient_level + 1):
 		$UpgradeManager._unlock_ingredient(level)
 	ingredient_level = saved_ingredient_level
+
+	var saved_quantities: Dictionary = data.get("ingredient_quantities", {})
+	for ingredient in saved_quantities.keys():
+		if game_ingredients.has(ingredient):
+			game_ingredients[ingredient]["quantity"] = int(saved_quantities[ingredient])
 
 	for ingredient in game_ingredients.keys():
 		game_ingredients[ingredient]["Storage_Limit"] = ingredient_storage
@@ -165,6 +183,7 @@ func _process(delta: float) -> void:
 
 func start_next_week() -> void:
 	$TimeManager.start_next_week()
+	SaveManager.save_game(get_save_data())
 
 func bank_color():
 	var difference = player_balance - displayed_balance

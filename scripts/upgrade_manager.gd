@@ -54,8 +54,6 @@ func _on_UpgradeButton_pressed(upgrade_type: String,price: float) -> void:
 		print("Unknown upgrade type: ", upgrade_type)
 		return
 
-	SaveManager.save_game(main.get_save_data())
-
 
 
 func upgrade_storage() -> void:

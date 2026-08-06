@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dwx7jabjq2oqf"]
 
-[ext_resource type="Script" uid="uid://cqvhvvi0uvct" path="res://scripts/tutorial_manager.gd" id="1_ehuit"]
+[ext_resource type="Script" uid="uid://bhiu0eqibsrj5" path="res://scripts/tutorial_manager.gd" id="1_ehuit"]
 [ext_resource type="Theme" uid="uid://b8msacrlqyrhr" path="res://themes/gameplay_theme.tres" id="2_5mrt3"]
 [ext_resource type="PackedScene" uid="uid://da52leltxcmh3" path="res://scenes/benny.tscn" id="3_ph3nu"]
 [ext_resource type="PackedScene" uid="uid://drbkplepsvmeo" path="res://scenes/milk.tscn" id="4_4kmhl"]

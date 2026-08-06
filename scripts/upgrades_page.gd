@@ -2,7 +2,7 @@ extends Control
 
 @onready var main = get_node("/root/main")
 @onready var watch_ad_button = get_node("WatchAdButton")
-@export var reward_amount: float = 25.0
+@export var reward_amount: float = 10
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	if main.get_node("TimeManager").weeks_completed == 1:
@@ -14,14 +14,9 @@ func _ready() -> void:
 	pass # Replace with function body.
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
-
 func _on_continue_pressed() -> void:
 	main.game_music = true
 	print("Continue button pressed, starting next week...")
-	var main = get_node("/root/main")
 	CMGApi.request_ad_break()
 	queue_free()
 	main.start_next_week()

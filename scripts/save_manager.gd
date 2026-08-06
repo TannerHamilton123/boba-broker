@@ -28,9 +28,9 @@ func clear_save(path: String = SAVE_PATH) -> void:
 		var dir := DirAccess.open(path.get_base_dir())
 		if dir == null:
 			push_warning("SaveManager: could not open %s for deletion (error %d)" % [path.get_base_dir(), DirAccess.get_open_error()])
+			print("SaveManager: could not open %s for deletion (error %d)" % [path.get_base_dir(), DirAccess.get_open_error()])
 		else:
 			var err := dir.remove(path.get_file())
-			print(err)
 			if err != OK:
 				push_warning("SaveManager: failed to delete %s (error %d)" % [path, err])
 	_sync_web_filesystem()

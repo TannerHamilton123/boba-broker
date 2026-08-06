@@ -1,5 +1,8 @@
 extends Node
 
+const ORDER_FULFILLED_HAPPINESS_GAIN = 2
+const ORDER_FAILED_HAPPINESS_PENALTY = 10.0
+
 @onready var main = get_parent()
 @onready var ui_manager = get_parent().get_node("UIManager")
 @onready var order_list = get_parent().get_node("OrderList")
@@ -12,7 +15,7 @@ Receives a fulfilled order; stores it and
 accumulates per-ingredient revenue split evenly by unit count
 '''
 func _on_order_fulfilled(order: Dictionary, price: float) -> void:
-	order_list.happiness_score += 5
+	order_list.happiness_score += ORDER_FULFILLED_HAPPINESS_GAIN
 
 	main.get_node("sound/casino").play()
 	summary_manager.week_revenue += price
@@ -34,7 +37,7 @@ func _on_order_fulfilled(order: Dictionary, price: float) -> void:
 Logs failed order and reorders the queue
 '''
 func _on_order_failed() -> void:
-	order_list.happiness_score -= 10
+	order_list.happiness_score -= ORDER_FAILED_HAPPINESS_PENALTY
 	await get_tree().create_timer(0.1).timeout
 	main.get_node("OrderList").call_deferred("_reorder_orders")
 

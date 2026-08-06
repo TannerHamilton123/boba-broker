@@ -1,6 +1,7 @@
 extends Node
 const max_orders = 5
 const IN_DEMAND_THRESHOLD = 2.51
+const BASE_HAPPINESS_SCORE = 20.0
 var order_count = 0
 var popularity = 0.0
 '''
@@ -10,12 +11,12 @@ The price increases with the difficulty, and some variety
 var initial_price = 5.0
 
 '''
-Happiness ranges from 0 to 100, with 100 being the happiest. 
-It decreases by 10 for each failed order and increases by 10 for each completed order.
-Happiness affects the timer
-Happiness increases and decreases are handled by main.gd
+Happiness ranges from 0 to 100, with 100 being the happiest.
+Increases/decreases per order are handled by order_manager.gd.
+It resets to BASE_HAPPINESS_SCORE at the start of every week (see reset_happiness()).
+Happiness affects both the order arrival timer and order difficulty.
 '''
-var happiness_score := 20.0
+var happiness_score := BASE_HAPPINESS_SCORE
 
 """
 Difficulty ranges from 1 to 5
@@ -34,6 +35,14 @@ func _ready() -> void:
 	$Timer.wait_time = randf_range(5.0, 10.0)
 	$Timer.start()
 	pass # Replace with function body.
+
+'''
+Called at the start of each week so order complexity always ramps up
+from an easy baseline, regardless of permanent upgrades like popularity
+or supply level (which are meant to persist across weeks).
+'''
+func reset_happiness() -> void:
+	happiness_score = BASE_HAPPINESS_SCORE
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -147,5 +156,5 @@ func difficulty_check():
 	#Then the number of ingredients ranges from 1 to 3 based on difficulty
 	#At 50 happiness, a total of 4 ingredients will be in an order
 	#At 100 happiness, a total of 5 ingredients will be in an order
-	var number_of_ingredients = min(order_difficulty, 4)
+	var number_of_ingredients = min(randi() % 7, min(order_difficulty, 3))
 	return number_of_ingredients

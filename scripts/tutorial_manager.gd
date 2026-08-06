@@ -72,6 +72,7 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
+	self.visible = true
 	if main.get_node("sound/menu_music").volume_db < 0 and main.menu_music:
 		main.get_node("sound/menu_music").volume_db += delta * 0.5
 
