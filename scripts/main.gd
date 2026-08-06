@@ -64,15 +64,84 @@ var game_ingredients = {
 
 
 func _ready() -> void:
+	if not $DomainValidator.is_valid():
+		get_tree().quit()
+		return
+
 	await get_tree().create_timer(0.01).timeout
 	$sound/menu_music.volume_db = -20
 	$sound/game_music.volume_db = -80
 	menu_music = true
-	$Tutorial.visible = true
+
+	var save_data: Dictionary = SaveManager.load_game()
+	if save_data.is_empty():
+		$Tutorial.visible = true
+	else:
+		apply_save_data(save_data)
+		$TimeManager.start_next_week()
 	# create_good_containers()
 	# create_storage()
-	
+
 	pass
+
+
+'''
+Snapshot of everything needed to resume a playthrough:
+economy stats, unlocked ingredients/upgrades, and week progress.
+In-week gameplay state (live orders, bubbles, ingredient quantities)
+is intentionally left out - it's cheap to regenerate and resets each week anyway.
+'''
+func get_save_data() -> Dictionary:
+	return {
+		"player_balance": player_balance,
+		"ingredient_storage": ingredient_storage,
+		"popularity": popularity,
+		"supply_level": supply_level,
+		"wait_time_increase": wait_time_increase,
+		"ingredient_level": ingredient_level,
+		"weeks_completed": $TimeManager.weeks_completed,
+		"upgrade_levels": $UpgradeManager.upgrade_levels,
+		"ingredient_quantities": _get_ingredient_quantities(),
+	}
+
+'''
+Snapshot of how much of each ingredient the player currently has in stock,
+so a returning player doesn't resume with empty storage.
+'''
+func _get_ingredient_quantities() -> Dictionary:
+	var quantities: Dictionary = {}
+	for ingredient in game_ingredients.keys():
+		quantities[ingredient] = game_ingredients[ingredient]["quantity"]
+	return quantities
+
+func apply_save_data(data: Dictionary) -> void:
+	player_balance = float(data.get("player_balance", player_balance))
+	displayed_balance = player_balance
+	popularity = int(data.get("popularity", popularity))
+	supply_level = int(data.get("supply_level", supply_level))
+	wait_time_increase = float(data.get("wait_time_increase", wait_time_increase))
+
+	var saved_upgrade_levels: Dictionary = data.get("upgrade_levels", {})
+	for upgrade_type in saved_upgrade_levels.keys():
+		if $UpgradeManager.upgrade_levels.has(upgrade_type):
+			$UpgradeManager.upgrade_levels[upgrade_type] = int(saved_upgrade_levels[upgrade_type])
+
+	ingredient_storage = int(data.get("ingredient_storage", ingredient_storage))
+	var saved_ingredient_level: int = int(data.get("ingredient_level", ingredient_level))
+	for level in range(ingredient_level + 1, saved_ingredient_level + 1):
+		$UpgradeManager._unlock_ingredient(level)
+	ingredient_level = saved_ingredient_level
+
+	var saved_quantities: Dictionary = data.get("ingredient_quantities", {})
+	for ingredient in saved_quantities.keys():
+		if game_ingredients.has(ingredient):
+			game_ingredients[ingredient]["quantity"] = int(saved_quantities[ingredient])
+
+	for ingredient in game_ingredients.keys():
+		game_ingredients[ingredient]["Storage_Limit"] = ingredient_storage
+	$GameUI/StorageBars.create_storage_lines(ingredient_storage, Color("#c87ab072"), 1.0)
+
+	$TimeManager.weeks_completed = int(data.get("weeks_completed", $TimeManager.weeks_completed))
 
 
 
@@ -96,6 +165,7 @@ func _process(delta: float) -> void:
 			menu_music_player.volume_db += delta * 5.0
 			game_music_player.volume_db -= delta * 5.0
 	if game_over:
+		SaveManager.clear_save()
 		game_music_player.volume_db -= delta * 5.0
 		menu_music_player.volume_db -= delta * 5.0
 		game_over_sequence()
@@ -112,6 +182,7 @@ func _process(delta: float) -> void:
 
 func start_next_week() -> void:
 	$TimeManager.start_next_week()
+	SaveManager.save_game(get_save_data())
 
 func bank_color():
 	var difference = player_balance - displayed_balance
@@ -133,6 +204,7 @@ func _on_no_storage(ingredient: String) -> void:
 
 func end_game():
 	print("Game Over! Total profit: $%.2f" % player_balance)
+	SaveManager.clear_save()
 	get_tree().change_scene_to_file("res://scenes/after_5_weeks.tscn")
 
 func game_over_sequence():
@@ -143,5 +215,6 @@ func game_over_sequence():
 	has_been_done = true
 
 func _on_restart_pressed() -> void:
+	CMGApi.send_game_event("replay", 1)
+	SaveManager.clear_save()
 	get_tree().change_scene_to_file("res://scenes/titlescreen.tscn")
-	pass # Replace with function body.

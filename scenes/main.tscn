@@ -24,6 +24,7 @@
 [ext_resource type="PackedScene" uid="uid://dwx7jabjq2oqf" path="res://scenes/tutorial.tscn" id="19_0ld40"]
 [ext_resource type="Script" uid="uid://ca7j8ov3njfgr" path="res://scenes/notification.gd" id="21_pm3ni"]
 [ext_resource type="PackedScene" uid="uid://da52leltxcmh3" path="res://scenes/benny.tscn" id="22_y6deb"]
+[ext_resource type="Script" path="res://scenes/domain_validator.gd" id="25_og1vs"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_og1vs"]
 bg_color = Color(1, 0.972549, 0.9411765, 1)
@@ -208,7 +209,6 @@ script = ExtResource("3_muem4")
 
 [node name="TimeManager" type="Node" parent="." unique_id=2092677775]
 script = ExtResource("2_choun")
-day_length = 5.0
 eow_scene = ExtResource("10_choun")
 
 [node name="UpgradeManager" type="Node" parent="." unique_id=1780036871]
@@ -792,6 +792,9 @@ color = Color(0.24477637, 0.2447764, 0.24477637, 1)
 
 [node name="Timer" type="Timer" parent="OrderList" unique_id=1999790851]
 autostart = true
+
+[node name="DomainValidator" type="Node" parent="." unique_id=1409382371]
+script = ExtResource("25_og1vs")
 
 [connection signal="timeout" from="BubbleSpawner/Timer" to="BubbleSpawner" method="_on_timer_timeout"]
 [connection signal="timeout" from="PriceCalculator/Timer" to="PriceCalculator" method="_on_timer_timeout"]

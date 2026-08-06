@@ -11,13 +11,15 @@ config_version=5
 [application]
 
 config/name="Boba_Broker"
-run/main_scene="uid://xvovxdquna4e"
+run/main_scene="uid://cvx651ojyiktb"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
 
 Global="*uid://c20l1ndltdlrv"
+SaveManager="*res://scripts/save_manager.gd"
+CMGApi="*res://scripts/cmg_api.gd"
 
 [display]
 

@@ -1,7 +1,7 @@
 [gd_scene format=4 uid="uid://xvovxdquna4e"]
 
 [ext_resource type="Theme" uid="uid://b8msacrlqyrhr" path="res://themes/gameplay_theme.tres" id="1_goadl"]
-[ext_resource type="Script" uid="uid://bkwe1x1tm600l" path="res://scripts/titlescreen.gd" id="1_tt55a"]
+[ext_resource type="Script" uid="uid://b33h2iehf12mh" path="res://scripts/titlescreen.gd" id="1_tt55a"]
 [ext_resource type="FontFile" uid="uid://bkq7isl3bkgjh" path="res://themes/Fredoka-Bold.ttf" id="2_2bjoa"]
 [ext_resource type="PackedScene" uid="uid://da52leltxcmh3" path="res://scenes/benny.tscn" id="4_t7v6v"]
 [ext_resource type="Texture2D" uid="uid://2h6bttikb1t1" path="res://assets/benny_drinking_boba.png" id="5_v6ms7"]
@@ -107,6 +107,18 @@ tracks/5/keys = {
 "update": 0,
 "values": [Vector2(400, 296)]
 }
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Panel/RestartButton:scale")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
 
 [sub_resource type="Animation" id="Animation_84han"]
 resource_name = "start"
@@ -158,6 +170,18 @@ tracks/3/keys = {
 "transitions": PackedFloat32Array(0.22531264, 0.14865094),
 "update": 0,
 "values": [Vector2(400, 800), Vector2(400, 296)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Panel/RestartButton:scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(1.9333335, 2.5666668, 3.2333333),
+"transitions": PackedFloat32Array(1, 0.26390165, 3.8637443),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(1.3, 1.3), Vector2(1, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_v6ms7"]
@@ -273,13 +297,33 @@ anchor_bottom = 1.0
 offset_left = -144.0
 offset_top = -160.0
 offset_right = 134.0
-offset_bottom = -36.0
+offset_bottom = -96.0
 grow_horizontal = 2
 grow_vertical = 0
 pivot_offset = Vector2(150, 50)
 theme_override_fonts/font = ExtResource("2_2bjoa")
 theme_override_font_sizes/font_size = 48
 text = "PLAY"
+
+[node name="RestartButton" type="Button" parent="Panel" unique_id=481329512]
+visible = false
+z_index = 10
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -144.0
+offset_top = -79.0
+offset_right = 134.0
+offset_bottom = -18.0
+grow_horizontal = 2
+grow_vertical = 0
+pivot_offset = Vector2(150, 50)
+theme_override_fonts/font = ExtResource("2_2bjoa")
+theme_override_font_sizes/font_size = 48
+text = "RESTART"
 
 [node name="Line2D" type="Line2D" parent="Panel" unique_id=870043874]
 z_index = 10
@@ -322,3 +366,4 @@ position = Vector2(0, -600)
 position = Vector2(0, -1200)
 
 [connection signal="pressed" from="Panel/PlayButton" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="Panel/RestartButton" to="." method="_on_restart_button_pressed"]

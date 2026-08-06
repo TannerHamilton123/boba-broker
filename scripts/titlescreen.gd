@@ -3,9 +3,12 @@ var fade_away: bool = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	if SaveManager.has_save():
+		$Panel/PlayButton.text = "CONTINUE"
+		$Panel/RestartButton.show()
 	$AnimationPlayer.play("start")
 	await $AnimationPlayer.animation_finished
-	
+
 	pass # Replace with function body.
 
 
@@ -22,3 +25,11 @@ func _on_play_button_pressed() -> void:
 	await $AnimationPlayer.animation_finished
 	get_tree().change_scene_to_file("res://scenes/main.tscn")
 	pass # Replace with function body.
+
+func _on_restart_button_pressed() -> void:
+	print("Restarting game...")
+	$AnimationPlayer.play("transition")
+	fade_away = true
+	await $AnimationPlayer.animation_finished
+	SaveManager.clear_save()
+	get_tree().change_scene_to_file("res://scenes/main.tscn")

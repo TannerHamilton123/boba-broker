@@ -21,7 +21,17 @@ var _time_accum: float = 0.0
 @onready var OrderList = get_node("/root/main/OrderList/OrderContainer")
 @onready var Bank = get_node("/root/main/GameUI/Bank")
 @onready var rent_amount = main.rent
+
+@export var skip_tutorial_after_week: int = 1
+
 func _ready() -> void:
+	var save_data: Dictionary = SaveManager.load_game()
+	var current_week: int = int(save_data.get("weeks_completed", 0)) + 1
+	if current_week > skip_tutorial_after_week:
+		_end_tutorial()
+		return
+
+	visible = true
 	print("starting tutorial fade in")
 	$Node2D/AnimationPlayer.play("start")
 	await $Node2D/AnimationPlayer.animation_finished
@@ -116,6 +126,7 @@ func _finish_typing() -> void:
 
 
 func _end_tutorial() -> void:
+	CMGApi.send_game_event("start", 0)
 	get_tree().paused = false
 	queue_free()
 

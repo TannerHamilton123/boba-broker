@@ -25,8 +25,6 @@ func _ready() -> void:
 		$Benny.visible = false
 	main.menu_music = true
 	$AnimationPlayer.play("start")
-	#Pay Rent
-	main.player_balance -= main.rent
 	check_game_over()
 
 	Summary_Manager.calculate_weekly_summary()
