@@ -4,7 +4,7 @@ extends Node
 @onready var Summary_Manager = get_node("/root/main/SummaryManager")
 var time: String = ""
 var day: String = ""
-@export var day_length: float = 30.0
+@export var day_length: float = 20
 var time_elapsed: float = 0.0
 var shop_open_hour: int = 10
 var shop_close_hour: int = 20

@@ -31,6 +31,7 @@ func _ready() -> void:
 		_end_tutorial()
 		return
 
+	visible = true
 	print("starting tutorial fade in")
 	$Node2D/AnimationPlayer.play("start")
 	await $Node2D/AnimationPlayer.animation_finished

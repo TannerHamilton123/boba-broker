@@ -61,25 +61,22 @@ var game_ingredients = {
 }
 
 func _ready() -> void:
-	
-	#Validate domain for cool math games
 	if not $DomainValidator.is_valid():
-		# Do stuff here if you want to do something at an invalid domain
 		get_tree().quit()
 		return
-	$Tutorial.visible = true
+
 	await get_tree().create_timer(0.01).timeout
 	$sound/menu_music.volume_db = -20
 	$sound/game_music.volume_db = -80
 	menu_music = true
 
 	var save_data: Dictionary = SaveManager.load_game()
+	print("save data is:" + str(save_data))
 	if save_data.is_empty():
-		print("save data is empty, showing tutorial")
+		$Tutorial.visible = true
 	else:
 		apply_save_data(save_data)
 		$TimeManager.start_next_week()
-		$Tutorial.visible = false
 	# create_good_containers()
 	# create_storage()
 
