@@ -1,6 +1,6 @@
-[gd_scene format=3 uid="uid://cvx651ojyiktb"]
+[gd_scene format=3 uid="uid://8q18kcfgggny"]
 
-[ext_resource type="Script" uid="uid://dcnbqybereuyt" path="res://cmg_splash_screen.gd" id="1_m3q8p"]
+[ext_resource type="Script" path="res://cmg_splash_screen.gd" id="1_m3q8p"]
 [ext_resource type="Texture2D" uid="uid://daenuvhknk61g" path="res://assets/CoolmathGames-800x600.png" id="2_v4qa7"]
 
 [sub_resource type="Animation" id="Animation_q5ype"]
