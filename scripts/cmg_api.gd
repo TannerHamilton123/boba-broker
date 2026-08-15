@@ -20,6 +20,7 @@ func _ready() -> void:
 
 
 func send_game_event(event_type: String, level: int) -> void:
+	print("send_game_event called with event_type =", event_type, " and level =", level)
 	if OS.get_name() != "HTML5":
 		return
 	var payload := {"cm_game_event": true, "cm_game_evt": event_type, "cm_game_lvl": level}
@@ -27,28 +28,33 @@ func send_game_event(event_type: String, level: int) -> void:
 
 
 func request_ad_break() -> void:
+	print("request_ad_break called")
 	if OS.get_name() != "HTML5":
 		return
-	JavaScriptBridge.eval("if (typeof cmgAdBreak === 'function') { cmgAdBreak(); }", true)
+	JavaScriptBridge.eval("console.log('CMGApi: request_ad_break(), typeof cmgAdBreak =', typeof cmgAdBreak); if (typeof cmgAdBreak === 'function') { cmgAdBreak(); }", true)
 
 
 func request_rewarded_ad() -> void:
+	print("requesting_rewarded_ad called")
 	if OS.get_name() != "HTML5":
 		return
 	_pending_reward = true
-	JavaScriptBridge.eval("if (typeof cmgRewardAds === 'function') { cmgRewardAds(); }", true)
+	JavaScriptBridge.eval("console.log('CMGApi: request_rewarded_ad(), typeof cmgRewardAds =', typeof cmgRewardAds); if (typeof cmgRewardAds === 'function') { cmgRewardAds(); }", true)
 
 
 func _on_adbreak_start(_args) -> void:
+	print("_on_adbreak_start called")
 	JavaScriptBridge.get_interface("console").log("AdBreak Started")
 	get_tree().paused = true
 	AudioServer.set_bus_mute(AudioServer.get_bus_index("Master"), true)
 
 
 func _on_adbreak_complete(_args) -> void:
+	print("_on_adbreak_complete called")
 	JavaScriptBridge.get_interface("console").log("AdBreak Completed")
 	get_tree().paused = false
 	AudioServer.set_bus_mute(AudioServer.get_bus_index("Master"), false)
 	if _pending_reward:
 		_pending_reward = false
+		print("Reward ad completed, emitting signal")
 		reward_ad_completed.emit()

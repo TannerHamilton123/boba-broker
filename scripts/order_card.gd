@@ -55,20 +55,20 @@ func order_timer():
 	$ColorRect.modulate = Color(1, color_ratio, color_ratio)
 
 func _on_timer_timeout() -> void:
-	print("Order ", order_number, " timed out!")
+	# print("Order ", order_number, " timed out!")
 	emit_signal("order_failed",order)
 	queue_free()
 
 func _gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
-		print("Clicked on order ", order_number)
+		# print("Clicked on order ", order_number)
 		check_order()
 
 func check_order():
 	var game_ingredients = get_node("/root/main").game_ingredients
 	for ingredient in order.keys():
 		if game_ingredients[ingredient]["quantity"] < order[ingredient]:
-			print("Order ", order_number, " failed! Not enough ", ingredient)
+			# print("Order ", order_number, " failed! Not enough ", ingredient)
 			main.get_node("UIManager").show_notification("Not enough " + ingredient + "!", 1.5)
 			main.get_node("sound/fail").play()
 			return

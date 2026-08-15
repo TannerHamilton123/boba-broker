@@ -71,7 +71,7 @@ func _ready() -> void:
 	menu_music = true
 
 	var save_data: Dictionary = SaveManager.load_game()
-	print("save data is:" + str(save_data))
+	# print("save data is:" + str(save_data))
 	if save_data.is_empty():
 		$Tutorial.visible = true
 	else:
@@ -201,7 +201,7 @@ func _on_no_storage(ingredient: String) -> void:
 	$UIManager.show_notification("Not enough storage for %s!" % ingredient)
 
 func end_game():
-	print("Game Over! Total profit: $%.2f" % player_balance)
+	# print("Game Over! Total profit: $%.2f" % player_balance)
 	SaveManager.clear_save()
 	get_tree().change_scene_to_file("res://scenes/after_5_weeks.tscn")
 

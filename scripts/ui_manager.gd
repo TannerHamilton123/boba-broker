@@ -28,7 +28,7 @@ func move_price_icons():
 	for ingredient in main.game_ingredients.keys():
 		var good_icon = get_node_or_null("../GameUI/PriceBar/icons/" + ingredient)
 		if good_icon == null:
-			print("Could not find icon for ", ingredient)
+			# print("Could not find icon for ", ingredient)
 			continue
 		var price = main.game_ingredients[ingredient]["Price"]
 		var top_of_bar = 300
@@ -38,7 +38,7 @@ func move_price_icons():
 		good_icon.position.y = lerp(good_icon.position.y, inverted_location, 0.01)
 
 func show_notification(text: String, duration: float = 2.0) -> void:
-	print("Showing notification: ", text)
+	# print("Showing notification: ", text)
 	var notification = main.get_node("GameUI/Notification")
 	notification.text = text
 	notification.modulate.a = 1.0

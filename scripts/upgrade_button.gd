@@ -61,9 +61,9 @@ func refresh_label() -> void:
 
 func _on_pressed() -> void:
 	if price > main.player_balance:
-		print("Not enough money to purchase ", upgrade_type, " upgrade!")
+		# print("Not enough money to purchase ", upgrade_type, " upgrade!")
 		return
-	print("Buying " + upgrade_type + "for " + str(price))
+	# print("Buying " + upgrade_type + "for " + str(price))
 
 	#add dollar sign instance
 	main.get_node("sound/click").play()

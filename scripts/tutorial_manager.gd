@@ -32,10 +32,10 @@ func _ready() -> void:
 		return
 
 	visible = true
-	print("starting tutorial fade in")
+	# print("starting tutorial fade in")
 	$Node2D/AnimationPlayer.play("start")
 	await $Node2D/AnimationPlayer.animation_finished
-	print("tutorial fade in done")
+	# print("tutorial fade in done")
 	main.get_node("sound/menu_music").volume_db = -5
 	rent_amount = "$%.2f" % main.rent
 	location_of_text = {
@@ -97,14 +97,14 @@ func _show_step(index: int) -> void:
 		$OrderCard.visible = false
 
 	if index == 3:
-		print("Showing bubble for step ", index)
+		# print("Showing bubble for step ", index)
 		$bubble.visible = true
 	else:		
 		$bubble.visible = false
 
 	if steps[index -1].size() >=3:
 		steps[index -1][2].z_index = 0
-		print("Resetting z-index of ", steps[index -1][2])
+		# print("Resetting z-index of ", steps[index -1][2])
 
 	_full_text = steps[index][1]
 	_visible_chars = 0

@@ -3,13 +3,16 @@ var fade_away: bool = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	$AnimationPlayer.play("start")
+	$Panel2.show()
+	$Benny.show()
+	$Panel/PlayButton.show()
+	$Panel/Label.show()
 	if SaveManager.has_save():
+		
 		$Panel/PlayButton.text = "CONTINUE"
 		$Panel/RestartButton.show()
-	$AnimationPlayer.play("start")
-	await $AnimationPlayer.animation_finished
-
-	pass # Replace with function body.
+	
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -27,7 +30,7 @@ func _on_play_button_pressed() -> void:
 	pass # Replace with function body.
 
 func _on_restart_button_pressed() -> void:
-	print("Restarting game...")
+	# print("Restarting game...")
 	$AnimationPlayer.play("transition")
 	fade_away = true
 	await $AnimationPlayer.animation_finished

@@ -36,7 +36,7 @@ func _on_UpgradeButton_pressed(upgrade_type: String,price: float) -> void:
 		return
 
 	if upgrade_levels[upgrade_type] >= upgrade_max_levels[upgrade_type]:
-		print("Upgrade ", upgrade_type, " is already at max level!")
+		# print("Upgrade ", upgrade_type, " is already at max level!")
 		return
 
 	main.player_balance -= price
@@ -51,7 +51,7 @@ func _on_UpgradeButton_pressed(upgrade_type: String,price: float) -> void:
 	elif upgrade_type == "Supply":
 		upgrade_supply()
 	else:
-		print("Unknown upgrade type: ", upgrade_type)
+		# print("Unknown upgrade type: ", upgrade_type)
 		return
 
 
@@ -69,25 +69,25 @@ func upgrade_ingredient() -> void:
 	upgrade_levels["Ingredient"] += 1
 	_refresh_button("Ingredient")
 	_unlock_ingredient(main.ingredient_level)
-	print("Ingredient quality upgraded to level ", upgrade_levels["Ingredient"])
+	# print("Ingredient quality upgraded to level ", upgrade_levels["Ingredient"])
 
 func upgrade_wait_time() -> void:
 	main.wait_time_increase += 2
 	upgrade_levels["WaitTime"] += 1
 	_refresh_button("WaitTime")
-	print("Wait time reduction upgraded to level ", upgrade_levels["WaitTime"])
+	# print("Wait time reduction upgraded to level ", upgrade_levels["WaitTime"])
 
 func upgrade_popularity() -> void:
 	main.popularity += 1
 	upgrade_levels["Popularity"] += 1
 	_refresh_button("Popularity")
-	print("Popularity upgraded to level ", upgrade_levels["Popularity"])
+	# print("Popularity upgraded to level ", upgrade_levels["Popularity"])
 
 func upgrade_supply() -> void:
 	main.supply_level += 1
 	upgrade_levels["Supply"] += 1
 	_refresh_button("Supply")
-	print("Supply upgraded to level ", upgrade_levels["Supply"])
+	# print("Supply upgraded to level ", upgrade_levels["Supply"])
 
 '''
 Finds the matching button in the EOW scene and
@@ -117,9 +117,9 @@ func _unlock_ingredient(level: int) -> void:
 	"Storage_Limit": main.ingredient_storage,
 	"Spawn_Probability": 0.1}
 
-	print("Unlocked new ingredient: ", new_ingredient)
-	print("Level ", level, " ingredient unlocked: ", new_ingredient)
-	print("main.game_ingredients: ", main.game_ingredients)
+	# print("Unlocked new ingredient: ", new_ingredient)
+	# print("Level ", level, " ingredient unlocked: ", new_ingredient)
+	# print("main.game_ingredients: ", main.game_ingredients)
 	var PriceBar_icons = get_node("/root/main/GameUI/PriceBar/icons")
 	PriceBar_icons.get_node(new_ingredient).visible = true
 	var StorageBars = get_node("/root/main/GameUI/StorageBars")

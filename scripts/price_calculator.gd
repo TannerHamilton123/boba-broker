@@ -12,7 +12,7 @@ func _process(_delta: float) -> void:
 	pass
 
 func _on_timer_timeout() -> void:
-	print("Updating prices...")
+	# print("Updating prices...")
 	for ingredient in main.game_ingredients.keys():
 		var current_price = main.game_ingredients[ingredient]["Price"]
 		# if current_price > 2.5:

@@ -93,8 +93,8 @@ func start_next_week() -> void:
 	CMGApi.send_game_event("start", weeks_completed + 1)
 	$"../GameUI/StartWeek".modulate.a = 1.0
 	$"../GameUI/StartWeek".text = "Starting Week %d" % (weeks_completed + 1)
-	# if weeks_completed >= 1:
-	# 	$"../GameUI/StartWeek".text = "Continuing to Week %d\nGame Saved" % (weeks_completed + 1)
+	if weeks_completed >= 1:
+		$"../GameUI/StartWeek".text = "Continuing to Week %d\nGame Saved" % (weeks_completed + 1)
 	if weeks_completed >= total_weeks - 1:
 		$"../GameUI/StartWeek".text = "Final Week!"
 	

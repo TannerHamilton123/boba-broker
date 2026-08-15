@@ -105,7 +105,7 @@ tracks/5/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(400, 296)]
+"values": [Vector2(402, 673)]
 }
 tracks/6/type = "value"
 tracks/6/imported = false
@@ -268,6 +268,7 @@ theme = ExtResource("1_goadl")
 theme_override_styles/panel = SubResource("StyleBoxFlat_rpvs4")
 
 [node name="Label" type="Label" parent="Panel" unique_id=1822075420]
+visible = false
 z_index = 10
 layout_mode = 1
 anchors_preset = 5
@@ -287,6 +288,7 @@ text = "BOBA BROKER"
 horizontal_alignment = 1
 
 [node name="PlayButton" type="Button" parent="Panel" unique_id=1932013236]
+visible = false
 z_index = 10
 layout_mode = 1
 anchors_preset = 7
@@ -332,6 +334,7 @@ width = 4.0
 default_color = Color(0.78431374, 0.47843137, 0.6901961, 1)
 
 [node name="Panel2" type="Panel" parent="." unique_id=216583049]
+visible = false
 layout_mode = 0
 offset_left = 256.0
 offset_top = 160.0
@@ -350,7 +353,8 @@ mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_v6ms7")
 
 [node name="Benny" parent="." unique_id=435675722 instance=ExtResource("4_t7v6v")]
-position = Vector2(400, 296)
+visible = false
+position = Vector2(402, 673)
 rotation = -0.7853982
 texture = ExtResource("5_v6ms7")
 
@@ -364,6 +368,17 @@ position = Vector2(0, -600)
 
 [node name="FallingIngredients2" parent="." unique_id=1037609477 instance=ExtResource("6_v6ms7")]
 position = Vector2(0, -1200)
+
+[node name="Label" type="Label" parent="." unique_id=139051763]
+layout_mode = 0
+offset_left = 535.0
+offset_top = 571.0
+offset_right = 800.0
+offset_bottom = 646.0
+theme = ExtResource("1_goadl")
+text = "CREATED BY TANNER HAMILTON
+
+"
 
 [connection signal="pressed" from="Panel/PlayButton" to="." method="_on_play_button_pressed"]
 [connection signal="pressed" from="Panel/RestartButton" to="." method="_on_restart_button_pressed"]

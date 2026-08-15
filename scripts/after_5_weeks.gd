@@ -6,9 +6,9 @@ var current_profit_value:= 0.0
 func _ready() -> void:
 	total_profit = Global.week_5_profit #for a test
 	$AnimationPlayer.play("start")
-	print("Playing animation")
+	# print("Playing animation")
 	await $AnimationPlayer.animation_finished
-	print("animation finished")
+	# print("animation finished")
 
 
 

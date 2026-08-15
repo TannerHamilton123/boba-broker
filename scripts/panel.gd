@@ -39,5 +39,5 @@ func visible_bars():
 		
 		var bar = get_node_or_null(ingredient)
 		if bar != null:
-			print("Making bar visible for ", ingredient)
+			# print("Making bar visible for ", ingredient)
 			bar.visible = true

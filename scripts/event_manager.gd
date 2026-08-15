@@ -152,9 +152,9 @@ func trigger_event(ingredient: String, event: Dictionary, event_duration:= 10.0)
 		main.game_ingredients[ingredient]["Price"] = low_price
 	for i in range(2): #Apply the spawn multiplier 2 times for a more dramatic effect
 		main.get_node("BubbleSpawner").bag.push_front(ingredient) #Regenerate the bag to apply spawn probability changes immediately
-	print(main.get_node("BubbleSpawner").bag)
-	
-	print("Event triggered: [", ingredient, "] ", event["name"], " — ", event["description"])
+	# print(main.get_node("BubbleSpawner").bag)
+
+	# print("Event triggered: [", ingredient, "] ", event["name"], " — ", event["description"])
 
 	event_name_title.text = "%s: %s" % [ingredient.capitalize(), event["name"]]
 	event_panel.visible = true
@@ -199,7 +199,7 @@ func schedule_week_events(event_count: int = 7) -> void:
 			"trigger_time": trigger_time,
 			"triggered": false,
 		})
-		print("Scheduled: [Day %d at %.1fs] %s — %s" % [day_index, trigger_time, picked["ingredient"], picked["event"]["name"]])
+		# print("Scheduled: [Day %d at %.1fs] %s — %s" % [day_index, trigger_time, picked["ingredient"], picked["event"]["name"]])
 
 func _check_scheduled_events() -> void:
 	
@@ -211,7 +211,7 @@ func _check_scheduled_events() -> void:
 		if time_manager.current_day_index == scheduled["day_index"] and time_manager.time_elapsed >= scheduled["trigger_time"]:
 			trigger_event(scheduled["ingredient"], scheduled["event"])
 			scheduled["triggered"] = true
-			print("Event triggered: [Day %d at %.1fs] %s — %s" % [scheduled["day_index"], scheduled["trigger_time"], scheduled["ingredient"], scheduled["event"]["name"]])
+			# print("Event triggered: [Day %d at %.1fs] %s — %s" % [scheduled["day_index"], scheduled["trigger_time"], scheduled["ingredient"], scheduled["event"]["name"]])
 
 func _ready() -> void:
 	begin_week_scheduling()

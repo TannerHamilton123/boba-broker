@@ -15,7 +15,7 @@ func _can_drop_data(_at_position: Vector2, _data: Variant) -> bool:
 
 func _drop_data(at_position: Vector2, data: Variant) -> void:
 	if _can_drop_data(at_position, data):
-		print("Dropped ", data, " at ", at_position)
+		# print("Dropped ", data, " at ", at_position)
 		match data:
 			"tea":
 				self.color = Color(46, 0.8, 1) # Light brown for tea
@@ -26,4 +26,4 @@ func _drop_data(at_position: Vector2, data: Variant) -> void:
 			"pearls":
 				self.color = Color(0.2, 0.2, 0.2) # Dark gray for boba
 				used_ingredients.append("pearls")
-		print("Updated color to: ", self.color)
+		# print("Updated color to: ", self.color)

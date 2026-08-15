@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="Boba_Broker"
+config/name="Boba Broker – Play it now at CoolmathGames.com"
 run/main_scene="uid://cvx651ojyiktb"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"

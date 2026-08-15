@@ -44,7 +44,7 @@ func choose_ingredient() -> String:
 	if bag.size() == 0:
 		make_bag_of_ingredients()
 		return choose_ingredient()
-	print(bag)
+	# print(bag)
 	return bag.pop_front() # Remove the first ingredient from the bag and return it
 
 
