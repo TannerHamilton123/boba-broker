@@ -30,6 +30,7 @@ once CMGApi confirms the ad actually completed, via reward_ad_completed.
 func _on_watch_ad_pressed() -> void:
 	print("Watch Ad button pressed, requesting rewarded ad...")
 	watch_ad_button.disabled = true
+	JavaScript.eval("cmgRewardAds();", true)
 	CMGApi.reward_ad_completed.connect(_on_reward_ad_completed, CONNECT_ONE_SHOT)
 	CMGApi.request_rewarded_ad()
 
