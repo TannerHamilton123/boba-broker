@@ -9,6 +9,9 @@ Requires cmg-ads.js to be loaded via the Web export's head_include.
 
 signal reward_ad_completed
 
+@export var ready_check_max_attempts: int = 20
+@export var ready_check_interval_sec: float = 0.25
+
 var _pending_reward: bool = false
 var _callback_adbreak_start = JavaScriptBridge.create_callback(_on_adbreak_start)
 var _callback_adbreak_complete = JavaScriptBridge.create_callback(_on_adbreak_complete)
@@ -29,17 +32,50 @@ func send_game_event(event_type: String, level: int) -> void:
 
 func request_ad_break() -> void:
 	print("request_ad_break called")
+	JavaScript.eval("cmgAdBreak();", true)
 	if OS.get_name() != "HTML5":
 		return
-	JavaScriptBridge.eval("console.log('CMGApi: request_ad_break(), typeof cmgAdBreak =', typeof cmgAdBreak); if (typeof cmgAdBreak === 'function') { cmgAdBreak(); }", true)
+	_call_when_defined("cmgAdBreak", "request_ad_break", ready_check_max_attempts)
 
 
 func request_rewarded_ad() -> void:
 	print("requesting_rewarded_ad called")
+	JavaScript.eval("cmgRewardAds();", true)
 	if OS.get_name() != "HTML5":
 		return
 	_pending_reward = true
-	JavaScriptBridge.eval("console.log('CMGApi: request_rewarded_ad(), typeof cmgRewardAds =', typeof cmgRewardAds); if (typeof cmgRewardAds === 'function') { cmgRewardAds(); }", true)
+	_call_when_defined("cmgRewardAds", "request_rewarded_ad", ready_check_max_attempts)
+
+
+func _call_when_defined(js_function_name: String, caller_label: String, attempts_left: int) -> void:
+	var is_defined: bool = JavaScriptBridge.eval("typeof %s === 'function'" % js_function_name, true)
+	if is_defined:
+		_eval_ad_call(js_function_name, caller_label)
+		return
+	if attempts_left <= 0:
+		JavaScriptBridge.get_interface("console").error(
+			"CMGApi: %s() gave up waiting for %s to be defined after %d attempts" % [caller_label, js_function_name, ready_check_max_attempts]
+		)
+		return
+	print("CMGApi: %s not yet defined, retrying (%d attempts left)" % [js_function_name, attempts_left])
+	await get_tree().create_timer(ready_check_interval_sec).timeout
+	_call_when_defined(js_function_name, caller_label, attempts_left - 1)
+
+
+func _eval_ad_call(js_function_name: String, caller_label: String) -> void:
+	var js := """
+		try {
+			console.log('CMGApi: %s(), typeof %s =', typeof %s);
+			if (typeof %s === 'function') {
+				%s();
+			} else {
+				console.error('CMGApi: %s() failed - %s is not defined');
+			}
+		} catch (e) {
+			console.error('CMGApi: %s() threw an error calling %s():', e);
+		}
+	""" % [caller_label, js_function_name, js_function_name, js_function_name, js_function_name, caller_label, js_function_name, caller_label, js_function_name]
+	JavaScriptBridge.eval(js, true)
 
 
 func _on_adbreak_start(_args) -> void:

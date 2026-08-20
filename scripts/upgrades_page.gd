@@ -17,6 +17,7 @@ func _ready() -> void:
 func _on_continue_pressed() -> void:
 	main.game_music = true
 	print("Continue button pressed, starting next week...")
+	JavaScript.eval("cmgAdBreak();", true)
 	CMGApi.request_ad_break()
 	queue_free()
 	main.start_next_week()
