@@ -194,3 +194,4 @@ scale = Vector2(0.23224507, 0.23224507)
 libraries/ = SubResource("AnimationLibrary_js5n2")
 
 [connection signal="pressed" from="Continue" to="." method="_on_continue_pressed"]
+[connection signal="pressed" from="WatchAdButton" to="." method="_on_watch_ad_pressed"]

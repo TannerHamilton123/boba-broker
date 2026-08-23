@@ -17,7 +17,6 @@ func _ready() -> void:
 func _on_continue_pressed() -> void:
 	main.game_music = true
 	print("Continue button pressed, starting next week...")
-	JavaScript.eval("cmgAdBreak();", true)
 	CMGApi.request_ad_break()
 	queue_free()
 	main.start_next_week()
@@ -30,7 +29,7 @@ once CMGApi confirms the ad actually completed, via reward_ad_completed.
 func _on_watch_ad_pressed() -> void:
 	print("Watch Ad button pressed, requesting rewarded ad...")
 	watch_ad_button.disabled = true
-	JavaScript.eval("cmgRewardAds();", true)
+	JavaScriptBridge.eval("cmgRewardAds();", true)
 	CMGApi.reward_ad_completed.connect(_on_reward_ad_completed, CONNECT_ONE_SHOT)
 	CMGApi.request_rewarded_ad()
 

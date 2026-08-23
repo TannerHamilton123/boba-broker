@@ -32,7 +32,7 @@ func send_game_event(event_type: String, level: int) -> void:
 
 func request_ad_break() -> void:
 	print("request_ad_break called")
-	JavaScript.eval("cmgAdBreak();", true)
+	JavaScriptBridge.eval("cmgAdBreak();", true)
 	if OS.get_name() != "HTML5":
 		return
 	_call_when_defined("cmgAdBreak", "request_ad_break", ready_check_max_attempts)
@@ -40,7 +40,7 @@ func request_ad_break() -> void:
 
 func request_rewarded_ad() -> void:
 	print("requesting_rewarded_ad called")
-	JavaScript.eval("cmgRewardAds();", true)
+	JavaScriptBridge.eval("cmgRewardAds();", true)
 	if OS.get_name() != "HTML5":
 		return
 	_pending_reward = true
