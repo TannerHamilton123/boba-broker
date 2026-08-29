@@ -1,6 +1,6 @@
 extends Node
 
-const ORDER_FULFILLED_HAPPINESS_GAIN = 2
+const ORDER_FULFILLED_HAPPINESS_GAIN = 10.0
 const ORDER_FAILED_HAPPINESS_PENALTY = 10.0
 
 @onready var main = get_parent()

@@ -8,6 +8,7 @@ Requires cmg-ads.js to be loaded via the Web export's head_include.
 '''
 
 signal reward_ad_completed
+signal ad_break_completed
 
 @export var ready_check_max_attempts: int = 20
 @export var ready_check_interval_sec: float = 0.25
@@ -17,14 +18,17 @@ var _callback_adbreak_start = JavaScriptBridge.create_callback(_on_adbreak_start
 var _callback_adbreak_complete = JavaScriptBridge.create_callback(_on_adbreak_complete)
 
 func _ready() -> void:
-	if OS.get_name() == "HTML5":
+	if OS.has_feature("web"):
 		JavaScriptBridge.get_interface("document").addEventListener("adBreakStart", _callback_adbreak_start)
 		JavaScriptBridge.get_interface("document").addEventListener("adBreakComplete", _callback_adbreak_complete)
+	else:
+		print("CMGApi: OS.has_feature('web') is false, skipping adBreakStart/adBreakComplete listener registration")
 
 
 func send_game_event(event_type: String, level: int) -> void:
 	print("send_game_event called with event_type =", event_type, " and level =", level)
-	if OS.get_name() != "HTML5":
+	if not OS.has_feature("web"):
+		print("CMGApi: OS.has_feature('web') is false, skipping send_game_event postMessage")
 		return
 	var payload := {"cm_game_event": true, "cm_game_evt": event_type, "cm_game_lvl": level}
 	JavaScriptBridge.eval("window.parent.postMessage(%s, '*');" % JSON.stringify(payload), true)
@@ -32,16 +36,17 @@ func send_game_event(event_type: String, level: int) -> void:
 
 func request_ad_break() -> void:
 	print("request_ad_break called")
-	JavaScriptBridge.eval("cmgAdBreak();", true)
-	if OS.get_name() != "HTML5":
+	if not OS.has_feature("web"):
+		print("CMGApi: OS.has_feature('web') is false, skipping cmgAdBreak call and emitting ad_break_completed immediately")
+		ad_break_completed.emit()
 		return
 	_call_when_defined("cmgAdBreak", "request_ad_break", ready_check_max_attempts)
 
 
 func request_rewarded_ad() -> void:
 	print("requesting_rewarded_ad called")
-	JavaScriptBridge.eval("cmgRewardAds();", true)
-	if OS.get_name() != "HTML5":
+	if not OS.has_feature("web"):
+		print("CMGApi: OS.has_feature('web') is false, skipping cmgRewardAds call")
 		return
 	_pending_reward = true
 	_call_when_defined("cmgRewardAds", "request_rewarded_ad", ready_check_max_attempts)
@@ -90,6 +95,7 @@ func _on_adbreak_complete(_args) -> void:
 	JavaScriptBridge.get_interface("console").log("AdBreak Completed")
 	get_tree().paused = false
 	AudioServer.set_bus_mute(AudioServer.get_bus_index("Master"), false)
+	ad_break_completed.emit()
 	if _pending_reward:
 		_pending_reward = false
 		print("Reward ad completed, emitting signal")
