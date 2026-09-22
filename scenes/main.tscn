@@ -24,7 +24,7 @@
 [ext_resource type="PackedScene" uid="uid://dwx7jabjq2oqf" path="res://scenes/tutorial.tscn" id="19_0ld40"]
 [ext_resource type="Script" uid="uid://ca7j8ov3njfgr" path="res://scenes/notification.gd" id="21_pm3ni"]
 [ext_resource type="PackedScene" uid="uid://da52leltxcmh3" path="res://scenes/benny.tscn" id="22_y6deb"]
-[ext_resource type="Script" path="res://scenes/domain_validator.gd" id="25_og1vs"]
+[ext_resource type="Script" uid="uid://nwtc2awk30yl" path="res://scenes/domain_validator.gd" id="25_og1vs"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_og1vs"]
 bg_color = Color(1, 0.972549, 0.9411765, 1)
